@@ -238,7 +238,7 @@ const Blog = () => {
                             <li className="hover:text-white transition-colors cursor-pointer">Portfolio</li>
 
                             <li className="hover:text-white transition-colors cursor-pointer text-gray-400 group relative">
-                                <Link to="/careers" target="_blank" rel="noopener noreferrer" className="relative group-hover:text-white transition-colors duration-300">
+                                <Link to="/careers" className="relative group-hover:text-white transition-colors duration-300">
                                     Careers
                                     <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-[#ff4f5a] transition-all duration-300 group-hover:w-full"></span>
                                 </Link>

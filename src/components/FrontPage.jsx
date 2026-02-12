@@ -307,7 +307,7 @@ const FrontPage = () => {
                             <li>Gallery</li>
                             <li>Behind the Scenes</li>
                             <li className="hover:text-black transition-colors cursor-pointer">
-                                <Link to="/careers" target="_blank" rel="noopener noreferrer">Careers</Link>
+                                <Link to="/careers">Careers</Link>
                             </li>
                             <li>Investor Relations</li>
                         </ul>
