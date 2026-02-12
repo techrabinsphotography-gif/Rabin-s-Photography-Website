@@ -158,7 +158,7 @@ const BlogPost = () => {
                     <div>
                         <h3 className="text-white font-semibold mb-4">Company</h3>
                         <ul className="space-y-2 text-sm">
-                            <li className="hover:text-white transition-colors cursor-pointer"><Link to="/about" target="_blank" rel="noopener noreferrer">About Us</Link></li>
+                            <li className="hover:text-white transition-colors cursor-pointer"><Link to="/about">About Us</Link></li>
                             <li className="hover:text-white transition-colors cursor-pointer"><Link to="/blog">Blog</Link></li>
                             <li className="hover:text-white transition-colors cursor-pointer"><Link to="/privacy">Privacy Policy</Link></li>
                             <li className="hover:text-white transition-colors cursor-pointer"><Link to="/terms">Terms of Service</Link></li>
