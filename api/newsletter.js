@@ -51,7 +51,7 @@ export default async function handler(req, res) {
         `;
     sendSmtpEmail.sender = {
       name: "Rabin's Photography Website",
-      email: "noreply@rabinsphotography.com"
+      email: "rabinsphotography@gmail.com"
     };
     sendSmtpEmail.to = [{
       email: "rabinsphotography@gmail.com",
