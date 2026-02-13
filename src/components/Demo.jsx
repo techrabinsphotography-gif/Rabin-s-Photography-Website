@@ -782,7 +782,7 @@ const Demo = () => {
                             <li className="hover:text-white transition-colors cursor-pointer">Portfolio</li>
 
                             <li className="hover:text-white transition-colors cursor-pointer text-gray-400 group relative">
-                                <Link to="/careers" className="relative group-hover:text-white transition-colors duration-300">
+                                <Link to="/careers" onClick={() => window.scrollTo(0, 0)} className="relative group-hover:text-white transition-colors duration-300">
                                     Careers
                                     <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-[#ff4f5a] transition-all duration-300 group-hover:w-full"></span>
                                 </Link>
@@ -805,11 +805,11 @@ const Demo = () => {
                     <div>
                         <h3 className="text-white font-semibold mb-4">Company</h3>
                         <ul className="space-y-2 text-sm">
-                            <li className="hover:text-white transition-colors cursor-pointer"><Link to="/about">About Us</Link></li>
-                            <li className="hover:text-white transition-colors cursor-pointer"><Link to="/blog">Blog</Link></li>
-                            <li className="hover:text-white transition-colors cursor-pointer"><Link to="/privacy">Privacy Policy</Link></li>
-                            <li className="hover:text-white transition-colors cursor-pointer"><Link to="/terms">Terms of Service</Link></li>
-                            <li className="hover:text-white transition-colors cursor-pointer"><Link to="/help">Help & Support</Link></li>
+                            <li className="hover:text-white transition-colors cursor-pointer"><Link to="/about" onClick={() => window.scrollTo(0, 0)}>About Us</Link></li>
+                            <li className="hover:text-white transition-colors cursor-pointer"><Link to="/blog" onClick={() => window.scrollTo(0, 0)}>Blog</Link></li>
+                            <li className="hover:text-white transition-colors cursor-pointer"><Link to="/privacy" onClick={() => window.scrollTo(0, 0)}>Privacy Policy</Link></li>
+                            <li className="hover:text-white transition-colors cursor-pointer"><Link to="/terms" onClick={() => window.scrollTo(0, 0)}>Terms of Service</Link></li>
+                            <li className="hover:text-white transition-colors cursor-pointer"><Link to="/help" onClick={() => window.scrollTo(0, 0)}>Help & Support</Link></li>
                         </ul>
                     </div>
 
