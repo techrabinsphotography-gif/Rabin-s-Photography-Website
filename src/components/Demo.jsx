@@ -99,7 +99,7 @@ const Demo = () => {
     return (
         <>
             {/* Section ForHeader - Hero with Summary Style */}
-            <div className="relative w-full min-h-screen bg-gradient-to-br from-black via-gray-900 to-black overflow-hidden pt-20 pb-20">
+            <div className="relative w-full min-h-screen bg-gradient-to-br from-black via-gray-900 to-black overflow-hidden">
 
                 {/* Background Video with animated overlay */}
                 <video
@@ -119,7 +119,7 @@ const Demo = () => {
                 <div className="absolute bottom-10 right-10 w-96 h-96 bg-blue-600/10 rounded-full blur-3xl animate-pulse" style={{animationDelay: '1s'}} />
 
                 {/* Main Content - Summary Style Layout */}
-                <div className="relative z-10 w-full h-full flex flex-col items-center justify-center px-6">
+                <div className="relative z-10 w-full min-h-screen flex flex-col items-center justify-center px-6">
                     
                     {/* Top Badge */}
                     <motion.div
@@ -581,9 +581,67 @@ const Demo = () => {
 
                     {/* Subheading - App-Centric */}
                     <p className="mt-2 text-white/90 text-xl md:text-2xl font-medium tracking-wide max-w-2xl leading-relaxed">
-                        <span className="bg-gradient-to-r from-green-400 to-emerald-500 bg-clip-text text-transparent font-bold">All Premium Features Completely FREE</span> — 
-                        Professional Services, Priority Booking & Unlimited Cloud Storage Included
+                        <span className="bg-gradient-to-r from-green-400 to-emerald-500 bg-clip-text text-transparent font-bold">All Premium Features Completely FREE Life Time </span> 
+                        — Professional Services, Priority Booking & Unlimited Cloud Storage Included
                     </p>
+
+                    {/* Feature Points List */}
+                    <motion.div 
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.6, delay: 0.3 }}
+                        className="mt-8 max-w-xl mx-auto"
+                    >
+                        <ul className="grid grid-cols-1 md:grid-cols-2 gap-4 text-left">
+                            <motion.li 
+                                initial={{ opacity: 0, x: -20 }}
+                                whileInView={{ opacity: 1, x: 0 }}
+                                transition={{ duration: 0.5, delay: 0.4 }}
+                                className="flex items-center gap-3 text-white/90"
+                            >
+                                <div className="flex-shrink-0 w-6 h-6 rounded-full bg-gradient-to-r from-green-400 to-emerald-500 flex items-center justify-center">
+                                    <CheckCircle className="w-4 h-4 text-white" />
+                                </div>
+                                <span className="text-base md:text-lg font-medium">Package Customization</span>
+                            </motion.li>
+                            
+                            <motion.li 
+                                initial={{ opacity: 0, x: -20 }}
+                                whileInView={{ opacity: 1, x: 0 }}
+                                transition={{ duration: 0.5, delay: 0.5 }}
+                                className="flex items-center gap-3 text-white/90"
+                            >
+                                <div className="flex-shrink-0 w-6 h-6 rounded-full bg-gradient-to-r from-green-400 to-emerald-500 flex items-center justify-center">
+                                    <CheckCircle className="w-4 h-4 text-white" />
+                                </div>
+                                <span className="text-base md:text-lg font-medium">Priority Notification</span>
+                            </motion.li>
+                            
+                            <motion.li 
+                                initial={{ opacity: 0, x: -20 }}
+                                whileInView={{ opacity: 1, x: 0 }}
+                                transition={{ duration: 0.5, delay: 0.6 }}
+                                className="flex items-center gap-3 text-white/90"
+                            >
+                                <div className="flex-shrink-0 w-6 h-6 rounded-full bg-gradient-to-r from-green-400 to-emerald-500 flex items-center justify-center">
+                                    <CheckCircle className="w-4 h-4 text-white" />
+                                </div>
+                                <span className="text-base md:text-lg font-medium">Rewards</span>
+                            </motion.li>
+                            
+                            <motion.li 
+                                initial={{ opacity: 0, x: -20 }}
+                                whileInView={{ opacity: 1, x: 0 }}
+                                transition={{ duration: 0.5, delay: 0.7 }}
+                                className="flex items-center gap-3 text-white/90"
+                            >
+                                <div className="flex-shrink-0 w-6 h-6 rounded-full bg-gradient-to-r from-green-400 to-emerald-500 flex items-center justify-center">
+                                    <CheckCircle className="w-4 h-4 text-white" />
+                                </div>
+                                <span className="text-base md:text-lg font-medium">Delivery Tracking</span>
+                            </motion.li>
+                        </ul>
+                    </motion.div>
 
                     {/* CTA Button */}
                     <div className="relative">
@@ -612,9 +670,10 @@ const Demo = () => {
                     </div>
                 </motion.div>
 
-                {/* Benefits Cards Grid - Modernized */}
-                <div className="mt-24 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 w-full max-w-7xl px-4 relative z-10">
+                {/* Feature Cards Grid with Detailed Descriptions */}
+                <div className="mt-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 w-full max-w-7xl px-4 relative z-10">
 
+                    {/* Card 1: Package Customization */}
                     <motion.div
                         initial={{ opacity: 0, y: 30 }}
                         whileInView={{ opacity: 1, y: 0 }}
@@ -622,18 +681,18 @@ const Demo = () => {
                         whileHover={{ y: -10, scale: 1.02 }}
                         className="group relative p-8 rounded-3xl bg-gradient-to-br from-green-900/10 via-black/50 to-black/50 border border-green-700/30 backdrop-blur-xl hover:border-green-500/60 transition-all duration-500 overflow-hidden"
                     >
-                        {/* Card Glow Effect */}
                         <div className="absolute inset-0 bg-gradient-to-br from-green-500/0 to-green-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                         
                         <div className="relative z-10">
                             <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-green-500/20 to-emerald-600/20 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-7 h-7 text-green-400"><path strokeLinecap="round" strokeLinejoin="round" d="M6.827 6.175A2.31 2.31 0 0 1 5.186 7.23c-.38.054-.757.112-1.134.175C2.999 7.58 2.25 8.507 2.25 9.574V18a2.25 2.25 0 0 0 2.25 2.25h15A2.25 2.25 0 0 0 21.75 18V9.574c0-1.067-.75-1.994-1.802-2.169a47.865 47.865 0 0 0-1.134-.175 2.31 2.31 0 0 1-1.64-1.055l-.822-1.316a2.192 2.192 0 0 0-1.736-1.039 48.774 48.774 0 0 0-5.232 0 2.192 2.192 0 0 0-1.736 1.039l-.821 1.316Z" /><path strokeLinecap="round" strokeLinejoin="round" d="M16.5 12.75a4.5 4.5 0 1 1-9 0 4.5 4.5 0 0 1 9 0ZM18.75 10.5h.008v.008h-.008V10.5Z" /></svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-7 h-7 text-green-400"><path strokeLinecap="round" strokeLinejoin="round" d="m20.25 7.5-.625 10.632a2.25 2.25 0 0 1-2.247 2.118H6.622a2.25 2.25 0 0 1-2.247-2.118L3.75 7.5M10 11.25h4M3.375 7.5h17.25c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125Z" /></svg>
                             </div>
-                            <h3 className="text-xl font-bold text-white mb-3">Unlimited Bookings</h3>
-                            <p className="text-gray-400 leading-relaxed">Book anytime through the app. No limits, no queues — the studio is always ready for you.</p>
+                            <h3 className="text-xl font-bold text-white mb-3">Package Customization</h3>
+                            <p className="text-gray-400 leading-relaxed text-sm">Allows customers to personalize packaging, messages, or product options before delivery.</p>
                         </div>
                     </motion.div>
 
+                    {/* Card 2: Priority Notification */}
                     <motion.div
                         initial={{ opacity: 0, y: 30 }}
                         whileInView={{ opacity: 1, y: 0 }}
@@ -645,13 +704,14 @@ const Demo = () => {
                         
                         <div className="relative z-10">
                             <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-green-500/20 to-emerald-600/20 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-7 h-7 text-green-400"><path strokeLinecap="round" strokeLinejoin="round" d="M9.813 15.904 9 18.75l-.813-2.846a4.5 4.5 0 0 0-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 0 0 3.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 0 0 3.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 0 0-3.09 3.09ZM18.259 8.715 18 9.75l-.259-1.035a3.375 3.375 0 0 0-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 0 0 2.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 0 0 2.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 0 0-2.456 2.456ZM16.894 20.567 16.5 21.75l-.394-1.183a2.25 2.25 0 0 0-1.423-1.423L13.5 18.75l1.183-.394a2.25 2.25 0 0 0 1.423-1.423l.394-1.183.394 1.183a2.25 2.25 0 0 0 1.423 1.423l1.183.394-1.183.394a2.25 2.25 0 0 0-1.423 1.423Z" /></svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-7 h-7 text-green-400"><path strokeLinecap="round" strokeLinejoin="round" d="M14.857 17.082a23.848 23.848 0 0 0 5.454-1.31A8.967 8.967 0 0 1 18 9.75V9A6 6 0 0 0 6 9v.75a8.967 8.967 0 0 1-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 0 1-5.714 0m5.714 0a3 3 0 1 1-5.714 0" /></svg>
                             </div>
-                            <h3 className="text-xl font-bold text-white mb-3">Pro Retouching</h3>
-                            <p className="text-gray-400 leading-relaxed">40% off on premium editing & color grading. Get magazine-quality results every time.</p>
+                            <h3 className="text-xl font-bold text-white mb-3">Priority Notification</h3>
+                            <p className="text-gray-400 leading-relaxed text-sm">Sends instant alerts to customers about important order updates like confirmation or shipping.</p>
                         </div>
                     </motion.div>
 
+                    {/* Card 3: Rewards */}
                     <motion.div
                         initial={{ opacity: 0, y: 30 }}
                         whileInView={{ opacity: 1, y: 0 }}
@@ -663,13 +723,14 @@ const Demo = () => {
                         
                         <div className="relative z-10">
                             <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-green-500/20 to-emerald-600/20 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-7 h-7 text-green-400"><path strokeLinecap="round" strokeLinejoin="round" d="M11.48 3.499a.562.562 0 0 1 1.04 0l2.125 5.111a.563.563 0 0 0 .475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 0 0-.182.557l1.285 5.385a.562.562 0 0 1-.84.61l-4.725-2.885a.563.563 0 0 0-.586 0L6.982 20.54a.562.562 0 0 1-.84-.61l1.285-5.386a.562.562 0 0 0-.182-.557l-4.204-3.602a.563.563 0 0 1 .321-.988l5.518-.442a.563.563 0 0 0 .475-.345L11.48 3.5Z" /></svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-7 h-7 text-green-400"><path strokeLinecap="round" strokeLinejoin="round" d="M21 11.25v8.25a1.5 1.5 0 0 1-1.5 1.5H5.25a1.5 1.5 0 0 1-1.5-1.5v-8.25M12 4.875A2.625 2.625 0 1 0 9.375 7.5H12m0-2.625V7.5m0-2.625A2.625 2.625 0 1 1 14.625 7.5H12m0 0V21m-8.625-9.75h18c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125h-18c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125Z" /></svg>
                             </div>
-                            <h3 className="text-xl font-bold text-white mb-3">Priority Access</h3>
-                            <p className="text-gray-400 leading-relaxed">Skip the waitlist. Get instant booking confirmations and first-choice time slots.</p>
+                            <h3 className="text-xl font-bold text-white mb-3">Rewards</h3>
+                            <p className="text-gray-400 leading-relaxed text-sm">Offers incentives such as points or discounts to encourage repeat purchases and customer loyalty.</p>
                         </div>
                     </motion.div>
 
+                    {/* Card 4: Delivery Tracking - WITH TRUCK ICON */}
                     <motion.div
                         initial={{ opacity: 0, y: 30 }}
                         whileInView={{ opacity: 1, y: 0 }}
@@ -681,10 +742,10 @@ const Demo = () => {
                         
                         <div className="relative z-10">
                             <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-green-500/20 to-emerald-600/20 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-7 h-7 text-green-400"><path strokeLinecap="round" strokeLinejoin="round" d="M2.25 15a4.5 4.5 0 0 0 4.5 4.5H18a3.75 3.75 0 0 0 1.332-7.257 3 3 0 0 0-3.758-3.848 5.25 5.25 0 0 0-10.233 2.33A4.502 4.502 0 0 0 2.25 15Z" /></svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-7 h-7 text-green-400"><path strokeLinecap="round" strokeLinejoin="round" d="M8.25 18.75a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m3 0h6m-9 0H3.375a1.125 1.125 0 0 1-1.125-1.125V14.25m17.25 4.5a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m3 0h1.125c.621 0 1.129-.504 1.09-1.124a17.902 17.902 0 0 0-3.213-9.193 2.056 2.056 0 0 0-1.58-.86H14.25M16.5 18.75h-2.25m0-11.177v-.958c0-.568-.422-1.048-.987-1.106a48.554 48.554 0 0 0-10.026 0 1.106 1.106 0 0 0-.987 1.106v7.635m12-6.677v6.677m0 4.5v-4.5m0 0h-12" /></svg>
                             </div>
-                            <h3 className="text-xl font-bold text-white mb-3">Lifetime Cloud Storage</h3>
-                            <p className="text-gray-400 leading-relaxed">All your photos securely stored forever. Access them anytime, anywhere through the app.</p>
+                            <h3 className="text-xl font-bold text-white mb-3">Delivery Tracking</h3>
+                            <p className="text-gray-400 leading-relaxed text-sm">Lets customers monitor their order status and location in real time until it arrives.</p>
                         </div>
                     </motion.div>
 
@@ -785,10 +846,9 @@ const Demo = () => {
                             {/* App Store */}
                             <div className="relative">
                                 <button 
-                                    onClick={() => setShowAppStorePopup(true)}
                                     onMouseEnter={() => setShowAppStorePopup(true)}
                                     onMouseLeave={() => setShowAppStorePopup(false)}
-                                    className="w-full px-4 py-3 rounded-xl bg-black border border-white/30 text-white hover:bg-white/10 transition-all flex items-center justify-center gap-3 group"
+                                    className="w-full px-4 py-3 rounded-xl bg-black border border-white/30 text-white hover:bg-white/10 transition-all flex items-center justify-center gap-3 group cursor-default"
                                 >
                                     <svg className="w-8 h-8" viewBox="0 0 24 24" fill="currentColor">
                                         <path d="M17.05 20.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.35C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.74 1.18 0 2.48-1.67 5.17-1.44 1.14.08 3.52.41 4.3 2.5a3.65 3.65 0 0 1-2 2 c-1.52.89-1.85 3.51.05 5.37.5 1.57.25 2.15 0 2.5ZM13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.84 1.53-2.95 1.5-.83-4.17.65-3.19 1.05-3.19Z"/>
@@ -815,8 +875,9 @@ const Demo = () => {
                             {/* Google Play - With Popup */}
                             <div className="relative">
                                 <button 
-                                    onClick={() => setShowPopup(true)}
-                                    className="w-full px-4 py-3 rounded-xl bg-black border border-white/30 text-white hover:bg-white/10 transition-all flex items-center justify-center gap-3"
+                                    onMouseEnter={() => setShowPopup(true)}
+                                    onMouseLeave={() => setShowPopup(false)}
+                                    className="w-full px-4 py-3 rounded-xl bg-black border border-white/30 text-white hover:bg-white/10 transition-all flex items-center justify-center gap-3 cursor-default"
                                 >
                                     <svg className="w-7 h-7" viewBox="0 0 24 24" fill="currentColor">
                                         <path d="M3,20.5V3.5C3,2.91 3.34,2.39 3.84,2.15L13.69,12L3.84,21.85C3.34,21.6 3,21.09 3,20.5M16.81,15.12L6.05,21.34L14.54,12.85L16.81,15.12M20.16,10.81C20.5,11.08 20.75,11.5 20.75,12C20.75,12.5 21,12.92 20.16,13.19L17.89,14.5L15.39,12L17.89,9.5L20.16,10.81M6.05,2.66L16.81,8.88L14.54,11.15L6.05,2.66Z" />
@@ -1119,7 +1180,6 @@ const DownloadAppSection = () => {
                     <div className="flex justify-center md:justify-start gap-4 mt-8">
                         <div className="relative">
                             <img
-                                onClick={() => setShowGooglePlayPopup(true)}
                                 onMouseEnter={() => setShowGooglePlayPopup(true)}
                                 onMouseLeave={() => setShowGooglePlayPopup(false)}
                                 src="https://b.zmtcdn.com/data/o2_assets/aad864bd17860b27634fe621001c32db1739350431.png"
@@ -1142,7 +1202,6 @@ const DownloadAppSection = () => {
                         
                         <div className="relative">
                             <img
-                                onClick={() => setShowAppStorePopup2(true)}
                                 onMouseEnter={() => setShowAppStorePopup2(true)}
                                 onMouseLeave={() => setShowAppStorePopup2(false)}
                                 src="https://b.zmtcdn.com/data/o2_assets/df6464de32f4a09262cee301f65aaa661739351256.png"
