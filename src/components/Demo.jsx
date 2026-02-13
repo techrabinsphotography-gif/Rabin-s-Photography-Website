@@ -1002,6 +1002,7 @@ const BenefitCard = ({ title, desc, icon, delay }) => {
 const ContactSection = () => {
     const [formData, setFormData] = React.useState({
         name: '',
+        phone: '',
         email: '',
         message: ''
     });
@@ -1037,7 +1038,7 @@ const ContactSection = () => {
                     type: 'success', 
                     message: data.message || 'Message sent successfully!' 
                 });
-                setFormData({ name: '', email: '', message: '' });
+                setFormData({ name: '', phone: '', email: '', message: '' });
             } else {
                 setSubmitStatus({ 
                     type: 'error', 
@@ -1150,6 +1151,19 @@ const ContactSection = () => {
                                 placeholder="Your name"
                                 onChange={handleChange}
                                 value={formData.name}
+                            />
+                        </div>
+
+                        <div className="space-y-2">
+                            <label className="text-sm font-semibold text-white ml-1">Contact Number</label>
+                            <input
+                                type="tel"
+                                name="phone"
+                                required
+                                className="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-4 text-white placeholder-gray-400 focus:outline-none focus:border-blue-500 focus:ring-4 focus:ring-blue-500/20 transition-all backdrop-blur-sm"
+                                placeholder="+91 1234567890"
+                                onChange={handleChange}
+                                value={formData.phone}
                             />
                         </div>
 

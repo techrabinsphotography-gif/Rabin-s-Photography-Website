@@ -350,11 +350,27 @@ const FrontPage = () => {
                             <div className="w-8 h-8 rounded-full bg-white text-black flex items-center justify-center">x</div>
                         </div>
 
-                        {/* App Buttons */}
-                        <div className="space-y-3">
-                            <img src="https://b.zmtcdn.com/data/o2_assets/aad864bd17860b27634fe621001c32db1739350431.png" alt="App Store" className="h-10 cursor-pointer" />
-                            <img src="https://b.zmtcdn.com/data/o2_assets/aad864bd17860b27634fe621001c32db1739350431.png" alt="Google Play" className="h-10 cursor-pointer" />
-                        </div>
+                        {/* Store Buttons */}
+                    <div className="flex justify-center md:justify-start gap-4 mt-8">
+                        <button className="px-5 py-2 rounded-lg bg-black text-white hover:opacity-80 transition-all flex items-center gap-2.5 cursor-default min-h-[44px]">
+                            <svg className="w-8 h-8 flex-shrink-0" viewBox="0 0 24 24" fill="white">
+                                <path d="M3,20.5V3.5C3,2.91 3.34,2.39 3.84,2.15L13.69,12L3.84,21.85C3.34,21.6 3,21.09 3,20.5M16.81,15.12L6.05,21.34L14.54,12.85L16.81,15.12M20.16,10.81C20.5,11.08 20.75,11.5 20.75,12C20.75,12.5 21,12.92 20.16,13.19L17.89,14.5L15.39,12L17.89,9.5L20.16,10.81M6.05,2.66L16.81,8.88L14.54,11.15L6.05,2.66Z" />
+                            </svg>
+                            <div className="text-left flex-1">
+                                <div className="text-[8.5px] font-normal text-white leading-tight">GET IT ON</div>
+                                <div className="text-[18px] font-semibold leading-tight">Google Play</div>
+                            </div>
+                        </button>
+                        <button className="px-5 py-2 rounded-lg bg-black text-white hover:opacity-80 transition-all flex items-center gap-2.5 cursor-default min-h-[44px]">
+                            <svg className="w-8 h-8 flex-shrink-0" viewBox="0 0 24 24" fill="white">
+                                <path d="M17.05 20.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.35C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.74 1.18 0 2.48-1.67 5.17-1.44 1.14.08 3.52.41 4.3 2.5a3.65 3.65 0 0 1-2 2 c-1.52.89-1.85 3.51.05 5.37.5 1.57.25 2.15 0 2.5ZM13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.84 1.53-2.95 1.5-.83-4.17.65-3.19 1.05-3.19Z"/>
+                            </svg>
+                            <div className="text-left flex-1">
+                                <div className="text-[8.5px] font-normal text-white leading-tight">Download on the</div>
+                                <div className="text-[18px] font-semibold leading-tight">App Store</div>
+                            </div>
+                        </button>
+                    </div>
                     </div>
 
                 </div>

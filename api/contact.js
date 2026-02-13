@@ -6,10 +6,10 @@ export default async function handler(req, res) {
     return res.status(405).json({ success: false, message: 'Method not allowed' });
   }
 
-  const { name, email, message } = req.body;
+  const { name, phone, email, message } = req.body;
 
   // Validate inputs
-  if (!name || !email || !message) {
+  if (!name || !phone || !email || !message) {
     return res.status(400).json({
       success: false,
       message: 'Please fill in all fields'
@@ -40,6 +40,12 @@ export default async function handler(req, res) {
                         <p style="color: #6b7280; margin: 0; font-size: 12px; text-transform: uppercase; letter-spacing: 1px;">Email</p>
                         <p style="color: #111827; margin: 5px 0 0 0; font-size: 16px;">
                             <a href="mailto:${email}" style="color: #10b981; text-decoration: none;">${email}</a>
+                        </p>
+                    </div>
+                    <div style="margin-bottom: 20px;">
+                        <p style="color: #6b7280; margin: 0; font-size: 12px; text-transform: uppercase; letter-spacing: 1px;">Phone Number</p>
+                        <p style="color: #111827; margin: 5px 0 0 0; font-size: 16px;">
+                            <a href="tel:${phone}" style="color: #10b981; text-decoration: none;">${phone}</a>
                         </p>
                     </div>
                     <div style="margin-bottom: 20px;">
