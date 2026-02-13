@@ -183,7 +183,7 @@ const Demo = () => {
                                 onMouseLeave={() => setShowDownloadPopup(false)}
                                 className="px-10 py-4 rounded-full bg-gradient-to-r from-[#ff4f5a] to-orange-600 text-white font-bold text-lg hover:shadow-2xl hover:shadow-[#ff4f5a]/40 hover:scale-105 transition-all duration-300 backdrop-blur-sm"
                             >
-                                Download App
+                                Download App Now
                             </button>
                             {showDownloadPopup && (
                                 <motion.div 
