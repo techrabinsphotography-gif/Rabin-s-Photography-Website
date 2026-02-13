@@ -197,17 +197,54 @@ const Blog = () => {
                             Get our latest photography tips, behind-the-scenes content, and exclusive offers 
                             delivered straight to your inbox.
                         </p>
-                        <div className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
+                        <form onSubmit={async (e) => {
+                            e.preventDefault();
+                            const email = e.target.email.value;
+                            const button = e.target.querySelector('button');
+                            const statusDiv = document.getElementById('newsletter-status');
+                            
+                            button.disabled = true;
+                            button.textContent = 'Subscribing...';
+                            
+                            try {
+                                // Vercel Serverless Function - Uses Brevo!
+                                const response = await fetch('/api/newsletter', {
+                                    method: 'POST',
+                                    headers: { 'Content-Type': 'application/json' },
+                                    body: JSON.stringify({ email }),
+                                });
+                                
+                                const data = await response.json();
+                                
+                                if (response.ok && data.success) {
+                                    statusDiv.className = 'mt-4 p-3 rounded-lg bg-green-100 text-green-800 text-sm';
+                                    statusDiv.textContent = data.message || 'Successfully subscribed!';
+                                    e.target.reset();
+                                } else {
+                                    statusDiv.className = 'mt-4 p-3 rounded-lg bg-red-100 text-red-800 text-sm';
+                                    statusDiv.textContent = 'Failed to subscribe. Please try again.';
+                                }
+                            } catch (error) {
+                                statusDiv.className = 'mt-4 p-3 rounded-lg bg-red-100 text-red-800 text-sm';
+                                statusDiv.textContent = 'Network error. Please try again.';
+                            } finally {
+                                button.disabled = false;
+                                button.textContent = 'Subscribe';
+                            }
+                        }} className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
                             <input 
-                                type="email" 
+                                type="email"
+                                name="email"
+                                required
                                 placeholder="Enter your email"
                                 className="flex-1 px-6 py-3 rounded-full border-2 border-gray-300 focus:border-[#ff4f5a] focus:outline-none transition-colors"
                             />
-                            <button className="px-8 py-3 rounded-full bg-gradient-to-r from-[#ff4f5a] to-orange-600 text-white font-semibold hover:shadow-lg hover:shadow-[#ff4f5a]/30 transition-all duration-300">
+                            <button type="submit" className="px-8 py-3 rounded-full bg-gradient-to-r from-[#ff4f5a] to-orange-600 text-white font-semibold hover:shadow-lg hover:shadow-[#ff4f5a]/30 transition-all duration-300">
                                 Subscribe
                             </button>
-                        </div>
-                        <p className="text-sm text-gray-500">
+                        </form>
+                        <div id="newsletter-status"></div>
+                        <p className="text-sm text-gray-500 mt-4">
                             Join 2,000+ photographers and enthusiasts
                         </p>
                     </motion.div>

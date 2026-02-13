@@ -1005,16 +1005,54 @@ const ContactSection = () => {
         email: '',
         message: ''
     });
+    const [submitStatus, setSubmitStatus] = React.useState({ type: '', message: '' });
+    const [isSubmitting, setIsSubmitting] = React.useState(false);
 
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
+        if (submitStatus.type) {
+            setSubmitStatus({ type: '', message: '' });
+        }
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        const { name, email, message } = formData;
-        const mailtoLink = `mailto:contact@rabinsphotography.com?subject=Inquiry from ${name}&body=Name: ${name}%0D%0AEmail: ${email}%0D%0A%0D%0AMessage:%0D%0A${message}`;
-        window.location.href = mailtoLink;
+        setIsSubmitting(true);
+        setSubmitStatus({ type: '', message: '' });
+
+        try {
+            // Vercel Serverless Function - Uses Brevo, no backend server needed!
+            const response = await fetch('/api/contact', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(formData),
+            });
+
+            const data = await response.json();
+
+            if (response.ok && data.success) {
+                setSubmitStatus({ 
+                    type: 'success', 
+                    message: data.message || 'Message sent successfully!' 
+                });
+                setFormData({ name: '', email: '', message: '' });
+            } else {
+                setSubmitStatus({ 
+                    type: 'error', 
+                    message: 'Failed to send message. Please try again.' 
+                });
+            }
+        } catch (error) {
+            console.error('Error sending message:', error);
+            setSubmitStatus({ 
+                type: 'error', 
+                message: 'Network error. Please check your connection and try again.' 
+            });
+        } finally {
+            setIsSubmitting(false);
+        }
     };
 
     return (
@@ -1111,6 +1149,7 @@ const ContactSection = () => {
                                 className="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-4 text-white placeholder-gray-400 focus:outline-none focus:border-blue-500 focus:ring-4 focus:ring-blue-500/20 transition-all backdrop-blur-sm"
                                 placeholder="Your name"
                                 onChange={handleChange}
+                                value={formData.name}
                             />
                         </div>
 
@@ -1123,6 +1162,7 @@ const ContactSection = () => {
                                 className="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-4 text-white placeholder-gray-400 focus:outline-none focus:border-blue-500 focus:ring-4 focus:ring-blue-500/20 transition-all backdrop-blur-sm"
                                 placeholder="you@example.com"
                                 onChange={handleChange}
+                                value={formData.email}
                             />
                         </div>
 
@@ -1135,14 +1175,33 @@ const ContactSection = () => {
                                 className="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-4 text-white placeholder-gray-400 focus:outline-none focus:border-blue-500 focus:ring-4 focus:ring-blue-500/20 transition-all resize-none backdrop-blur-sm"
                                 placeholder="Tell us about your project..."
                                 onChange={handleChange}
+                                value={formData.message}
                             ></textarea>
                         </div>
 
+                        {/* Status Message */}
+                        {submitStatus.message && (
+                            <motion.div
+                                initial={{ opacity: 0, y: -10 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                className={`p-4 rounded-xl ${
+                                    submitStatus.type === 'success'
+                                        ? 'bg-green-500/20 border border-green-500/50 text-green-100'
+                                        : 'bg-red-500/20 border border-red-500/50 text-red-100'
+                                }`}
+                            >
+                                {submitStatus.message}
+                            </motion.div>
+                        )}
+
                         <button
                             type="submit"
-                            className="w-full bg-gradient-to-r from-blue-600 to-[#ff4f5a] text-white font-bold py-4 rounded-xl hover:shadow-2xl hover:shadow-blue-500/30 hover:scale-[1.02] active:scale-[0.98] transition-all duration-300"
+                            disabled={isSubmitting}
+                            className={`w-full bg-gradient-to-r from-blue-600 to-[#ff4f5a] text-white font-bold py-4 rounded-xl hover:shadow-2xl hover:shadow-blue-500/30 hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 ${
+                                isSubmitting ? 'opacity-70 cursor-not-allowed' : ''
+                            }`}
                         >
-                            Send Message →
+                            {isSubmitting ? 'Sending...' : 'Send Message →'}
                         </button>
                     </form>
                 </motion.div>
