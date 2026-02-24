@@ -6,7 +6,7 @@ import img1 from '../assets/recent/cameraa.png'
 import img2 from '/571744774_1361610111985518_3207307785903951187_n.jpg'
 
 import img4 from '/484042900_1180013106811887_2538291571904064716_n.jpg'
-import video from "../assets/recent/video.mp4"
+const HERO_VIDEO_URL = "https://res.cloudinary.com/dvjm8xxgj/video/upload/v1771931255/Rabin_s_Photography_Web_Video_javamy.mp4"
 import finalLogo from '../assets/recent/final logo.png'
 
 
@@ -104,7 +104,7 @@ const Demo = () => {
                 {/* Background Video with animated overlay */}
                 <video
                     className="absolute top-0 left-0 w-full h-full object-cover opacity-40"
-                    src={video}
+                    src={HERO_VIDEO_URL}
                     autoPlay
                     loop
                     muted
@@ -1317,7 +1317,7 @@ const DownloadAppSection = () => {
                 </div>
 
                 {/* RIGHT PHONE + QR */}
-                <div className="relative z-10 h-[270px] overflow-hidden">
+                <div className="relative z-10 h-[380px] overflow-hidden flex justify-center w-full md:w-auto">
                     <div className="w-full max-w-[380px] h-auto md:h-[540px] aspect-[9/16] md:aspect-auto rounded-[40px] bg-white border-4 border-gray-300 shadow-2xl flex items-start justify-center relative pt-12">
                         {/* Screen */}
                         <div className="w-[92%] h-[96%] bg-slate-50 rounded-[32px] flex flex-col items-center justify-start gap-6 px-6 overflow-hidden relative pt-8">
@@ -1479,7 +1479,7 @@ const AboutSection = () => {
                             className="absolute top-0 right-0 w-[85%] h-[90%] rounded-3xl overflow-hidden shadow-2xl border border-white/20 backdrop-blur-sm"
                         >
                             <div className="absolute inset-0 bg-gradient-to-br from-[#ff4f5a]/20 via-transparent to-transparent z-10" />
-                            <img src={img4} alt="Photography Work" className="w-full h-full object-cover" />
+                            <img src={img4} alt="Photography Work" className="w-full h-full object-cover object-top" />
                         </motion.div>
 
                         {/* Floating Card 2 */}
@@ -1490,7 +1490,7 @@ const AboutSection = () => {
                             className="absolute bottom-10 left-2 w-[55%] h-[55%] rounded-2xl overflow-hidden shadow-xl border-2 border-white bg-white p-1"
                         >
                             <div className="w-full h-full rounded-xl overflow-hidden">
-                                <img src={img2} alt="Cinematic Shot" className="w-full h-full object-cover" />
+                                <img src={img2} alt="Cinematic Shot" className="w-full h-full object-cover object-top" />
                             </div>
                         </motion.div>
 
@@ -1502,7 +1502,7 @@ const AboutSection = () => {
                             className="absolute -top-20 left-0 w-48 h-48 rounded-2xl overflow-hidden shadow-lg border-3 border-white bg-white p-1"
                         >
                             <div className="w-full h-full rounded-lg overflow-hidden bg-gradient-to-br from-[#ff4f5a] to-orange-600 flex items-center justify-center relative">
-                                <img src={img1} alt="Detail Shot" className="w-full h-full object-cover" />
+                                <img src={img1} alt="Detail Shot" className="w-full h-full object-cover object-center" />
                                 <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
                             </div>
                         </motion.div>
@@ -1518,16 +1518,16 @@ const AboutSection = () => {
                         transition={{ duration: 0.8 }}
                         className="lg:hidden flex flex-col gap-4"
                     >
-                        <div className="relative rounded-2xl overflow-hidden shadow-xl h-64 border border-white/20">
+                        <div className="relative rounded-2xl overflow-hidden shadow-xl h-[400px] border border-white/20">
                             <div className="absolute inset-0 bg-gradient-to-br from-[#ff4f5a]/20 via-transparent to-transparent z-10" />
-                            <img src={img4} alt="Photography Work" className="w-full h-full object-cover" />
+                            <img src={img4} alt="Photography Work" className="w-full h-full object-cover object-top" />
                         </div>
                         <div className="flex gap-4">
-                            <div className="relative rounded-2xl overflow-hidden shadow-lg h-40 w-1/2 border border-white/20">
-                                <img src={img2} alt="Professional Camera" className="w-full h-full object-cover" />
+                            <div className="relative rounded-2xl overflow-hidden shadow-lg h-56 w-1/2 border border-white/20">
+                                <img src={img2} alt="Professional Camera" className="w-full h-full object-cover object-top" />
                             </div>
-                            <div className="relative rounded-2xl overflow-hidden shadow-lg h-40 w-1/2 border border-white/20">
-                                <img src={img1} alt="Detail Shot" className="w-full h-full object-cover" />
+                            <div className="relative rounded-2xl overflow-hidden shadow-lg h-56 w-1/2 border border-white/20">
+                                <img src={img1} alt="Detail Shot" className="w-full h-full object-cover object-center" />
                             </div>
                         </div>
                     </motion.div>

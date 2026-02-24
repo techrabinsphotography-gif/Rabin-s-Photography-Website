@@ -621,8 +621,8 @@ const DownloadAppSection = () => {
                 </div>
 
                 {/* RIGHT PHONE + QR */}
-                <div className="relative z-10 h-[270px] overflow-hidden">
-                    <div className="w-full max-w-[380px] h-[540px] rounded-[40px] bg-white border-4 border-gray-300 shadow-2xl flex items-start justify-center relative pt-12">
+                <div className="relative z-10 h-[380px] overflow-hidden flex justify-center w-full md:w-auto">
+                    <div className="w-full max-w-[380px] h-auto md:h-[540px] rounded-[40px] bg-white border-4 border-gray-300 shadow-2xl flex items-start justify-center relative pt-12">
                         {/* Screen */}
                         <div className="w-[92%] h-[96%] bg-slate-50 rounded-[32px] flex flex-col items-center justify-start gap-6 px-6 overflow-hidden relative pt-8">
                             {/* Decorative header */}
