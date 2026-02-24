@@ -35,7 +35,7 @@ const FrontPage = () => {
                         Est. 2012
                     </p>
 
-                    <h1 className="text-4xl md:text-6xl lg:text-7xl font-extrabold 
+                    <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold 
     text-white tracking-wide">
                         Robin <span className="text-[#ff4f5a]">Photo Studio</span>
                     </h1>
@@ -46,7 +46,7 @@ const FrontPage = () => {
                     </p>
 
                     {/* Optional CTA */}
-                    <div className="mt-10 flex gap-4">
+                    <div className="mt-10 flex flex-col sm:flex-row justify-center items-center gap-4 w-full">
                         <button className="px-8 py-3 rounded-full bg-[#ff4f5a] text-white font-semibold hover:scale-105 transition">
                             Book a Session
                         </button>
@@ -67,7 +67,7 @@ const FrontPage = () => {
 
             <section className="w-full flex justify-center items-center py-8 md:py-10 bg-white">
                 <div className="flex flex-col md:flex-row items-center gap-8 md:gap-10 px-8 py-8 md:px-12 md:py-6 rounded-3xl md:rounded-full 
-  shadow-[0_10px_40px_rgba(0,0,0,0.08)] bg-white w-full max-w-xs md:max-w-fit mx-4">
+  shadow-[0_10px_40px_rgba(0,0,0,0.08)] bg-white w-[calc(100%-2rem)] md:w-fit mx-auto">
 
                     {/* Item 1 */}
                     <div className="flex items-center gap-3">
@@ -160,7 +160,7 @@ const FrontPage = () => {
                         transition={{ duration: 1, type: "spring" }}
                         className="relative z-10 flex-shrink-0"
                     >
-                        <div className="w-[300px] h-[600px] bg-black rounded-[45px] p-3 shadow-2xl border-[6px] border-gray-900 relative">
+                        <div className="w-full max-w-[300px] h-[600px] bg-black rounded-[45px] p-3 shadow-2xl border-[6px] border-gray-900 relative">
                             {/* Bezel & Notch */}
                             <div className="absolute top-0 left-1/2 -translate-x-1/2 h-[25px] w-[120px] bg-black rounded-b-3xl z-20"></div>
 
@@ -215,7 +215,7 @@ const FrontPage = () => {
 
 
             {/* Gold membership */}
-            <section id='gold-membership' className="w-full min-h-screen  bg-neutral-950 flex flex-col items-center justify-center text-center px-6 relative overflow-hidden py-24 mx-4  rounded-3xl">
+            <section id='gold-membership' className="w-[calc(100%-2rem)] mx-auto min-h-screen  bg-neutral-950 flex flex-col items-center justify-center text-center px-6 relative overflow-hidden py-24 rounded-3xl">
 
                 {/* Background Gradients/Glows */}
                 <div className="absolute top-[-20%] left-[-10%] w-[500px] h-[500px] bg-yellow-600/20 rounded-full blur-[120px]" />
@@ -234,7 +234,7 @@ const FrontPage = () => {
                     </div>
 
                     {/* GOLD Title */}
-                    <h1 className="text-7xl md:text-9xl font-serif font-bold tracking-tighter 
+                    <h1 className="text-5xl sm:text-7xl md:text-9xl font-serif font-bold tracking-tighter 
                         text-transparent bg-clip-text bg-gradient-to-b from-[#FFF5C3] via-[#D4AF37] to-[#886618]
                         drop-shadow-[0_0_35px_rgba(212,175,55,0.4)]">
                         GOLD
@@ -498,7 +498,7 @@ const ContactSection = () => {
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.6 }}
-                        className="text-4xl md:text-6xl font-bold text-gray-900 leading-tight"
+                        className="text-4xl sm:text-5xl md:text-6xl font-bold text-gray-900 leading-tight"
                     >
                         Let’s start a <br /> conversation.
                     </motion.h2>
@@ -622,7 +622,7 @@ const DownloadAppSection = () => {
 
                 {/* RIGHT PHONE + QR */}
                 <div className="relative z-10 h-[270px] overflow-hidden">
-                    <div className="w-[380px] h-[540px] rounded-[40px] bg-white border-4 border-gray-300 shadow-2xl flex items-start justify-center relative pt-12">
+                    <div className="w-full max-w-[380px] h-[540px] rounded-[40px] bg-white border-4 border-gray-300 shadow-2xl flex items-start justify-center relative pt-12">
                         {/* Screen */}
                         <div className="w-[92%] h-[96%] bg-slate-50 rounded-[32px] flex flex-col items-center justify-start gap-6 px-6 overflow-hidden relative pt-8">
                             {/* Decorative header */}

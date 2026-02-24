@@ -138,8 +138,8 @@ const Demo = () => {
                         transition={{ duration: 0.8, delay: 0.2 }}
                         className="max-w-4xl"
                     >
-                        <h1 className="text-5xl md:text-7xl lg:text-8xl font-black text-white leading-tight mb-4 tracking-tight">
-                            Rabin's <br className="hidden md:block" />
+                        <h1 className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-black text-white leading-tight mb-4 tracking-tight">
+                            Rabin's <br className="hidden sm:block" />
                             <span className="bg-gradient-to-r from-[#ff4f5a] via-orange-500 to-[#ff4f5a] bg-clip-text text-transparent">
                                 Photography
                             </span>
@@ -153,7 +153,7 @@ const Demo = () => {
                         transition={{ duration: 0.8, delay: 0.4 }}
                         className="mt-10 text-center"
                     >
-                        <h2 className="text-5xl md:text-6xl font-bold text-white">
+                        <h2 className="text-3xl sm:text-4xl md:text-6xl font-bold text-white leading-tight">
                             India's #1<br />
                             Photography app
                         </h2>
@@ -174,7 +174,7 @@ const Demo = () => {
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.8, delay: 0.8 }}
-                        className="mt-12 flex flex-col sm:flex-row gap-4 w-full sm:w-auto"
+                        className="mt-12 flex flex-col sm:flex-row items-center justify-center gap-4 w-full sm:w-auto"
                     >
                         <div className="relative">
                             <button 
@@ -266,8 +266,9 @@ const Demo = () => {
                     transition={{ duration: 0.8 }}
                     className="text-center max-w-3xl px-6 mb-20"
                 >
-                    <h2 className="text-4xl md:text-5xl font-bold text-gray-900 leading-tight">
-                        Professional Photography <br className="hidden md:block" /> <span className="bg-gradient-to-r from-blue-600 to-[#ff4f5a] bg-clip-text text-transparent">at Your Fingertips</span>
+                    <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 leading-tight">
+                        Professional Photography <br className="block" />
+                        <span className="bg-gradient-to-r from-blue-600 to-[#ff4f5a] bg-clip-text text-transparent inline-block mt-2 md:mt-0">at Your Fingertips</span>
                     </h2>
                     <p className="mt-6 text-lg text-gray-600 max-w-xl mx-auto">
                         Experience professional capture, intelligent editing, and seamless delivery - all in one powerful app built for modern photographers.
@@ -313,7 +314,7 @@ const Demo = () => {
                         <div className="absolute -inset-6 bg-gradient-to-r from-blue-500/20 via-[#ff4f5a]/20 to-purple-500/20 rounded-[60px] blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
 
                         {/* Phone Device */}
-                        <div className="relative w-[300px] h-[600px] bg-gradient-to-b from-gray-900 to-black rounded-[45px] p-3 shadow-2xl border-[8px] border-gray-900 group">
+                        <div className="relative w-full max-w-[300px] h-auto aspect-[1/2] rounded-[45px] p-3 shadow-2xl border-[8px] border-gray-900 group">
                             {/* Phone Shine Effect */}
                             <div className="absolute inset-0 rounded-[45px] bg-gradient-to-br from-white/10 via-transparent to-transparent pointer-events-none"></div>
 
@@ -524,7 +525,7 @@ const Demo = () => {
             </section>
 
             {/* Gold Membership - Modern & Premium */}
-            <section id='gold-membership' className="w-full min-h-screen bg-black flex flex-col items-center justify-center text-center px-6 relative overflow-hidden py-32 mx-4 rounded-[3rem]">
+            <section id='gold-membership' className="w-[calc(100%-2rem)] mx-auto min-h-screen bg-black flex flex-col items-center justify-center text-center px-6 relative overflow-hidden py-32 rounded-[3rem]">
 
                 {/* Animated Background Gradients */}
                 <motion.div 
@@ -572,7 +573,7 @@ const Demo = () => {
                         initial={{ scale: 0.8, opacity: 0 }}
                         whileInView={{ scale: 1, opacity: 1 }}
                         transition={{ duration: 0.8, delay: 0.2 }}
-                        className="text-6xl md:text-8xl font-bold tracking-tight 
+                        className="text-4xl sm:text-6xl md:text-8xl font-bold tracking-tight 
                         text-transparent bg-clip-text bg-gradient-to-b from-white via-green-400 to-green-600
                         drop-shadow-[0_0_60px_rgba(34,197,94,0.6)] mb-6"
                     >
@@ -671,85 +672,7 @@ const Demo = () => {
                 </motion.div>
 
                 {/* Feature Cards Grid with Detailed Descriptions */}
-                <div className="mt-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 w-full max-w-7xl px-4 relative z-10">
-
-                    {/* Card 1: Package Customization */}
-                    <motion.div
-                        initial={{ opacity: 0, y: 30 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        transition={{ delay: 0.1, duration: 0.6 }}
-                        whileHover={{ y: -10, scale: 1.02 }}
-                        className="group relative p-8 rounded-3xl bg-gradient-to-br from-green-900/10 via-black/50 to-black/50 border border-green-700/30 backdrop-blur-xl hover:border-green-500/60 transition-all duration-500 overflow-hidden"
-                    >
-                        <div className="absolute inset-0 bg-gradient-to-br from-green-500/0 to-green-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                        
-                        <div className="relative z-10">
-                            <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-green-500/20 to-emerald-600/20 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-7 h-7 text-green-400"><path strokeLinecap="round" strokeLinejoin="round" d="m20.25 7.5-.625 10.632a2.25 2.25 0 0 1-2.247 2.118H6.622a2.25 2.25 0 0 1-2.247-2.118L3.75 7.5M10 11.25h4M3.375 7.5h17.25c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125Z" /></svg>
-                            </div>
-                            <h3 className="text-xl font-bold text-white mb-3">Package Customization</h3>
-                            <p className="text-gray-400 leading-relaxed text-sm">Allows customers to personalize packaging, messages, or product options before delivery.</p>
-                        </div>
-                    </motion.div>
-
-                    {/* Card 2: Priority Notification */}
-                    <motion.div
-                        initial={{ opacity: 0, y: 30 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        transition={{ delay: 0.2, duration: 0.6 }}
-                        whileHover={{ y: -10, scale: 1.02 }}
-                        className="group relative p-8 rounded-3xl bg-gradient-to-br from-green-900/10 via-black/50 to-black/50 border border-green-700/30 backdrop-blur-xl hover:border-green-500/60 transition-all duration-500 overflow-hidden"
-                    >
-                        <div className="absolute inset-0 bg-gradient-to-br from-green-500/0 to-green-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                        
-                        <div className="relative z-10">
-                            <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-green-500/20 to-emerald-600/20 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-7 h-7 text-green-400"><path strokeLinecap="round" strokeLinejoin="round" d="M14.857 17.082a23.848 23.848 0 0 0 5.454-1.31A8.967 8.967 0 0 1 18 9.75V9A6 6 0 0 0 6 9v.75a8.967 8.967 0 0 1-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 0 1-5.714 0m5.714 0a3 3 0 1 1-5.714 0" /></svg>
-                            </div>
-                            <h3 className="text-xl font-bold text-white mb-3">Priority Notification</h3>
-                            <p className="text-gray-400 leading-relaxed text-sm">Sends instant alerts to customers about important order updates like confirmation or shipping.</p>
-                        </div>
-                    </motion.div>
-
-                    {/* Card 3: Rewards */}
-                    <motion.div
-                        initial={{ opacity: 0, y: 30 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        transition={{ delay: 0.3, duration: 0.6 }}
-                        whileHover={{ y: -10, scale: 1.02 }}
-                        className="group relative p-8 rounded-3xl bg-gradient-to-br from-green-900/10 via-black/50 to-black/50 border border-green-700/30 backdrop-blur-xl hover:border-green-500/60 transition-all duration-500 overflow-hidden"
-                    >
-                        <div className="absolute inset-0 bg-gradient-to-br from-green-500/0 to-green-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                        
-                        <div className="relative z-10">
-                            <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-green-500/20 to-emerald-600/20 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-7 h-7 text-green-400"><path strokeLinecap="round" strokeLinejoin="round" d="M21 11.25v8.25a1.5 1.5 0 0 1-1.5 1.5H5.25a1.5 1.5 0 0 1-1.5-1.5v-8.25M12 4.875A2.625 2.625 0 1 0 9.375 7.5H12m0-2.625V7.5m0-2.625A2.625 2.625 0 1 1 14.625 7.5H12m0 0V21m-8.625-9.75h18c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125h-18c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125Z" /></svg>
-                            </div>
-                            <h3 className="text-xl font-bold text-white mb-3">Rewards</h3>
-                            <p className="text-gray-400 leading-relaxed text-sm">Offers incentives such as points or discounts to encourage repeat purchases and customer loyalty.</p>
-                        </div>
-                    </motion.div>
-
-                    {/* Card 4: Delivery Tracking - WITH TRUCK ICON */}
-                    <motion.div
-                        initial={{ opacity: 0, y: 30 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        transition={{ delay: 0.4, duration: 0.6 }}
-                        whileHover={{ y: -10, scale: 1.02 }}
-                        className="group relative p-8 rounded-3xl bg-gradient-to-br from-green-900/10 via-black/50 to-black/50 border border-green-700/30 backdrop-blur-xl hover:border-green-500/60 transition-all duration-500 overflow-hidden"
-                    >
-                        <div className="absolute inset-0 bg-gradient-to-br from-green-500/0 to-green-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                        
-                        <div className="relative z-10">
-                            <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-green-500/20 to-emerald-600/20 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-7 h-7 text-green-400"><path strokeLinecap="round" strokeLinejoin="round" d="M8.25 18.75a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m3 0h6m-9 0H3.375a1.125 1.125 0 0 1-1.125-1.125V14.25m17.25 4.5a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m3 0h1.125c.621 0 1.129-.504 1.09-1.124a17.902 17.902 0 0 0-3.213-9.193 2.056 2.056 0 0 0-1.58-.86H14.25M16.5 18.75h-2.25m0-11.177v-.958c0-.568-.422-1.048-.987-1.106a48.554 48.554 0 0 0-10.026 0 1.106 1.106 0 0 0-.987 1.106v7.635m12-6.677v6.677m0 4.5v-4.5m0 0h-12" /></svg>
-                            </div>
-                            <h3 className="text-xl font-bold text-white mb-3">Delivery Tracking</h3>
-                            <p className="text-gray-400 leading-relaxed text-sm">Lets customers monitor their order status and location in real time until it arrives.</p>
-                        </div>
-                    </motion.div>
-
-                </div>
+                <GoldFeaturesSlider />
             </section>
 
             {/* Contact Us Section */}
@@ -922,6 +845,102 @@ const Demo = () => {
         </>
     )
 }
+
+const GoldFeaturesSlider = () => {
+    const [activeSlide, setActiveSlide] = useState(0);
+
+    const features = [
+        {
+            title: "Package Customization",
+            desc: "Allows customers to personalize packaging, messages, or product options before delivery.",
+            icon: <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-7 h-7 text-green-400"><path strokeLinecap="round" strokeLinejoin="round" d="m20.25 7.5-.625 10.632a2.25 2.25 0 0 1-2.247 2.118H6.622a2.25 2.25 0 0 1-2.247-2.118L3.75 7.5M10 11.25h4M3.375 7.5h17.25c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125Z" /></svg>
+        },
+        {
+            title: "Priority Notification",
+            desc: "Sends instant alerts to customers about important order updates like confirmation or shipping.",
+            icon: <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-7 h-7 text-green-400"><path strokeLinecap="round" strokeLinejoin="round" d="M14.857 17.082a23.848 23.848 0 0 0 5.454-1.31A8.967 8.967 0 0 1 18 9.75V9A6 6 0 0 0 6 9v.75a8.967 8.967 0 0 1-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 0 1-5.714 0m5.714 0a3 3 0 1 1-5.714 0" /></svg>
+        },
+        {
+            title: "Rewards",
+            desc: "Offers incentives such as points or discounts to encourage repeat purchases and customer loyalty.",
+            icon: <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-7 h-7 text-green-400"><path strokeLinecap="round" strokeLinejoin="round" d="M21 11.25v8.25a1.5 1.5 0 0 1-1.5 1.5H5.25a1.5 1.5 0 0 1-1.5-1.5v-8.25M12 4.875A2.625 2.625 0 1 0 9.375 7.5H12m0-2.625V7.5m0-2.625A2.625 2.625 0 1 1 14.625 7.5H12m0 0V21m-8.625-9.75h18c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125h-18c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125Z" /></svg>
+        },
+        {
+            title: "Delivery Tracking",
+            desc: "Lets customers monitor their order status and location in real time until it arrives.",
+            icon: <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-7 h-7 text-green-400"><path strokeLinecap="round" strokeLinejoin="round" d="M8.25 18.75a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m3 0h6m-9 0H3.375a1.125 1.125 0 0 1-1.125-1.125V14.25m17.25 4.5a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m3 0h1.125c.621 0 1.129-.504 1.09-1.124a17.902 17.902 0 0 0-3.213-9.193 2.056 2.056 0 0 0-1.58-.86H14.25M16.5 18.75h-2.25m0-11.177v-.958c0-.568-.422-1.048-.987-1.106a48.554 48.554 0 0 0-10.026 0 1.106 1.106 0 0 0-.987 1.106v7.635m12-6.677v6.677m0 4.5v-4.5m0 0h-12" /></svg>
+        }
+    ];
+
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setActiveSlide((prev) => (prev + 1) % features.length);
+        }, 3000);
+        return () => clearInterval(interval);
+    }, [features.length]);
+
+    return (
+        <div className="w-full relative z-10">
+            {/* Desktop View */}
+            <div className="hidden md:grid mt-16 grid-cols-2 lg:grid-cols-4 gap-6 w-full max-w-7xl px-4 mx-auto">
+                {features.map((feature, idx) => (
+                    <motion.div
+                        key={idx}
+                        initial={{ opacity: 0, y: 30 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 0.1 * (idx + 1), duration: 0.6 }}
+                        whileHover={{ y: -10, scale: 1.02 }}
+                        className="group relative p-8 rounded-3xl bg-gradient-to-br from-green-900/10 via-black/50 to-black/50 border border-green-700/30 backdrop-blur-xl hover:border-green-500/60 transition-all duration-500 overflow-hidden"
+                    >
+                        <div className="absolute inset-0 bg-gradient-to-br from-green-500/0 to-green-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                        <div className="relative z-10">
+                            <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-green-500/20 to-emerald-600/20 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                                {feature.icon}
+                            </div>
+                            <h3 className="text-xl font-bold text-white mb-3">{feature.title}</h3>
+                            <p className="text-gray-400 leading-relaxed text-sm">{feature.desc}</p>
+                        </div>
+                    </motion.div>
+                ))}
+            </div>
+
+            {/* Mobile View Slider */}
+            <div className="md:hidden mt-12 w-full overflow-hidden">
+                <motion.div 
+                    animate={{ x: `-${activeSlide * 100}%` }}
+                    transition={{ duration: 0.5, ease: "easeInOut" }}
+                    className="flex w-full"
+                >
+                    {features.map((feature, idx) => (
+                        <div key={idx} className="w-full shrink-0 min-h-full">
+                            <div className="relative p-8 rounded-3xl bg-gradient-to-br from-green-900/10 via-black/50 to-black/50 border border-green-700/30 backdrop-blur-xl transition-all duration-500 overflow-hidden h-full">
+                                <div className="absolute inset-0 bg-gradient-to-br from-green-500/0 to-green-500/10 opacity-100 mix-blend-overlay"></div>
+                                <div className="relative z-10">
+                                    <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-green-500/20 to-emerald-600/20 flex items-center justify-center mb-6">
+                                        {feature.icon}
+                                    </div>
+                                    <h3 className="text-xl font-bold text-white mb-3">{feature.title}</h3>
+                                    <p className="text-gray-400 leading-relaxed text-sm">{feature.desc}</p>
+                                </div>
+                            </div>
+                        </div>
+                    ))}
+                </motion.div>
+
+                {/* Mobile Indicators */}
+                <div className="flex justify-center gap-2 mt-8 z-20 relative">
+                    {features.map((_, idx) => (
+                        <div 
+                            key={idx}
+                            onClick={() => setActiveSlide(idx)}
+                            className={`h-1.5 rounded-full transition-all duration-300 cursor-pointer ${idx === activeSlide ? 'w-6 bg-green-500' : 'w-2 bg-green-500/30'}`}
+                        />
+                    ))}
+                </div>
+            </div>
+        </div>
+    );
+};
 
 export default Demo
 
@@ -1299,7 +1318,7 @@ const DownloadAppSection = () => {
 
                 {/* RIGHT PHONE + QR */}
                 <div className="relative z-10 h-[270px] overflow-hidden">
-                    <div className="w-[380px] h-[540px] rounded-[40px] bg-white border-4 border-gray-300 shadow-2xl flex items-start justify-center relative pt-12">
+                    <div className="w-full max-w-[380px] h-auto md:h-[540px] aspect-[9/16] md:aspect-auto rounded-[40px] bg-white border-4 border-gray-300 shadow-2xl flex items-start justify-center relative pt-12">
                         {/* Screen */}
                         <div className="w-[92%] h-[96%] bg-slate-50 rounded-[32px] flex flex-col items-center justify-start gap-6 px-6 overflow-hidden relative pt-8">
                             {/* Decorative header */}
@@ -1361,7 +1380,7 @@ const AboutSection = () => {
                         {/* Main Heading - Modern Style */}
                         <h2 className="text-5xl md:text-6xl lg:text-7xl font-black text-gray-900 leading-tight tracking-tight">
                             Booking Photography <br className="hidden md:block" />
-                            <span className="bg-gradient-to-r from-[#ff4f5a] to-orange-600 bg-clip-text text-transparent">
+                            <span className="bg-gradient-to-r from-[#ff4f5a] to-orange-600 bg-clip-text text-transparent inline-block mt-2 md:mt-0">
                                 Just Became Effortless
                             </span>
                         </h2>
