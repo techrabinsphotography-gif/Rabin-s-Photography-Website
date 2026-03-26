@@ -2,8 +2,53 @@ import React, { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import finalLogo from "../assets/recent/final logo.png";
-import img2 from "/571744774_1361610111985518_3207307785903951187_n.jpg"; // Assuming this is a good image to use
-import img4 from "/484042900_1180013106811887_2538291571904064716_n.jpg"; // Another image
+import img2 from "/samall.jpeg"; // Assuming this is a good image to use
+import img4 from "/long.jpeg"; // Another image
+import teamImg from "/Rabin_Ghosh.jpeg"; // Avatar
+
+const teamData = {
+  core: [
+    { name: "Amit Roy", image: "/Team/Core/Copy of Amit Roy.jpg" },
+    { name: "Anirban Das", image: "/Team/Core/Copy of Anirban Das.jpg" },
+    { name: "Debdibs Daw", image: "https://lh3.googleusercontent.com/d/1XtZA2i1fdNiKfqxhaxzX9HWLejJOfpNu" },
+    { name: "Diponkor Paul", image: "/Team/Core/Copy of Diponkor Paul.JPG" },
+    { name: "Jayanta Das", image: "/Team/Core/Copy of Jayanta Das.jpg" },
+    { name: "Kiron Das Ghosh", image: "/Team/Core/Copy of Kiron Das Ghosh.jpg" },
+    { name: "Prosenjit Mondal", image: "/Team/Core/Copy of Prosenjit Mondal.jpeg" },
+    { name: "Puspal Bhattacharya", image: "/Team/Core/Copy of Puspal Bhattacharya.jpeg" },
+    { name: "Rohan Roy", image: "/Team/Core/Copy of Rohan Roy.jpg" },
+    { name: "Rohit Saha", image: "/Team/Core/Copy of Rohit Saha.webp" },
+    { name: "Sabyasachi Mondal", image: "/Team/Core/Copy of Sabyasachi Mondal.JPG" },
+    { name: "Samit Das", image: "/Team/Core/Copy of Samit Das.jpg" },
+    { name: "Sayan Mukherjee", image: "/Team/Core/Copy of Sayan Mukherjee.jpeg" },
+    { name: "Sk Salim", image: "/Team/Core/Copy of Sk Salim.jpg" },
+    { name: "Suman Bhattacharjee", image: "/Team/Core/Copy of Suman Bhattacharjee.jpg" }
+  ],
+  backbone: [
+    { name: "Kushal Saha", image: "/Team/Backbone/Copy of  Kushal Saha.jpeg" },
+    { name: "Tridib Purkait", image: "/Team/Backbone/Copy of  Tridib Purkait.jpg" },
+    { name: "Swarup Das", image: "/Team/Backbone/Copy of  swarup das.jpg" },
+    { name: "Arup Halder", image: "/Team/Backbone/Copy of ARUP HALDER.jpeg" },
+    { name: "Arpan Goswami", image: "/Team/Backbone/Copy of Arpan Goswami.jpg" },
+    { name: "Ayan Bagchi", image: "/Team/Backbone/Copy of Ayan Bagchi.jpg" },
+    { name: "Chinmoy Paul", image: "/Team/Backbone/Copy of Chinmoy Paul.jpeg" },
+    { name: "Dinesh Kumar Ghosh", image: "/Team/Backbone/Copy of Dinesh Kumar Ghosh.jpg" },
+    { name: "Gopal Das", image: "/Team/Backbone/Copy of Gopal Das.jpg" },
+    { name: "Manotosh Das", image: "/Team/Backbone/Copy of Manotosh Das.jpg" },
+    { name: "Niladri Das", image: "/Team/Backbone/Copy of Niladri Das.JPG" },
+    { name: "Samrat Manna", image: "/Team/Backbone/Copy of Samrat Manna.JPG" },
+    { name: "Shreyankan Dey", image: "/Team/Backbone/Copy of Shreyankan Dey.jpg" },
+    { name: "Souvik Ganguli", image: "/Team/Backbone/Copy of Souvik Ganguli.jpg" },
+    { name: "Souvik Mitra", image: "/Team/Backbone/Copy of Souvik Mitra.jpeg" },
+    { name: "Surya Sekhar", image: "/Team/Backbone/Copy of Surya Sekhar.jpg" }
+  ],
+  crew: [
+    { name: "Debdibs Daw", image: "https://lh3.googleusercontent.com/d/1XtZA2i1fdNiKfqxhaxzX9HWLejJOfpNu" },
+    { name: "Rohan Banik", image: "/Team/Crew/Copy of ROHAN BANIK.jpg" },
+    { name: "Sanat Bardolai", image: "/Team/Crew/Copy of Sanat Bardolai.jpg" },
+    { name: "Shreyan Roychowdhury", image: "/Team/Crew/Copy of Shreyan Roychowdhury.jpg" }
+  ]
+};
 
 const useCountUp = (end, duration = 2000, start = 0) => {
   const [count, setCount] = useState(start);
@@ -143,20 +188,19 @@ const AboutUs = () => {
               </span>
             </div>
             <h1 className="text-5xl md:text-7xl font-bold mb-6 tracking-tight">
-              Capturing Moments, <br />
+              Capturing Moments, <br className="hidden md:block"/>
               <span className="bg-gradient-to-r from-[#ff4f5a] via-orange-500 to-yellow-500 bg-clip-text text-transparent">
-                Creating Art.
+                Creating Art
               </span>
             </h1>
-            <p className="text-xl text-gray-400 max-w-2xl mx-auto leading-relaxed">
-              We are simplified content creators in Kolkata, dedicated to
-              turning your special moments into timeless memories.
+            <p className="text-xl text-gray-400 max-w-3xl mx-auto leading-relaxed">
+              At Rabin's Photography, we believe that every moment has a story — and every story deserves to be captured beautifully. Based in Kolkata, we are a team of passionate photographers and visual storytellers dedicated to transforming real emotions into timeless memories. With over a decade of experience in the industry, we specialize in creating cinematic, elegant, and emotionally rich visuals that you can cherish forever.
             </p>
           </motion.div>
         </div>
       </section>
 
-      {/* Content Section - Our Mission */}
+      {/* Content Section - Who We Are & What We Do */}
       <section className="py-20 px-6 bg-white/5 backdrop-blur-sm border-y border-white/5">
         <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           <motion.div
@@ -175,7 +219,7 @@ const AboutUs = () => {
             <div className="absolute -bottom-10 -right-10 w-64 h-64 bg-black rounded-2xl border border-white/10 p-4 shadow-xl -skew-y-3 hidden md:block">
               <img
                 src={img2}
-                alt="Rabin Das"
+                alt="Rabin Ghosh"
                 className="w-full h-full object-cover rounded-xl grayscale hover:grayscale-0 transition-all duration-500"
               />
             </div>
@@ -185,99 +229,263 @@ const AboutUs = () => {
             initial={{ opacity: 0, x: 50 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6 }}
-            className="space-y-8"
+            className="space-y-12"
           >
             <div>
               <h2 className="text-3xl md:text-4xl font-bold mb-4">
-                More Than Just Photography
+                Who We Are
               </h2>
+              <p className="text-gray-400 leading-relaxed text-lg mb-4">
+                Rabin's Photography is a premium photography brand under Nozze Arte Pvt. Ltd., built with a vision to deliver high-quality, artistic, and meaningful visual content.
+              </p>
               <p className="text-gray-400 leading-relaxed text-lg">
-                At Rabin's Photography, we believe that every photograph tells a
-                story. Founded with a passion for visual storytelling, we have
-                grown into one of Kolkata's premier photography services. Our
-                approach combines technical expertise with an artistic eye,
-                ensuring that we capture the authentic emotion and atmosphere of
-                every event.
+                Led by Rabin Ghosh, a professional photographer with 10+ years of experience, our team combines creativity, technical expertise, and storytelling to deliver exceptional results across every project.
               </p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div className="p-6 rounded-xl bg-white/5 hover:bg-white/10 transition-colors border border-white/10">
-                <h3 className="text-xl font-bold mb-2 text-[#ff4f5a]">
-                  Our Mission
-                </h3>
-                <p className="text-gray-400 text-sm">
-                  To provide exceptional photography services that preserve your
-                  most cherished memories with creativity and professionalism.
-                </p>
-              </div>
-              <div className="p-6 rounded-xl bg-white/5 hover:bg-white/10 transition-colors border border-white/10">
-                <h3 className="text-xl font-bold mb-2 text-blue-400">
-                  Our Vision
-                </h3>
-                <p className="text-gray-400 text-sm">
-                  To be the leading photography brand known for innovation,
-                  quality, and customer satisfaction.
-                </p>
-              </div>
+            <div>
+              <h2 className="text-3xl md:text-4xl font-bold mb-4">
+                What We Do
+              </h2>
+              <p className="text-gray-400 leading-relaxed text-lg mb-4">
+                We offer a wide range of professional photography and videography services:
+              </p>
+              <ul className="space-y-3 text-lg text-gray-300">
+                <li className="flex items-center gap-3">
+                  <svg className="w-5 h-5 text-white flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
+                  Wedding & Pre-Wedding Photography
+                </li>
+                <li className="flex items-center gap-3">
+                  <svg className="w-5 h-5 text-white flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
+                  Cinematic Wedding Films
+                </li>
+                <li className="flex items-center gap-3">
+                  <svg className="w-5 h-5 text-white flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
+                  Engagement, Haldi, Reception & Private Events
+                </li>
+                <li className="flex items-center gap-3">
+                  <svg className="w-5 h-5 text-white flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
+                  Fashion & Portfolio Shoots
+                </li>
+                <li className="flex items-center gap-3">
+                  <svg className="w-5 h-5 text-white flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
+                  Corporate & Brand Shoots
+                </li>
+              </ul>
+              <p className="text-gray-400 leading-relaxed text-lg mt-6">
+                Whether it's a grand wedding or an intimate celebration, we focus on capturing authentic emotions, candid moments, and fine details.
+              </p>
             </div>
           </motion.div>
         </div>
       </section>
 
-      {/* Analytics / Stats Section */}
+      {/* Approach & Mission/Vision */}
       <section className="py-24 px-6 relative">
-        <div className="max-w-7xl mx-auto text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            Our Impact in Numbers
-          </h2>
-          <p className="text-gray-400">
-            A glimpse into our journey and dedication.
-          </p>
-        </div>
+        <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12">
+            
+            {/* Our Approach */}
+            <motion.div 
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6 }}
+                className="p-8 md:p-12 rounded-3xl bg-white/5 border border-white/10"
+            >
+                <h2 className="text-3xl font-bold mb-6 text-[#ff4f5a]">Our Approach</h2>
+                <p className="text-xl font-medium text-white mb-6">We don't just take photos — we tell stories.</p>
+                <ul className="space-y-4 text-gray-400 text-lg">
+                    <li className="flex items-start gap-3">
+                        <span className="text-[#ff4f5a] mt-1">✦</span>
+                        We understand your vision before the shoot
+                    </li>
+                    <li className="flex items-start gap-3">
+                        <span className="text-[#ff4f5a] mt-1">✦</span>
+                        We create a comfortable and natural environment
+                    </li>
+                    <li className="flex items-start gap-3">
+                        <span className="text-[#ff4f5a] mt-1">✦</span>
+                        We focus on candid emotions and real expressions
+                    </li>
+                    <li className="flex items-start gap-3">
+                        <span className="text-[#ff4f5a] mt-1">✦</span>
+                        We deliver premium quality with attention to detail
+                    </li>
+                </ul>
+                <p className="text-white font-medium text-lg mt-8 pt-6 border-t border-white/10">
+                    Our goal is simple: to make you relive your special moments every time you look at your photos.
+                </p>
+            </motion.div>
 
-        <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
-          <CounterStat
-            end={15000}
-            suffix="+"
-            color="from-blue-400 to-purple-500"
-            label="App Bookings"
-          />
-          <CounterStat
-            end={35}
-            suffix="+"
-            color="from-[#ff4f5a] to-orange-500"
-            label="Cities Served"
-          />
-          <CounterStat
-            end={3}
-            suffix=" Days"
-            color="from-green-400 to-emerald-500"
-            label="Avg Delivery Time"
-          />
+            {/* Why Choose Us & MV */}
+            <div className="space-y-8">
+                <motion.div 
+                    initial={{ opacity: 0, x: 30 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.6 }}
+                    className="p-8 rounded-3xl bg-gradient-to-br from-blue-900/20 to-transparent border border-blue-500/20 relative overflow-hidden"
+                >
+                    <div className="absolute top-0 right-0 w-32 h-32 bg-blue-500/20 blur-2xl -z-10" />
+                    <h2 className="text-2xl font-bold mb-6 text-blue-400">Why Choose Us</h2>
+                    <ul className="space-y-3 text-gray-300 font-medium">
+                        <li className="flex items-center gap-3">
+                          <svg className="w-5 h-5 text-white flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
+                          10+ Years of Professional Experience
+                        </li>
+                        <li className="flex items-center gap-3">
+                          <svg className="w-5 h-5 text-white flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
+                          Creative & Cinematic Storytelling
+                        </li>
+                        <li className="flex items-center gap-3">
+                          <svg className="w-5 h-5 text-white flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
+                          High-End Editing & Premium Output
+                        </li>
+                        <li className="flex items-center gap-3">
+                          <svg className="w-5 h-5 text-white flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
+                          Dedicated Team Support
+                        </li>
+                        <li className="flex items-center gap-3">
+                          <svg className="w-5 h-5 text-white flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
+                          Trusted by Hundreds of Happy Clients
+                        </li>
+                    </ul>
+                </motion.div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                    <motion.div 
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.6, delay: 0.2 }}
+                        className="p-6 rounded-2xl bg-white/5 border border-white/10"
+                    >
+                        <h3 className="text-xl font-bold mb-3 text-white">Our Mission</h3>
+                        <p className="text-gray-400 text-sm leading-relaxed">
+                            To create visually stunning and emotionally powerful memories that last a lifetime.
+                        </p>
+                    </motion.div>
+
+                    <motion.div 
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.6, delay: 0.4 }}
+                        className="p-6 rounded-2xl bg-white/5 border border-white/10"
+                    >
+                        <h3 className="text-xl font-bold mb-3 text-white">Our Vision</h3>
+                        <p className="text-gray-400 text-sm leading-relaxed">
+                            To become one of India's most trusted and premium photography brands, known for quality, creativity, and storytelling excellence.
+                        </p>
+                    </motion.div>
+                </div>
+            </div>
         </div>
       </section>
 
       {/* Team Section */}
-      <section className="py-20 px-6 bg-gradient-to-b from-black to-zinc-900 border-t border-white/10">
-        <div className="max-w-4xl mx-auto text-center">
-          <div className="w-32 h-32 mx-auto rounded-full overflow-hidden border-4 border-[#ff4f5a] shadow-[0_0_30px_rgba(255,79,90,0.3)] mb-8">
-            <img
-              src={img2}
-              alt="Rabin Das"
-              className="w-full h-full object-cover"
-            />
-          </div>
-          <h2 className="text-3xl font-bold mb-2">Rabin Das</h2>
-          <p className="text-[#ff4f5a] font-medium tracking-wide uppercase text-sm mb-6">
-            Founder & Lead Photographer
-          </p>
-          <p className="text-xl text-gray-400 italic font-light">
-            "Photography is the only language that can be understood anywhere in
-            the world. My goal is to speak to your heart through my lens."
-          </p>
+      <section className="py-24 px-6 border-t border-white/10 bg-black">
+        <div className="max-w-6xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            className="flex flex-col md:flex-row items-center gap-12 bg-white/5 border border-white/10 p-8 md:p-12 rounded-3xl"
+          >
+              {/* Image Side */}
+              <div className="w-full md:w-1/2">
+                  <div className="w-full aspect-square rounded-2xl overflow-hidden border-2 border-white/10 shadow-[0_0_30px_rgba(255,79,90,0.15)] relative">
+                    <img
+                      src={teamImg}
+                      alt="Rabin Ghosh"
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+              </div>
+              
+              {/* Text Side */}
+              <div className="w-full md:w-1/2 space-y-6 text-center md:text-left flex flex-col items-center md:items-start">
+                  <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-[#ff4f5a]/10 text-[#ff4f5a] mb-2">
+                      <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/></svg>
+                  </div>
+                  <h2 className="text-4xl md:text-5xl font-bold">Rabin Ghosh</h2>
+                  <p className="text-[#ff4f5a] font-bold tracking-widest uppercase text-sm -mt-2">
+                    Founder & CEO
+                  </p>
+                  <div className="w-16 h-1 bg-[#ff4f5a]/30 my-4"></div>
+                  <p className="text-2xl md:text-3xl text-gray-300 italic font-light leading-snug">
+                    "Photography is the only language that can be understood anywhere in the world. My goal is to speak to your heart through my lens."
+                  </p>
+              </div>
+          </motion.div>
         </div>
       </section>
+
+      {/* Team Hierarchy Section - White UI */}
+      <section className="py-24 px-6 bg-white text-black border-t border-gray-200">
+        <div className="max-w-7xl mx-auto">
+            <div className="text-center mb-16">
+                <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
+                    <h2 className="text-4xl md:text-5xl font-bold mb-4">Meet The Team</h2>
+                    <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+                        The creative minds and skilled professionals behind the magic.
+                    </p>
+                    <div className="w-24 h-1 bg-[#ff4f5a] mx-auto mt-6"></div>
+                </motion.div>
+            </div>
+
+            {/* Core Team */}
+            <div className="mb-20">
+                <h3 className="text-3xl font-black mb-10 text-center uppercase tracking-widest text-gray-800">1. Core</h3>
+                <div className="flex flex-wrap justify-center gap-6">
+                    {teamData.core.map((member, idx) => (
+                        <div key={idx} className="group flex flex-col items-center w-36 md:w-48">
+                            <div className="w-32 h-32 md:w-40 md:h-40 rounded-full overflow-hidden shadow-xl border-4 border-gray-100 group-hover:border-[#ff4f5a] transition-all duration-300 mb-4 bg-gray-100">
+                                <img src={member.image} alt={member.name} loading="lazy" decoding="async" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
+                            </div>
+                            <h4 className="text-lg font-bold text-center group-hover:text-[#ff4f5a] transition-colors">{member.name}</h4>
+                        </div>
+                    ))}
+                </div>
+            </div>
+
+            {/* Backbone */}
+            <div className="mb-20">
+                <h3 className="text-3xl font-black mb-10 text-center uppercase tracking-widest text-gray-800">2. Backbone</h3>
+                <div className="flex flex-wrap justify-center gap-6">
+                    {teamData.backbone.map((member, idx) => (
+                        <div key={idx} className="group flex flex-col items-center w-36 md:w-48">
+                            <div className="w-32 h-32 md:w-40 md:h-40 rounded-full overflow-hidden shadow-xl border-4 border-gray-100 group-hover:border-[#ff4f5a] transition-all duration-300 mb-4 bg-gray-100">
+                                <img src={member.image} alt={member.name} loading="lazy" decoding="async" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
+                            </div>
+                            <h4 className="text-lg font-bold text-center group-hover:text-[#ff4f5a] transition-colors">{member.name}</h4>
+                        </div>
+                    ))}
+                </div>
+            </div>
+
+            {/* Crew */}
+            <div>
+                <h3 className="text-3xl font-black mb-10 text-center uppercase tracking-widest text-gray-800">3. Crew</h3>
+                <div className="flex flex-wrap justify-center gap-6">
+                    {teamData.crew.map((member, idx) => (
+                        <div key={idx} className="group flex flex-col items-center w-36 md:w-48">
+                            <div className="w-32 h-32 md:w-40 md:h-40 rounded-full overflow-hidden shadow-xl border-4 border-gray-100 group-hover:border-[#ff4f5a] transition-all duration-300 mb-4 bg-gray-100">
+                                <img src={member.image} alt={member.name} loading="lazy" decoding="async" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
+                            </div>
+                            <h4 className="text-lg font-bold text-center group-hover:text-[#ff4f5a] transition-colors">{member.name}</h4>
+                        </div>
+                    ))}
+                </div>
+            </div>
+        </div>
+      </section>
+
+      {/* CTA Section */}
+      <section className="py-20 px-6 bg-gradient-to-b from-black to-zinc-900 border-t border-white/10 text-center relative">
+        <div className="max-w-4xl mx-auto">
+            <h2 className="text-4xl md:text-5xl font-bold mb-6">Let's Create Something Beautiful</h2>
+            <p className="text-xl text-gray-400 mb-2">Your moments are special — and they deserve more than just photographs.</p>
+            <p className="text-2xl text-[#ff4f5a] font-medium italic mb-10">Let's turn them into art that speaks forever.</p>
+        </div>
+      </section>
+
 
       {/* Footer */}
       <footer className="w-full bg-black text-gray-400 pt-20 pb-10 px-8 relative overflow-hidden border-t border-white/10">

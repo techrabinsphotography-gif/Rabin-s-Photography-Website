@@ -7,19 +7,83 @@ const HelpSupport = () => {
     const faqs = [
         {
             question: "How do I book a session?",
-            answer: "You can book a session directly through our app or website by clicking the 'Book Now' button. Choose your preferred date, time, and package, and you'll receive an instant confirmation."
+            answer: "You can book a session by contacting us via WhatsApp or call, or by filling out the booking form on our website. Your booking will be confirmed only after paying the required advance."
         },
         {
-            question: "What is the cancellation policy?",
-            answer: "We understand plans change. You can maximize flexibility by cancelling up to 24 hours before your session for a full refund. Cancellations within 24 hours may incur a small fee."
+            question: "What is the advance payment policy?",
+            answer: "A 50% advance payment is required to confirm your booking. This advance is non-refundable and non-transferable, and dates are blocked only after payment is received."
         },
         {
-            question: "When will I receive my photos?",
-            answer: "Our standard delivery time is 3-5 business days for edited photos. Premium members get priority editing with 24-hour turnaround."
+            question: "What is your cancellation or rescheduling policy?",
+            answer: "Same-day cancellations will result in full advance retention. Rescheduling is allowed only in exceptional cases with valid proof and management approval. Additional charges may apply for date changes."
+        },
+        {
+            question: "What services do you offer?",
+            answer: "We offer wedding and pre-wedding photography, cinematic wedding films, engagement, haldi and reception coverage, fashion and portfolio shoots, as well as corporate and private event coverage."
         },
         {
             question: "Do you offer destination photography?",
-            answer: "Yes! We travel worldwide. Please contact our support team for a custom quote for destination weddings or events outside our primary service areas."
+            answer: "Yes, we provide destination photography services across India. Travel, accommodation, and logistics must be arranged or covered by the client."
+        },
+        {
+            question: "When will I receive my photos and videos?",
+            answer: "Raw photos are delivered within 1–10 days after full payment. Edited photos take 45–60 days after selection. Cinematic videos are delivered within 60–90 days. Album design takes 20–30 days, and delivery takes 10–15 days after approval."
+        },
+        {
+            question: "How will I receive my photos?",
+            answer: "Photos are shared via Google Drive or an online gallery. Albums are delivered physically if included in your package."
+        },
+        {
+            question: "How many photos will we get?",
+            answer: "We provide unlimited clicks during the event. The final edited photos depend on event coverage and your selection."
+        },
+        {
+            question: "Can we select photos for editing and albums?",
+            answer: "Yes, clients must complete their selection within 30 days of receiving raw data. Delays beyond 3 months will incur a penalty of ₹200 per day."
+        },
+        {
+            question: "How many revisions are included?",
+            answer: "We offer 2 revisions for albums and 1 revision for videos. Additional revisions will be chargeable."
+        },
+        {
+            question: "Can we change songs in the video later?",
+            answer: "Once finalized, songs cannot be changed. Any changes will cost ₹2,000 per change."
+        },
+        {
+            question: "Do you provide raw photos/videos?",
+            answer: "Yes, raw photos are provided. Raw video footage is generally not provided unless discussed in advance."
+        },
+        {
+            question: "What are the extra charges?",
+            answer: "Extra hours are charged at ₹4,000 per hour. Travel and logistics are paid by the client. Additional edits or revisions are also chargeable."
+        },
+        {
+            question: "Do we need to arrange food for the team?",
+            answer: "Yes, food and refreshments must be provided for the entire crew during the shoot."
+        },
+        {
+            question: "How many team members will cover the event?",
+            answer: "The team size depends on your package, typically ranging from 2 to 6 professionals including photographers and videographers."
+        },
+        {
+            question: "What happens if payment is delayed?",
+            answer: "Deliverables will be delayed, and no data will be shared until full payment is completed."
+        },
+        {
+            question: "How long do you store our data?",
+            answer: "Raw data is stored for 30 days only. After delivery, clients are responsible for maintaining their own backup."
+        },
+        {
+            question: "Can you share our photos on social media?",
+            answer: "Yes, unless the client requests privacy in advance. Some private or family photos may not be shared without permission."
+        },
+        {
+            question: "What if there is an unavoidable delay or issue?",
+            answer: "We are not responsible for delays caused by natural conditions, technical failures, or other uncontrollable situations."
+        },
+        {
+            question: "How can I contact support?",
+            answer: "You can contact us via email at support@rabinsphotography.com, WhatsApp during working hours, or visit during office hours (Monday to Saturday, 10 AM – 7 PM)."
         }
     ];
 
@@ -89,7 +153,8 @@ const HelpSupport = () => {
                         <h3 className="text-xl font-bold text-white mb-2">Email Support</h3>
                         <p className="text-gray-400 mb-6">Get a response within 24 hours.</p>
                         <a href="mailto:support@rabinsphotography.com" className="text-blue-400 font-medium hover:underline">
-                            rabinsphotography@gmail.com                        </a>
+                            support@rabinsphotography.com
+                        </a>
                     </div>
 
                     <div className="p-8 rounded-3xl bg-gradient-to-br from-green-900/20 to-transparent border border-green-500/20 text-center">

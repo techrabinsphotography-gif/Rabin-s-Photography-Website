@@ -8,7 +8,8 @@ import img2 from '/571744774_1361610111985518_3207307785903951187_n.jpg'
 import img4 from '/484042900_1180013106811887_2538291571904064716_n.jpg'
 const HERO_VIDEO_URL = "https://res.cloudinary.com/dvjm8xxgj/video/upload/v1771931255/Rabin_s_Photography_Web_Video_javamy.mp4"
 import finalLogo from '../assets/recent/final logo.png'
-
+import rabinsQR from "../assets/recent/Rabin's Photography.png"
+import appleBadge from "../assets/recent/apple.png"
 
 
 
@@ -126,9 +127,9 @@ const Demo = () => {
                         initial={{ opacity: 0, y: -20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.8 }}
-                        className="mb-8 px-4 py-2 rounded-full border border-[#ff4f5a]/30 bg-[#ff4f5a]/10 backdrop-blur-md"
+                        className="mb-8 mt-16 sm:mt-24 px-4 py-2 rounded-full border border-[#ff4f5a]/30 bg-[#ff4f5a]/10 backdrop-blur-md text-center"
                     >
-                        <p className="text-[#ff4f5a] text-sm font-semibold tracking-widest uppercase">Est. 2013 • Award-Winning Photography company</p>
+                        <p className="text-[#ff4f5a] text-[10px] sm:text-sm font-semibold tracking-widest uppercase">Est. 2013 • Award-Winning Photography company</p>
                     </motion.div>
 
                     {/* Main Headline - Summary Style */}
@@ -138,8 +139,8 @@ const Demo = () => {
                         transition={{ duration: 0.8, delay: 0.2 }}
                         className="max-w-4xl"
                     >
-                        <h1 className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-black text-white leading-tight mb-4 tracking-tight">
-                            Rabin's <br className="hidden sm:block" />
+                        <h1 className="text-[2rem] min-[400px]:text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-black text-white leading-tight mb-4 tracking-tight whitespace-nowrap">
+                            Rabin's{' '}
                             <span className="bg-gradient-to-r from-[#ff4f5a] via-orange-500 to-[#ff4f5a] bg-clip-text text-transparent">
                                 Photography
                             </span>
@@ -742,10 +743,10 @@ const Demo = () => {
 
                         {/* Social Icons */}
                         <div className="flex gap-3 mb-8">
-                            {/* LinkedIn */}
-                            {/* <a href="#" className="w-10 h-10 rounded-full bg-white text-black flex items-center justify-center hover:scale-110 transition-all">
-                                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
-                            </a> */}
+                            {/* Facebook */}
+                            <a href="https://www.facebook.com/RabinsPhotography/" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-white text-black flex items-center justify-center hover:scale-110 transition-all">
+                                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"/></svg>
+                            </a>
                             {/* Instagram */}
                             <a href="https://www.instagram.com/rabinsphotography/" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-white text-black flex items-center justify-center hover:scale-110 transition-all">
                                 <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M7.8,2H16.2C19.4,2 22,4.6 22,7.8V16.2A5.8,5.8 0 0,1 16.2,22H7.8C4.6,22 2,19.4 2,16.2V7.8A5.8,5.8 0 0,1 7.8,2M7.6,4A3.6,3.6 0 0,0 4,7.6V16.4C4,18.39 5.61,20 7.6,20H16.4A3.6,3.6 0 0,0 20,16.4V7.6C20,5.61 18.39,4 16.4,4H7.6M17.25,5.5A1.25,1.25 0 0,1 18.5,6.75A1.25,1.25 0 0,1 17.25,8A1.25,1.25 0 0,1 16,6.75A1.25,1.25 0 0,1 17.25,5.5M12,7A5,5 0 0,1 17,12A5,5 0 0,1 12,17A5,5 0 0,1 7,12A5,5 0 0,1 12,7M12,9A3,3 0 0,0 9,12A3,3 0 0,0 12,15A3,3 0 0,0 15,12A3,3 0 0,0 12,9Z" /></svg>
@@ -753,10 +754,6 @@ const Demo = () => {
                             {/* YouTube */}
                             <a href="https://www.youtube.com/@RabinsPhotography" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-white text-black flex items-center justify-center hover:scale-110 transition-all">
                                 <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"/></svg>
-                            </a>
-                            {/* Facebook */}
-                            <a href="https://www.facebook.com/RabinsPhotography/" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-white text-black flex items-center justify-center hover:scale-110 transition-all">
-                                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"/></svg>
                             </a>
                             {/* X (Twitter) */}
                             <a href="https://x.com/Rabinsclick" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-white text-black flex items-center justify-center hover:scale-110 transition-all">
@@ -768,18 +765,12 @@ const Demo = () => {
                         <div className="space-y-3">
                             {/* App Store */}
                             <div className="relative">
-                                <button 
+                                <button
                                     onMouseEnter={() => setShowAppStorePopup(true)}
                                     onMouseLeave={() => setShowAppStorePopup(false)}
-                                    className="w-full px-4 py-3 rounded-xl bg-black border border-white/30 text-white hover:bg-white/10 transition-all flex items-center justify-center gap-3 group cursor-default"
+                                    className="w-full cursor-default hover:opacity-80 transition-opacity"
                                 >
-                                    <svg className="w-8 h-8" viewBox="0 0 24 24" fill="currentColor">
-                                        <path d="M17.05 20.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.35C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.74 1.18 0 2.48-1.67 5.17-1.44 1.14.08 3.52.41 4.3 2.5a3.65 3.65 0 0 1-2 2 c-1.52.89-1.85 3.51.05 5.37.5 1.57.25 2.15 0 2.5ZM13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.84 1.53-2.95 1.5-.83-4.17.65-3.19 1.05-3.19Z"/>
-                                    </svg>
-                                    <div className="text-left">
-                                        <div className="text-[10px] uppercase font-medium text-gray-400 leading-none">Download on the</div>
-                                        <div className="text-lg font-bold leading-tight">App Store</div>
-                                    </div>
+                                    <img src={appleBadge} alt="Download on the App Store" className="h-14 w-auto object-contain" />
                                 </button>
                                 {showAppStorePopup && (
                                     <motion.div 
@@ -1318,7 +1309,7 @@ const DownloadAppSection = () => {
 
                 {/* RIGHT PHONE + QR */}
                 <div className="relative z-10 h-[380px] overflow-hidden flex justify-center w-full md:w-auto">
-                    <div className="w-full max-w-[380px] h-auto md:h-[540px] aspect-[9/16] md:aspect-auto rounded-[40px] bg-white border-4 border-gray-300 shadow-2xl flex items-start justify-center relative pt-12">
+                    <div className="w-full max-w-[490px] h-auto md:h-[540px] aspect-[9/16] md:aspect-auto rounded-[40px] bg-white border-4 border-gray-300 shadow-2xl flex items-start justify-center relative pt-12">
                         {/* Screen */}
                         <div className="w-[92%] h-[96%] bg-slate-50 rounded-[32px] flex flex-col items-center justify-start gap-6 px-6 overflow-hidden relative pt-8">
                             {/* Decorative header */}
@@ -1330,9 +1321,9 @@ const DownloadAppSection = () => {
                                 </p>
                                 <div className="bg-white p-3 rounded-2xl shadow-lg border border-blue-100 mx-auto w-fit">
                                     <img
-                                        src="https://b.zmtcdn.com/data/o2_assets/98cc4eba0a6f59e728e5223a70fd39551742471514.png"
-                                        alt="QR Code"
-                                        className="w-32 h-32 opacity-90"
+                                        src={rabinsQR}
+                                        alt="Rabin's Photography QR Code"
+                                        className="w-52 h-52 opacity-90"
                                     />
                                 </div>
                                 <p className="text-gray-400 text-sm mt-4 font-medium">

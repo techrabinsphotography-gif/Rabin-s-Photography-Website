@@ -10,7 +10,22 @@
         background-color: var(--color-page-bg);
         font-family: var(--font-sans);
         letter-spacing: -0.015em;
+        cursor: none;
         /* tracking-tight */
         @apply text-white/90 antialiased overflow-x-hidden;
+    }
+
+    /* Prevent images from being dragged and opened in new tab */
+    img {
+        -webkit-user-drag: none;
+        user-drag: none;
+        pointer-events: none;
+    }
+
+    /* Re-enable pointer events on clickable images/links */
+    a img,
+    button img,
+    [role="button"] img {
+        pointer-events: auto;
     }
 }
