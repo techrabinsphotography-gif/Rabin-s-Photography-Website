@@ -11,12 +11,10 @@ import AboutUs from './components/AboutUs';
 import CookiePolicy from './components/CookiePolicy';
 import CookieConsent from './components/CookieConsent';
 import Careers from './components/Careers';
-import CustomCursor from './components/CustomCursor';
 
 function App() {
   return (
     <Router>
-      <CustomCursor />
       <CookieConsent />
       <Routes>
         <Route path="/demo" element={<FrontPage />} />

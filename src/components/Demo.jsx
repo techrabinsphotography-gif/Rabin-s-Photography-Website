@@ -9,7 +9,6 @@ import img4 from '/484042900_1180013106811887_2538291571904064716_n.jpg'
 const HERO_VIDEO_URL = "https://res.cloudinary.com/dvjm8xxgj/video/upload/v1771931255/Rabin_s_Photography_Web_Video_javamy.mp4"
 import finalLogo from '../assets/recent/final logo.png'
 import rabinsQR from "../assets/recent/Rabin's Photography.png"
-import appleBadge from "../assets/recent/apple.png"
 
 
 
@@ -97,6 +96,16 @@ const Demo = () => {
     const [showPortfolioPopup, setShowPortfolioPopup] = useState(false);
     const [showGoldPopup, setShowGoldPopup] = useState(false);
     const [showAppStorePopup, setShowAppStorePopup] = useState(false);
+    useEffect(() => {
+        const scrollTo = sessionStorage.getItem('scrollTo');
+        if (scrollTo === 'footer') {
+            sessionStorage.removeItem('scrollTo');
+            setTimeout(() => {
+                document.getElementById('footer')?.scrollIntoView({ behavior: 'smooth' });
+            }, 300);
+        }
+    }, []);
+
     return (
         <>
             {/* Section ForHeader - Hero with Summary Style */}
@@ -683,7 +692,7 @@ const Demo = () => {
             <DownloadAppSection />
 
             {/* Footer Section */}
-            <footer className="w-full bg-black text-gray-400 pt-20 pb-10 px-8 relative overflow-hidden">
+            <footer id="footer" className="w-full bg-black text-gray-400 pt-20 pb-10 px-8 relative overflow-hidden">
                 {/* Subtle Gradient Background */}
                 <div className="absolute top-0 left-0 w-96 h-96 bg-blue-500/5 rounded-full blur-[120px]" />
                 <div className="absolute bottom-0 right-0 w-96 h-96 bg-[#ff4f5a]/5 rounded-full blur-[120px]" />
@@ -763,17 +772,24 @@ const Demo = () => {
 
                         {/* App Buttons */}
                         <div className="space-y-3">
-                            {/* App Store */}
+
+                            {/* App Store - With Popup */}
                             <div className="relative">
                                 <button
                                     onMouseEnter={() => setShowAppStorePopup(true)}
                                     onMouseLeave={() => setShowAppStorePopup(false)}
-                                    className="w-full cursor-default hover:opacity-80 transition-opacity"
+                                    className="w-full px-4 py-3 rounded-xl bg-black border border-white/30 text-white hover:bg-white/10 transition-all flex items-center justify-center gap-3 cursor-default"
                                 >
-                                    <img src={appleBadge} alt="Download on the App Store" className="h-14 w-auto object-contain" />
+                                    <svg className="w-7 h-7" viewBox="0 0 24 24" fill="currentColor">
+                                        <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
+                                    </svg>
+                                    <div className="text-left">
+                                        <div className="text-[10px] uppercase font-medium text-gray-400 leading-none">Download on the</div>
+                                        <div className="text-lg font-bold leading-tight">App Store</div>
+                                    </div>
                                 </button>
                                 {showAppStorePopup && (
-                                    <motion.div 
+                                    <motion.div
                                         initial={{ opacity: 0, y: 10, scale: 0.9 }}
                                         animate={{ opacity: 1, y: 0, scale: 1 }}
                                         exit={{ opacity: 0, y: 10, scale: 0.9 }}
@@ -1308,8 +1324,8 @@ const DownloadAppSection = () => {
                 </div>
 
                 {/* RIGHT PHONE + QR */}
-                <div className="relative z-10 h-[380px] overflow-hidden flex justify-center w-full md:w-auto">
-                    <div className="w-full max-w-[490px] h-auto md:h-[540px] aspect-[9/16] md:aspect-auto rounded-[40px] bg-white border-4 border-gray-300 shadow-2xl flex items-start justify-center relative pt-12">
+                <div className="relative z-10 h-[460px] overflow-hidden flex justify-center w-full md:w-auto">
+                    <div className="w-full max-w-[580px] h-auto md:h-[640px] aspect-[9/16] md:aspect-auto rounded-[40px] bg-white border-4 border-gray-300 shadow-2xl flex items-start justify-center relative pt-12">
                         {/* Screen */}
                         <div className="w-[92%] h-[96%] bg-slate-50 rounded-[32px] flex flex-col items-center justify-start gap-6 px-6 overflow-hidden relative pt-8">
                             {/* Decorative header */}
@@ -1323,7 +1339,7 @@ const DownloadAppSection = () => {
                                     <img
                                         src={rabinsQR}
                                         alt="Rabin's Photography QR Code"
-                                        className="w-52 h-52 opacity-90"
+                                        className="w-64 h-64 opacity-90"
                                     />
                                 </div>
                                 <p className="text-gray-400 text-sm mt-4 font-medium">

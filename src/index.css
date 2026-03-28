@@ -10,7 +10,6 @@
         background-color: var(--color-page-bg);
         font-family: var(--font-sans);
         letter-spacing: -0.015em;
-        cursor: none;
         /* tracking-tight */
         @apply text-white/90 antialiased overflow-x-hidden;
     }
