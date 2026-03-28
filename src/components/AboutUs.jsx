@@ -551,9 +551,7 @@ const AboutUs = () => {
               <li className="hover:text-white transition-colors cursor-pointer">
                 Track Project
               </li>
-              <li className="hover:text-white transition-colors cursor-pointer">
-                Wedding Photography
-              </li>
+
             </ul>
           </div>
 

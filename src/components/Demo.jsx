@@ -729,7 +729,7 @@ const Demo = () => {
                         <ul className="space-y-2 text-sm">
                             <li className="hover:text-white transition-colors cursor-pointer">Book a Session</li>
                             <li className="hover:text-white transition-colors cursor-pointer">Track Project</li>
-                            <li className="hover:text-white transition-colors cursor-pointer">Wedding Photography</li>
+
 
                         </ul>
                     </div>

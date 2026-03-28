@@ -318,7 +318,7 @@ const FrontPage = () => {
                         <h3 className="text-white font-semibold mb-4">For Clients</h3>
                         <ul className="space-y-2">
                             <li>Book a Shoot</li>
-                            <li>Wedding Photography</li>
+
                             <li>Portrait Sessions</li>
                             <li>Commercial Shoots</li>
                         </ul>
