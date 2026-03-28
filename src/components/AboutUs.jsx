@@ -432,7 +432,7 @@ const AboutUs = () => {
 
             {/* Core Team */}
             <div className="mb-20">
-                <h3 className="text-3xl font-black mb-10 text-center uppercase tracking-widest text-gray-800">1. Core</h3>
+                <h3 className="text-3xl font-black mb-10 text-center uppercase tracking-widest text-gray-800">Core</h3>
                 <div className="flex flex-wrap justify-center gap-6">
                     {teamData.core.map((member, idx) => (
                         <div key={idx} className="group flex flex-col items-center w-36 md:w-48">
@@ -447,7 +447,7 @@ const AboutUs = () => {
 
             {/* Backbone */}
             <div className="mb-20">
-                <h3 className="text-3xl font-black mb-10 text-center uppercase tracking-widest text-gray-800">2. Backbone</h3>
+                <h3 className="text-3xl font-black mb-10 text-center uppercase tracking-widest text-gray-800">Backbone</h3>
                 <div className="flex flex-wrap justify-center gap-6">
                     {teamData.backbone.map((member, idx) => (
                         <div key={idx} className="group flex flex-col items-center w-36 md:w-48">
@@ -462,7 +462,7 @@ const AboutUs = () => {
 
             {/* Crew */}
             <div>
-                <h3 className="text-3xl font-black mb-10 text-center uppercase tracking-widest text-gray-800">3. Crew</h3>
+                <h3 className="text-3xl font-black mb-10 text-center uppercase tracking-widest text-gray-800">Crew</h3>
                 <div className="flex flex-wrap justify-center gap-6">
                     {teamData.crew.map((member, idx) => (
                         <div key={idx} className="group flex flex-col items-center w-36 md:w-48">
