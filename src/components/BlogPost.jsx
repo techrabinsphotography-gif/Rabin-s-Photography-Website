@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { blogPosts, featuredPost } from '../data/blogData';
+import { fetchBlogPost } from '../api';
 import finalLogo from '../assets/recent/final logo.png';
 import { Camera } from 'lucide-react';
 
@@ -12,14 +12,10 @@ const BlogPost = () => {
     const [showAppStorePopup, setShowAppStorePopup] = useState(false);
 
     useEffect(() => {
-        // Find post by ID
-        const postId = parseInt(id);
-        if (featuredPost.id === postId) {
-            setPost(featuredPost);
-        } else {
-            const foundPost = blogPosts.find(p => p.id === postId);
-            setPost(foundPost);
-        }
+        // Fetch post by ID
+        fetchBlogPost(id)
+            .then(data => setPost(data))
+            .catch(err => console.error("Failed to load post", err));
         window.scrollTo(0, 0);
     }, [id]);
 
@@ -55,7 +51,7 @@ const BlogPost = () => {
                         </span>
                         <span className="text-sm text-gray-500">{post.readTime}</span>
                         <span className="text-gray-400">·</span>
-                        <span className="text-sm text-gray-500">{post.date}</span>
+                        <span className="text-sm text-gray-500">{new Date(post.createdAt || post.date).toLocaleDateString()}</span>
                     </div>
 
                     <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 leading-tight mb-8">
@@ -74,7 +70,7 @@ const BlogPost = () => {
 
                     <div className="relative aspect-[16/9] mb-12 rounded-2xl overflow-hidden shadow-lg">
                         <img 
-                            src={post.image} 
+                            src={post.coverImage || post.image} 
                             alt={post.title}
                             className="w-full h-full object-cover"
                         />

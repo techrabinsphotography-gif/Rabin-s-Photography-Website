@@ -1,7 +1,16 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
+import { fetchCookiePolicy } from '../api';
 
 const CookiePolicy = () => {
+    const [policy, setPolicy] = useState(null);
+    
+    useEffect(() => {
+        fetchCookiePolicy()
+            .then(data => setPolicy(data))
+            .catch(err => console.error("Failed to load policy", err));
+    }, []);
+
     return (
         <div className="min-h-screen bg-black text-white relative overflow-hidden">
             {/* Background Effects */}
@@ -9,7 +18,7 @@ const CookiePolicy = () => {
             <div className="absolute top-20 right-20 w-96 h-96 bg-blue-600/5 rounded-full blur-3xl animate-pulse" />
             <div className="absolute top-40 left-10 w-72 h-72 bg-[#ff4f5a]/5 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }} />
 
-            <div className="max-w-4xl mx-auto px-6 py-20 relative z-10">
+                    <div className="max-w-4xl mx-auto px-6 py-20 relative z-10">
                 {/* Header */}
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
@@ -20,7 +29,7 @@ const CookiePolicy = () => {
                     <h1 className="text-4xl md:text-5xl font-bold mb-4">
                         Cookie <span className="text-[#ff4f5a]">Policy</span>
                     </h1>
-                    <p className="text-gray-400">Last updated: February 2026</p>
+                    <p className="text-gray-400">Last updated: {policy && policy.lastUpdated ? new Date(policy.lastUpdated).toLocaleDateString() : 'February 2026'}</p>
                 </motion.div>
 
                 {/* Content */}
@@ -30,55 +39,23 @@ const CookiePolicy = () => {
                     transition={{ duration: 0.8, delay: 0.2 }}
                     className="space-y-12 text-gray-300 leading-relaxed"
                 >
-                    <section>
-                        <h2 className="text-2xl font-semibold text-white mb-4 flex items-center gap-3">
-                            <span className="w-8 h-8 rounded-lg bg-[#ff4f5a]/10 text-[#ff4f5a] flex items-center justify-center text-sm">01</span>
-                            What Are Cookies?
-                        </h2>
-                        <p className="mb-4">
-                            Cookies are small text files that are stored on your device (computer or mobile device) when you visit certain websites. They are widely used to make websites work more efficiently and to provide information to the owners of the site.
-                        </p>
-                    </section>
-
-                    <section>
-                        <h2 className="text-2xl font-semibold text-white mb-4 flex items-center gap-3">
-                            <span className="w-8 h-8 rounded-lg bg-[#ff4f5a]/10 text-[#ff4f5a] flex items-center justify-center text-sm">02</span>
-                            How We Use Cookies
-                        </h2>
-                        <p className="mb-4">
-                            Rabin's Photography uses cookies for the following purposes:
-                        </p>
-                        <ul className="list-disc list-inside space-y-2 ml-4 text-gray-400">
-                            <li><strong>Essential Cookies:</strong> Necessary for the website to function properly, such as secure login and session management.</li>
-                            <li><strong>Analytics Cookies:</strong> Help us understand how visitors interact with our website by collecting and reporting information anonymously.</li>
-                            <li><strong>Functionality Cookies:</strong> Allow the website to remember choices you make (such as your user name, language, or the region you are in) and provide enhanced features.</li>
-                            <li><strong>Advertising Cookies:</strong> Used to deliver advertisements more relevant to you and your interests.</li>
-                        </ul>
-                    </section>
-
-                    <section>
-                        <h2 className="text-2xl font-semibold text-white mb-4 flex items-center gap-3">
-                            <span className="w-8 h-8 rounded-lg bg-[#ff4f5a]/10 text-[#ff4f5a] flex items-center justify-center text-sm">03</span>
-                            Your Choices
-                        </h2>
-                        <p>
-                            You can choose to accept or decline cookies. Most web browsers automatically accept cookies, but you can usually modify your browser setting to decline cookies if you prefer. This may prevent you from taking full advantage of the website.
-                        </p>
-                    </section>
-
-                    <section>
-                        <h2 className="text-2xl font-semibold text-white mb-4 flex items-center gap-3">
-                            <span className="w-8 h-8 rounded-lg bg-[#ff4f5a]/10 text-[#ff4f5a] flex items-center justify-center text-sm">04</span>
-                            Contact Us
-                        </h2>
-                        <p>
-                            If you have any questions about our Cookie Policy, please contact us at:
-                            <br />
-                            <a href="mailto:privacy@rabinsphotography.com" className="text-[#ff4f5a] hover:underline mt-2 inline-block">
-                                privacy@rabinsphotography.com
-                            </a>
-                        </p>
-                    </section>
+                    {(!policy || !policy.sections || policy.sections.length === 0) ? (
+                        <div className="py-20 flex justify-center"><div className="w-10 h-10 border-4 border-[#ff4f5a] border-t-transparent flex items-center justify-center rounded-full animate-spin"></div></div>
+                    ) : (
+                        policy.sections.map((section, idx) => (
+                            <section key={idx}>
+                                <h2 className="text-2xl font-semibold text-white mb-4 flex items-center gap-3">
+                                    <span className="w-8 h-8 rounded-lg bg-[#ff4f5a]/10 text-[#ff4f5a] flex items-center justify-center text-sm">
+                                        {String(idx + 1).padStart(2, '0')}
+                                    </span>
+                                    {section.title}
+                                </h2>
+                                <div className="mb-4 whitespace-pre-wrap">
+                                    {section.content}
+                                </div>
+                            </section>
+                        ))
+                    )}
                 </motion.div>
 
                 {/* Back Button */}

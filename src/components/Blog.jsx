@@ -3,14 +3,32 @@ import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import finalLogo from '../assets/recent/final logo.png';
 
-import { blogPosts, featuredPost } from '../data/blogData';
+import { fetchBlogPosts } from '../api';
 
 const Blog = () => {
     const [selectedCategory, setSelectedCategory] = useState('All');
     const [showPopup, setShowPopup] = useState(false);
     const [showAppStorePopup, setShowAppStorePopup] = useState(false);
 
+    const [blogPosts, setBlogPosts] = useState([]);
+    const [featuredPost, setFeaturedPost] = useState(null);
+    const [loading, setLoading] = useState(true);
+
     const categories = ['All', 'Wedding', 'Portrait', 'Events', 'Tips & Tricks', 'Behind the Scenes'];
+
+    useEffect(() => {
+        fetchBlogPosts()
+            .then(data => {
+                if (data && data.length > 0) {
+                    const published = data.filter(p => p.published);
+                    const featured = published.find(p => p.featured) || published[0];
+                    setFeaturedPost(featured);
+                    setBlogPosts(published.filter(p => p._id !== featured?._id));
+                }
+            })
+            .catch(err => console.error("Failed to load blogs", err))
+            .finally(() => setLoading(false));
+    }, []);
 
     const filteredPosts = selectedCategory === 'All' 
         ? blogPosts 
@@ -80,6 +98,9 @@ const Blog = () => {
             </section>
 
             {/* Featured Post */}
+            {loading ? (
+                <div className="py-20 flex justify-center"><div className="w-10 h-10 border-4 border-[#ff4f5a] border-t-transparent flex items-center justify-center rounded-full animate-spin"></div></div>
+            ) : featuredPost ? (
             <section className="max-w-7xl mx-auto px-6 py-16">
                 <motion.article
                     initial={{ opacity: 0, y: 30 }}
@@ -87,9 +108,9 @@ const Blog = () => {
                     transition={{ duration: 0.8 }}
                     className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-20"
                 >
-                    <Link to={`/blog/${featuredPost.id}`} className="relative group overflow-hidden rounded-2xl aspect-[4/3] block">
+                    <Link to={`/blog/${featuredPost._id}`} className="relative group overflow-hidden rounded-2xl aspect-[4/3] block">
                         <img 
-                            src={featuredPost.image} 
+                            src={featuredPost.coverImage || featuredPost.image} 
                             alt={featuredPost.title}
                             className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                         />
@@ -102,50 +123,54 @@ const Blog = () => {
                             </span>
                             <span className="text-sm text-gray-500">{featuredPost.category}</span>
                         </div>
-                        <Link to={`/blog/${featuredPost.id}`}>
+                        <Link to={`/blog/${featuredPost._id}`}>
                             <h2 className="text-4xl md:text-5xl font-bold text-gray-900 leading-tight hover:text-[#ff4f5a] transition-colors cursor-pointer">
                                 {featuredPost.title}
                             </h2>
                         </Link>
-                        <p className="text-lg text-gray-600 leading-relaxed">
+                        <p className="text-lg text-gray-600 leading-relaxed max-h-32 overflow-hidden overflow-ellipsis text-left">
                             {featuredPost.excerpt}
                         </p>
-                        <div className="flex items-center gap-4 text-sm text-gray-500">
+                        <div className="flex flex-wrap items-center gap-4 text-sm text-gray-500">
                             <span className="font-semibold text-gray-900">{featuredPost.author}</span>
                             <span>·</span>
-                            <span>{featuredPost.date}</span>
+                            <span>{new Date(featuredPost.createdAt || featuredPost.date).toLocaleDateString()}</span>
                             <span>·</span>
                             <span>{featuredPost.readTime}</span>
                         </div>
-                        <Link to={`/blog/${featuredPost.id}`} className="inline-block px-8 py-3 rounded-full bg-gradient-to-r from-[#ff4f5a] to-orange-600 text-white font-semibold hover:shadow-lg hover:shadow-[#ff4f5a]/30 transition-all duration-300">
+                        <Link to={`/blog/${featuredPost._id}`} className="inline-block px-8 py-3 rounded-full bg-gradient-to-r from-[#ff4f5a] to-orange-600 text-white font-semibold hover:shadow-lg hover:shadow-[#ff4f5a]/30 transition-all duration-300">
                             Read Full Story
                         </Link>
                     </div>
                 </motion.article>
+            </section>
+            ) : null}
 
                 {/* Divider */}
                 <div className="border-t border-gray-200 mb-16"></div>
 
                 {/* Blog Posts Grid */}
+                {!loading && (
+                <section className="max-w-7xl mx-auto px-6">
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                     {filteredPosts.map((post, index) => (
                         <motion.article
-                            key={post.id}
+                            key={post._id}
                             initial={{ opacity: 0, y: 30 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.6, delay: index * 0.1 }}
-                            className="group cursor-pointer"
+                            className="group cursor-pointer flex flex-col h-full bg-white rounded-xl shadow-sm border border-gray-100 hover:shadow-md transition-all overflow-hidden"
                         >
-                            <Link to={`/blog/${post.id}`} className="relative overflow-hidden rounded-xl aspect-[3/2] mb-4 block">
+                            <Link to={`/blog/${post._id}`} className="relative overflow-hidden aspect-[3/2] block">
                                 <img 
-                                    src={post.image} 
+                                    src={post.coverImage || post.image} 
                                     alt={post.title}
                                     className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                                 />
                                 <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                             </Link>
                             
-                            <div className="space-y-3">
+                            <div className="p-6 flex flex-col flex-1 space-y-4">
                                 <div className="flex items-center gap-3 text-xs">
                                     <span className="px-2.5 py-1 rounded-full bg-gray-100 text-gray-700 font-semibold uppercase tracking-wider">
                                         {post.category}
@@ -153,25 +178,27 @@ const Blog = () => {
                                     <span className="text-gray-500">{post.readTime}</span>
                                 </div>
                                 
-                                <Link to={`/blog/${post.id}`}>
+                                <Link to={`/blog/${post._id}`} className="flex-1">
                                     <h3 className="text-xl font-bold text-gray-900 leading-tight group-hover:text-[#ff4f5a] transition-colors line-clamp-2">
                                         {post.title}
                                     </h3>
+                                    <p className="text-gray-600 leading-relaxed line-clamp-3 mt-3">
+                                        {post.excerpt}
+                                    </p>
                                 </Link>
                                 
-                                <p className="text-gray-600 leading-relaxed line-clamp-3">
-                                    {post.excerpt}
-                                </p>
                                 
-                                <div className="flex items-center gap-3 text-sm">
+                                <div className="flex items-center gap-3 text-sm mt-auto pt-4 border-t border-gray-100">
                                     <span className="font-semibold text-gray-700">{post.author}</span>
                                     <span className="text-gray-400">·</span>
-                                    <span className="text-gray-500">{post.date}</span>
+                                    <span className="text-gray-500">{new Date(post.createdAt || post.date).toLocaleDateString()}</span>
                                 </div>
                             </div>
                         </motion.article>
                     ))}
                 </div>
+                </section>
+                )}
 
                 {/* Load More */}
                 <div className="mt-16 text-center">
@@ -179,7 +206,6 @@ const Blog = () => {
                         Load More Articles
                     </button>
                 </div>
-            </section>
 
             {/* Newsletter Section */}
             <section className="border-t border-gray-200 bg-gradient-to-b from-white to-gray-50 py-20">
