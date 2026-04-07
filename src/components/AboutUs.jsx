@@ -7,47 +7,64 @@ import img4 from "/long.jpeg"; // Another image
 import teamImg from "/Rabin_Ghosh.jpeg"; // Avatar
 
 const teamData = {
-  core: [
-    { name: "Amit Roy", image: "/Team/Core/Copy of Amit Roy.jpg" },
-    { name: "Anirban Das", image: "/Team/Core/Copy of Anirban Das.jpg" },
-    { name: "Debdibs Daw", image: "https://lh3.googleusercontent.com/d/1XtZA2i1fdNiKfqxhaxzX9HWLejJOfpNu" },
-    { name: "Diponkor Paul", image: "/Team/Core/Copy of Diponkor Paul.JPG" },
-    { name: "Jayanta Das", image: "/Team/Core/Copy of Jayanta Das.jpg" },
-    { name: "Kiron Das Ghosh", image: "/Team/Core/Copy of Kiron Das Ghosh.jpg" },
-    { name: "Prosenjit Mondal", image: "/Team/Core/Copy of Prosenjit Mondal.jpeg" },
-    { name: "Puspal Bhattacharya", image: "/Team/Core/Copy of Puspal Bhattacharya.jpeg" },
-    { name: "Rohan Roy", image: "/Team/Core/Copy of Rohan Roy.jpg" },
-    { name: "Rohit Saha", image: "/Team/Core/Copy of Rohit Saha.webp" },
-    { name: "Sabyasachi Mondal", image: "/Team/Core/Copy of Sabyasachi Mondal.JPG" },
-    { name: "Samit Das", image: "/Team/Core/Copy of Samit Das.jpg" },
-    { name: "Sayan Mukherjee", image: "/Team/Core/Copy of Sayan Mukherjee.jpeg" },
-    { name: "Sk Salim", image: "/Team/Core/Copy of Sk Salim.jpg" },
-    { name: "Suman Bhattacharjee", image: "/Team/Core/Copy of Suman Bhattacharjee.jpg" }
-  ],
-  backbone: [
-    { name: "Kushal Saha", image: "/Team/Backbone/Copy of  Kushal Saha.jpeg" },
-    { name: "Tridib Purkait", image: "/Team/Backbone/Copy of  Tridib Purkait.jpg" },
-    { name: "Swarup Das", image: "/Team/Backbone/Copy of  swarup das.jpg" },
-    { name: "Arup Halder", image: "/Team/Backbone/Copy of ARUP HALDER.jpeg" },
-    { name: "Arpan Goswami", image: "/Team/Backbone/Copy of Arpan Goswami.jpg" },
-    { name: "Ayan Bagchi", image: "/Team/Backbone/Copy of Ayan Bagchi.jpg" },
-    { name: "Chinmoy Paul", image: "/Team/Backbone/Copy of Chinmoy Paul.jpeg" },
-    { name: "Dinesh Kumar Ghosh", image: "/Team/Backbone/Copy of Dinesh Kumar Ghosh.jpg" },
-    { name: "Gopal Das", image: "/Team/Backbone/Copy of Gopal Das.jpg" },
-    { name: "Manotosh Das", image: "/Team/Backbone/Copy of Manotosh Das.jpg" },
-    { name: "Niladri Das", image: "/Team/Backbone/Copy of Niladri Das.JPG" },
-    { name: "Samrat Manna", image: "/Team/Backbone/Copy of Samrat Manna.JPG" },
-    { name: "Shreyankan Dey", image: "/Team/Backbone/Copy of Shreyankan Dey.jpg" },
-    { name: "Souvik Ganguli", image: "/Team/Backbone/Copy of Souvik Ganguli.jpg" },
-    { name: "Souvik Mitra", image: "/Team/Backbone/Copy of Souvik Mitra.jpeg" },
-    { name: "Surya Sekhar", image: "/Team/Backbone/Copy of Surya Sekhar.jpg" }
-  ],
-  crew: [
-    { name: "Debdibs Daw", image: "https://lh3.googleusercontent.com/d/1XtZA2i1fdNiKfqxhaxzX9HWLejJOfpNu" },
-    { name: "Rohan Banik", image: "/Team/Crew/Copy of ROHAN BANIK.jpg" },
-    { name: "Sanat Bardolai", image: "/Team/Crew/Copy of Sanat Bardolai.jpg" },
-    { name: "Shreyan Roychowdhury", image: "/Team/Crew/Copy of Shreyan Roychowdhury.jpg" }
-  ]
+  backbone: {
+    cinematography: [
+      { name: "Samrat Manna", image: "https://res.cloudinary.com/dfcf6ug0s/image/upload/q_auto/f_auto/v1775576889/Samrat_Manna_rvujd5.jpg" },
+      { name: "Gopal Das", image: "https://res.cloudinary.com/dfcf6ug0s/image/upload/q_auto/f_auto/v1775576881/Gopal_Das_dtzzij.jpg" },
+      { name: "Souvik Ganguli", image: "https://res.cloudinary.com/dfcf6ug0s/image/upload/q_auto/f_auto/v1775576881/Souvik_Ganguli_hzyywf.jpg" },
+      { name: "Arpan Goswami", image: "https://res.cloudinary.com/dfcf6ug0s/image/upload/q_auto/f_auto/v1775576880/Arpan_Goswami_jnynzr.jpg" },
+      { name: "Ayan Bagchi", image: "https://res.cloudinary.com/dfcf6ug0s/image/upload/q_auto/f_auto/v1775576879/Ayan_Bagchi_erauhj.jpg" },
+      { name: "Surya Sekhar Mondal", image: "https://res.cloudinary.com/dfcf6ug0s/image/upload/q_auto/f_auto/v1775576878/Surya_Sekhar_Mondal_bhjk6j.jpg" },
+      { name: "Swarup Das", image: "https://res.cloudinary.com/dfcf6ug0s/image/upload/q_auto/f_auto/v1775576877/swarup_das_rnbjx8.jpg" },
+    ],
+    dronePilot: [
+      { name: "Kushal Saha", image: "https://res.cloudinary.com/dfcf6ug0s/image/upload/q_auto/f_auto/v1775576896/Kushal_Saha_p481fq.jpg" },
+      { name: "Dinesh Kumar Ghosh", image: "https://res.cloudinary.com/dfcf6ug0s/image/upload/q_auto/f_auto/v1775576893/Dinesh_Kumar_Ghosh_q9d734.heic" },
+      { name: "Chinmoy Paul", image: "https://res.cloudinary.com/dfcf6ug0s/image/upload/q_auto/f_auto/v1775576890/Chinmoy_Paul_hoz67v.jpg" },
+    ],
+    photographer: [
+      { name: "Manotosh Das", image: "https://res.cloudinary.com/dfcf6ug0s/image/upload/q_auto/f_auto/v1775576894/Manotosh_Das_n4x1cb.jpg" },
+      { name: "Tridib Purkait", image: "https://res.cloudinary.com/dfcf6ug0s/image/upload/q_auto/f_auto/v1775576888/Tridib_Purkait_f6udyi.jpg" },
+      { name: "Niladri Das", image: "https://res.cloudinary.com/dfcf6ug0s/image/upload/q_auto/f_auto/v1775576885/Niladri_Das_vjjnjn.jpg" },
+      { name: "Shreyankan Dey", image: "https://res.cloudinary.com/dfcf6ug0s/image/upload/q_auto/f_auto/v1775576885/Shreyankan_Dey_x3vk1m.jpg" },
+      { name: "Souvik Mitra", image: "https://res.cloudinary.com/dfcf6ug0s/image/upload/q_auto/f_auto/v1775576883/Souvik_Mitra_gcmews.jpg" },
+      { name: "Arup Halder", image: "https://res.cloudinary.com/dfcf6ug0s/image/upload/q_auto/f_auto/v1775576882/ARUP_HALDER_zodfxq.jpg" },
+    ],
+  },
+  crew: {
+    cinematographer: [
+      { name: "Sanat Bardolai", image: "https://res.cloudinary.com/dfcf6ug0s/image/upload/q_auto/f_auto/v1775576885/Sanat_Bardolai_eyzghe.jpg" },
+    ],
+    photographer: [
+      { name: "Shreyan Roychowdhury", image: "https://res.cloudinary.com/dfcf6ug0s/image/upload/q_auto/f_auto/v1775576884/Shreyan_Roychowdhury_vqk8ga.jpg" },
+      { name: "Rohan Banik", image: "https://res.cloudinary.com/dfcf6ug0s/image/upload/q_auto/f_auto/v1775576882/ROHAN_BANIK_gtq6ls.jpg" },
+      { name: "Debdibs Daw", image: "https://res.cloudinary.com/dfcf6ug0s/image/upload/q_auto/f_auto/v1775576877/Debdibs_Daw_acoeob.jpg" },
+    ],
+  },
+  core: {
+    dronePilot: [
+      { name: "Sabyasachi Mondal", image: "https://res.cloudinary.com/dfcf6ug0s/image/upload/q_auto/f_auto/v1775576873/Sabyasachi_Mondal_pyygxs.jpg" },
+    ],
+    cinematographer: [
+      { name: "Suman Bhattacharjee", image: "https://res.cloudinary.com/dfcf6ug0s/image/upload/q_auto/f_auto/v1775576872/Suman_Bhattacharjee_h4aweg.jpg" },
+      { name: "Kiron Das Ghosh", image: "https://res.cloudinary.com/dfcf6ug0s/image/upload/q_auto/f_auto/v1775576870/Kiron_Das_Ghosh_gprk1w.jpg" },
+      { name: "Anirban Das", image: "https://res.cloudinary.com/dfcf6ug0s/image/upload/q_auto/f_auto/v1775576868/Anirban_Das_walyxl.jpg" },
+      { name: "Rone Das", image: "https://res.cloudinary.com/dfcf6ug0s/image/upload/q_auto/f_auto/v1775576867/Rone_Das_adtzlj.jpg" },
+      { name: "Diponkor Paul", image: "https://res.cloudinary.com/dfcf6ug0s/image/upload/q_auto/f_auto/v1775576866/Diponkor_Paul_dqoigg.jpg" },
+      { name: "Sayan Mukherjee", image: "https://res.cloudinary.com/dfcf6ug0s/image/upload/q_auto/f_auto/v1775576866/Sayan_Mukherjee_lbnqyf.jpg" },
+      { name: "Sk Salim", image: "https://res.cloudinary.com/dfcf6ug0s/image/upload/q_auto/f_auto/v1775576865/Sk_Salim_qcd9zq.jpg" },
+      { name: "Rohan Roy", image: "https://res.cloudinary.com/dfcf6ug0s/image/upload/q_auto/f_auto/v1775576866/Rohan_Roy_tojyww.jpg" },
+    ],
+    photographer: [
+      { name: "Rohit Saha", image: "https://res.cloudinary.com/dfcf6ug0s/image/upload/q_auto/f_auto/v1775576880/Rohit_Saha_dhxwrf.webp" },
+      { name: "Puspal Bhattacharya", image: "https://res.cloudinary.com/dfcf6ug0s/image/upload/q_auto/f_auto/v1775576874/Puspal_Bhattacharya_gasovp.jpg" },
+      { name: "Sayantan Saha", image: "https://res.cloudinary.com/dfcf6ug0s/image/upload/q_auto/f_auto/v1775576871/Sayantan_Saha_lpati0.jpg" },
+      { name: "Amit Roy", image: "https://res.cloudinary.com/dfcf6ug0s/image/upload/q_auto/f_auto/v1775576871/Amit_Roy_o3mmyh.jpg" },
+      { name: "Prosenjit Mondal", image: "https://res.cloudinary.com/dfcf6ug0s/image/upload/q_auto/f_auto/v1775576871/Prosenjit_Mondal_ugyxau.jpg" },
+      { name: "Jayanta Das", image: "https://res.cloudinary.com/dfcf6ug0s/image/upload/q_auto/f_auto/v1775576870/Jayanta_Das_d730xy.jpg" },
+      { name: "Samit Das", image: "https://res.cloudinary.com/dfcf6ug0s/image/upload/q_auto/f_auto/v1775576869/Samit_Das_mesm7z.jpg" },
+    ],
+  },
 };
 
 const useCountUp = (end, duration = 2000, start = 0) => {
@@ -426,52 +443,153 @@ const AboutUs = () => {
                     <p className="text-xl text-gray-600 max-w-2xl mx-auto">
                         The creative minds and skilled professionals behind the magic.
                     </p>
-                    <div className="w-24 h-1 bg-[#ff4f5a] mx-auto mt-6"></div>
+                    <div className="w-24 h-1 bg-[#9333ea] mx-auto mt-6"></div>
                 </motion.div>
-            </div>
-
-            {/* Core Team */}
-            <div className="mb-20">
-                <h3 className="text-3xl font-black mb-10 text-center uppercase tracking-widest text-gray-800">Core</h3>
-                <div className="flex flex-wrap justify-center gap-6">
-                    {teamData.core.map((member, idx) => (
-                        <div key={idx} className="group flex flex-col items-center w-36 md:w-48">
-                            <div className="w-32 h-32 md:w-40 md:h-40 rounded-full overflow-hidden shadow-xl border-4 border-gray-100 group-hover:border-[#ff4f5a] transition-all duration-300 mb-4 bg-gray-100">
-                                <img src={member.image} alt={member.name} loading="lazy" decoding="async" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
-                            </div>
-                            <h4 className="text-lg font-bold text-center group-hover:text-[#ff4f5a] transition-colors">{member.name}</h4>
-                        </div>
-                    ))}
-                </div>
             </div>
 
             {/* Backbone */}
             <div className="mb-20">
-                <h3 className="text-3xl font-black mb-10 text-center uppercase tracking-widest text-gray-800">Backbone</h3>
-                <div className="flex flex-wrap justify-center gap-6">
-                    {teamData.backbone.map((member, idx) => (
-                        <div key={idx} className="group flex flex-col items-center w-36 md:w-48">
-                            <div className="w-32 h-32 md:w-40 md:h-40 rounded-full overflow-hidden shadow-xl border-4 border-gray-100 group-hover:border-[#ff4f5a] transition-all duration-300 mb-4 bg-gray-100">
-                                <img src={member.image} alt={member.name} loading="lazy" decoding="async" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
+                <h3 className="text-3xl font-black mb-2 text-center uppercase tracking-widest text-gray-800">Backbone</h3>
+                <div className="w-16 h-0.5 bg-[#9333ea] mx-auto mb-10"></div>
+
+                {/* Backbone - Cinematography */}
+                <div className="mb-12">
+                    <p className="text-xs font-semibold uppercase tracking-widest text-gray-400 text-center mb-8 border-b border-gray-100 pb-3">Cinematography</p>
+                    <div className="flex flex-wrap justify-center gap-6">
+                        {teamData.backbone.cinematography.map((member, idx) => (
+                            <div key={idx} className="group flex flex-col items-center w-36 md:w-44">
+                                <div className="w-32 h-32 md:w-36 md:h-36 rounded-full overflow-hidden shadow-xl border-4 border-gray-100 group-hover:border-[#9333ea] transition-all duration-300 mb-4 bg-gray-100">
+                                    <img src={member.image} alt={member.name} loading="lazy" decoding="async" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
+                                </div>
+                                <h4 className="text-base font-bold text-center group-hover:text-[#9333ea] transition-colors leading-tight">{member.name}</h4>
+                                <p className="text-xs text-gray-400 font-medium mt-1 text-center">Cinematographer</p>
                             </div>
-                            <h4 className="text-lg font-bold text-center group-hover:text-[#ff4f5a] transition-colors">{member.name}</h4>
-                        </div>
-                    ))}
+                        ))}
+                    </div>
+                </div>
+
+                {/* Backbone - Drone Pilot */}
+                <div className="mb-12">
+                    <p className="text-xs font-semibold uppercase tracking-widest text-gray-400 text-center mb-8 border-b border-gray-100 pb-3">Drone Pilot</p>
+                    <div className="flex flex-wrap justify-center gap-6">
+                        {teamData.backbone.dronePilot.map((member, idx) => (
+                            <div key={idx} className="group flex flex-col items-center w-36 md:w-44">
+                                <div className="w-32 h-32 md:w-36 md:h-36 rounded-full overflow-hidden shadow-xl border-4 border-gray-100 group-hover:border-[#9333ea] transition-all duration-300 mb-4 bg-gray-100">
+                                    <img src={member.image} alt={member.name} loading="lazy" decoding="async" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
+                                </div>
+                                <h4 className="text-base font-bold text-center group-hover:text-[#9333ea] transition-colors leading-tight">{member.name}</h4>
+                                <p className="text-xs text-gray-400 font-medium mt-1 text-center">Drone Pilot</p>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+
+                {/* Backbone - Photographer */}
+                <div>
+                    <p className="text-xs font-semibold uppercase tracking-widest text-gray-400 text-center mb-8 border-b border-gray-100 pb-3">Photographer</p>
+                    <div className="flex flex-wrap justify-center gap-6">
+                        {teamData.backbone.photographer.map((member, idx) => (
+                            <div key={idx} className="group flex flex-col items-center w-36 md:w-44">
+                                <div className="w-32 h-32 md:w-36 md:h-36 rounded-full overflow-hidden shadow-xl border-4 border-gray-100 group-hover:border-[#9333ea] transition-all duration-300 mb-4 bg-gray-100">
+                                    <img src={member.image} alt={member.name} loading="lazy" decoding="async" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
+                                </div>
+                                <h4 className="text-base font-bold text-center group-hover:text-[#9333ea] transition-colors leading-tight">{member.name}</h4>
+                                <p className="text-xs text-gray-400 font-medium mt-1 text-center">Photographer</p>
+                            </div>
+                        ))}
+                    </div>
                 </div>
             </div>
 
             {/* Crew */}
-            <div>
-                <h3 className="text-3xl font-black mb-10 text-center uppercase tracking-widest text-gray-800">Crew</h3>
-                <div className="flex flex-wrap justify-center gap-6">
-                    {teamData.crew.map((member, idx) => (
-                        <div key={idx} className="group flex flex-col items-center w-36 md:w-48">
-                            <div className="w-32 h-32 md:w-40 md:h-40 rounded-full overflow-hidden shadow-xl border-4 border-gray-100 group-hover:border-[#ff4f5a] transition-all duration-300 mb-4 bg-gray-100">
-                                <img src={member.image} alt={member.name} loading="lazy" decoding="async" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
+            <div className="mb-20">
+                <h3 className="text-3xl font-black mb-2 text-center uppercase tracking-widest text-gray-800">Crew</h3>
+                <div className="w-16 h-0.5 bg-[#9333ea] mx-auto mb-10"></div>
+
+                {/* Crew - Cinematographer */}
+                <div className="mb-12">
+                    <p className="text-xs font-semibold uppercase tracking-widest text-gray-400 text-center mb-8 border-b border-gray-100 pb-3">Cinematographer</p>
+                    <div className="flex flex-wrap justify-center gap-6">
+                        {teamData.crew.cinematographer.map((member, idx) => (
+                            <div key={idx} className="group flex flex-col items-center w-36 md:w-44">
+                                <div className="w-32 h-32 md:w-36 md:h-36 rounded-full overflow-hidden shadow-xl border-4 border-gray-100 group-hover:border-[#9333ea] transition-all duration-300 mb-4 bg-gray-100">
+                                    <img src={member.image} alt={member.name} loading="lazy" decoding="async" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
+                                </div>
+                                <h4 className="text-base font-bold text-center group-hover:text-[#9333ea] transition-colors leading-tight">{member.name}</h4>
+                                <p className="text-xs text-gray-400 font-medium mt-1 text-center">Cinematographer</p>
                             </div>
-                            <h4 className="text-lg font-bold text-center group-hover:text-[#ff4f5a] transition-colors">{member.name}</h4>
-                        </div>
-                    ))}
+                        ))}
+                    </div>
+                </div>
+
+                {/* Crew - Photographer */}
+                <div>
+                    <p className="text-xs font-semibold uppercase tracking-widest text-gray-400 text-center mb-8 border-b border-gray-100 pb-3">Photographer</p>
+                    <div className="flex flex-wrap justify-center gap-6">
+                        {teamData.crew.photographer.map((member, idx) => (
+                            <div key={idx} className="group flex flex-col items-center w-36 md:w-44">
+                                <div className="w-32 h-32 md:w-36 md:h-36 rounded-full overflow-hidden shadow-xl border-4 border-gray-100 group-hover:border-[#9333ea] transition-all duration-300 mb-4 bg-gray-100">
+                                    <img src={member.image} alt={member.name} loading="lazy" decoding="async" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
+                                </div>
+                                <h4 className="text-base font-bold text-center group-hover:text-[#9333ea] transition-colors leading-tight">{member.name}</h4>
+                                <p className="text-xs text-gray-400 font-medium mt-1 text-center">Photographer</p>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            </div>
+
+            {/* Core */}
+            <div>
+                <h3 className="text-3xl font-black mb-2 text-center uppercase tracking-widest text-gray-800">Core</h3>
+                <div className="w-16 h-0.5 bg-[#9333ea] mx-auto mb-10"></div>
+
+                {/* Core - Drone Pilot */}
+                <div className="mb-12">
+                    <p className="text-xs font-semibold uppercase tracking-widest text-gray-400 text-center mb-8 border-b border-gray-100 pb-3">Drone Pilot</p>
+                    <div className="flex flex-wrap justify-center gap-6">
+                        {teamData.core.dronePilot.map((member, idx) => (
+                            <div key={idx} className="group flex flex-col items-center w-36 md:w-44">
+                                <div className="w-32 h-32 md:w-36 md:h-36 rounded-full overflow-hidden shadow-xl border-4 border-gray-100 group-hover:border-[#9333ea] transition-all duration-300 mb-4 bg-gray-100">
+                                    <img src={member.image} alt={member.name} loading="lazy" decoding="async" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
+                                </div>
+                                <h4 className="text-base font-bold text-center group-hover:text-[#9333ea] transition-colors leading-tight">{member.name}</h4>
+                                <p className="text-xs text-gray-400 font-medium mt-1 text-center">Drone Pilot</p>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+
+                {/* Core - Cinematographer */}
+                <div className="mb-12">
+                    <p className="text-xs font-semibold uppercase tracking-widest text-gray-400 text-center mb-8 border-b border-gray-100 pb-3">Cinematographer</p>
+                    <div className="flex flex-wrap justify-center gap-6">
+                        {teamData.core.cinematographer.map((member, idx) => (
+                            <div key={idx} className="group flex flex-col items-center w-36 md:w-44">
+                                <div className="w-32 h-32 md:w-36 md:h-36 rounded-full overflow-hidden shadow-xl border-4 border-gray-100 group-hover:border-[#9333ea] transition-all duration-300 mb-4 bg-gray-100">
+                                    <img src={member.image} alt={member.name} loading="lazy" decoding="async" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
+                                </div>
+                                <h4 className="text-base font-bold text-center group-hover:text-[#9333ea] transition-colors leading-tight">{member.name}</h4>
+                                <p className="text-xs text-gray-400 font-medium mt-1 text-center">Cinematographer</p>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+
+                {/* Core - Photographer */}
+                <div>
+                    <p className="text-xs font-semibold uppercase tracking-widest text-gray-400 text-center mb-8 border-b border-gray-100 pb-3">Photographer</p>
+                    <div className="flex flex-wrap justify-center gap-6">
+                        {teamData.core.photographer.map((member, idx) => (
+                            <div key={idx} className="group flex flex-col items-center w-36 md:w-44">
+                                <div className="w-32 h-32 md:w-36 md:h-36 rounded-full overflow-hidden shadow-xl border-4 border-gray-100 group-hover:border-[#9333ea] transition-all duration-300 mb-4 bg-gray-100">
+                                    <img src={member.image} alt={member.name} loading="lazy" decoding="async" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
+                                </div>
+                                <h4 className="text-base font-bold text-center group-hover:text-[#9333ea] transition-colors leading-tight">{member.name}</h4>
+                                <p className="text-xs text-gray-400 font-medium mt-1 text-center">Photographer</p>
+                            </div>
+                        ))}
+                    </div>
                 </div>
             </div>
         </div>
