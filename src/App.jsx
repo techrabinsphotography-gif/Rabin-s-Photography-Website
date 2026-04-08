@@ -11,6 +11,7 @@ import AboutUs from './components/AboutUs';
 import CookiePolicy from './components/CookiePolicy';
 import CookieConsent from './components/CookieConsent';
 import Careers from './components/Careers';
+import CareerDetail from './components/CareerDetail';
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
         <Route path="/about" element={<AboutUs />} />
         <Route path="/cookie-policy" element={<CookiePolicy />} />
         <Route path="/careers" element={<Careers />} />
+        <Route path="/careers/:id" element={<CareerDetail />} />
       </Routes>
     </Router>
   );

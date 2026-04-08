@@ -7,9 +7,35 @@ export const fetchTeam = async () => {
 };
 
 export const fetchCareers = async () => {
-    const res = await fetch(`${baseURL}/web/careers`);
+    const res = await fetch(`${baseURL}/web/careers?t=${Date.now()}`, { cache: 'no-store' });
     const data = await res.json();
     return data.data;
+};
+
+export const fetchCareerPost = async (id) => {
+    const res = await fetch(`${baseURL}/web/careers/${id}?t=${Date.now()}`, { cache: 'no-store' });
+    const data = await res.json();
+    return data.data;
+};
+
+export const submitApplication = async (formData) => {
+    const res = await fetch(`${baseURL}/applications`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData),
+    });
+    const data = await res.json();
+    if (!data.success) throw new Error(data.message || 'Submission failed');
+    return data;
+};
+
+export const uploadResume = async (file) => {
+    const fd = new FormData();
+    fd.append('resume', file);
+    const res = await fetch(`${baseURL}/upload/resume`, { method: 'POST', body: fd });
+    const data = await res.json();
+    if (!data.success) throw new Error(data.message || 'Upload failed');
+    return data.url;
 };
 
 export const fetchBlogPosts = async () => {
