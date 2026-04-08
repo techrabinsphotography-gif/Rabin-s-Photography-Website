@@ -1,4 +1,4 @@
-const baseURL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:3000/api/v1';
+const baseURL = import.meta.env.VITE_API_BASE_URL || 'https://app-server-maaw.onrender.com/api/v1';
 
 export const fetchTeam = async () => {
     const res = await fetch(`${baseURL}/web/team`);

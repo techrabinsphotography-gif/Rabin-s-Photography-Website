@@ -397,167 +397,45 @@ const AboutUs = () => {
                 </motion.div>
             </div>
 
-            {/* Backbone */}
-            <div className="mb-20">
-                <h3 className="text-3xl font-black mb-2 text-center uppercase tracking-widest text-gray-800">Backbone</h3>
-                <div className="w-16 h-0.5 bg-[#9333ea] mx-auto mb-10"></div>
-
-                {/* Backbone - Cinematography */}
-                {teamData.backbone?.cinematography?.length > 0 && (
-                <div className="mb-12">
-                    <p className="text-xs font-semibold uppercase tracking-widest text-gray-400 text-center mb-8 border-b border-gray-100 pb-3">Cinematography</p>
-                    <div className="flex flex-wrap justify-center gap-6">
-                        {teamData.backbone.cinematography.map((member, idx) => (
+            {['backbone', 'crew', 'core'].map((tier, tierIdx) => {
+              const tierData = teamData[tier];
+              if (!tierData || Object.keys(tierData).length === 0) return null;
+              const positions = Object.keys(tierData);
+              return (
+                <div key={tier} className={tierIdx < 2 ? 'mb-20' : ''}>
+                  <h3 className="text-3xl font-black mb-2 text-center uppercase tracking-widest text-gray-800">{tier}</h3>
+                  <div className="w-16 h-0.5 bg-[#9333ea] mx-auto mb-10"></div>
+                  {positions.map((pos, posIdx) => {
+                    const members = tierData[pos];
+                    if (!members || members.length === 0) return null;
+                    return (
+                      <div key={pos} className={posIdx < positions.length - 1 ? 'mb-12' : ''}>
+                        <p className="text-xs font-semibold uppercase tracking-widest text-gray-400 text-center mb-8 border-b border-gray-100 pb-3">{pos}</p>
+                        <div className="flex flex-wrap justify-center gap-6">
+                          {members.map((member, idx) => (
                             <div key={idx} className="group flex flex-col items-center w-36 md:w-44">
-                                <div className="w-32 h-32 md:w-36 md:h-36 rounded-full overflow-hidden shadow-xl border-4 border-gray-100 group-hover:border-[#9333ea] transition-all duration-300 mb-4 bg-gray-100">
-                                    <img src={member.image} alt={member.name} loading="lazy" decoding="async" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
-                                </div>
-                                <h4 className="text-base font-bold text-center group-hover:text-[#9333ea] transition-colors leading-tight">{member.name}</h4>
-                                <p className="text-xs text-gray-400 font-medium mt-1 text-center">Cinematographer</p>
+                              <div className="w-32 h-32 md:w-36 md:h-36 rounded-full overflow-hidden shadow-xl border-4 border-gray-100 group-hover:border-[#9333ea] transition-all duration-300 mb-4 bg-gray-100">
+                                <img
+                                  src={member.image || member.imageUrl}
+                                  alt={member.name}
+                                  loading="lazy"
+                                  decoding="async"
+                                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                                  onError={(e) => { e.target.style.display = 'none'; }}
+                                />
+                              </div>
+                              <h4 className="text-base font-bold text-center group-hover:text-[#9333ea] transition-colors leading-tight">{member.name}</h4>
+                              <p className="text-xs text-gray-400 font-medium mt-1 text-center capitalize">{pos}</p>
                             </div>
-                        ))}
-                    </div>
+                          ))}
+                        </div>
+                      </div>
+                    );
+                  })}
                 </div>
-                )}
+              );
+            })}
 
-                {/* Backbone - Drone Pilot */}
-                {teamData.backbone?.dronePilot?.length > 0 && (
-                <div className="mb-12">
-                    <p className="text-xs font-semibold uppercase tracking-widest text-gray-400 text-center mb-8 border-b border-gray-100 pb-3">Drone Pilot</p>
-                    <div className="flex flex-wrap justify-center gap-6">
-                        {teamData.backbone.dronePilot.map((member, idx) => (
-                            <div key={idx} className="group flex flex-col items-center w-36 md:w-44">
-                                <div className="w-32 h-32 md:w-36 md:h-36 rounded-full overflow-hidden shadow-xl border-4 border-gray-100 group-hover:border-[#9333ea] transition-all duration-300 mb-4 bg-gray-100">
-                                    <img src={member.image} alt={member.name} loading="lazy" decoding="async" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
-                                </div>
-                                <h4 className="text-base font-bold text-center group-hover:text-[#9333ea] transition-colors leading-tight">{member.name}</h4>
-                                <p className="text-xs text-gray-400 font-medium mt-1 text-center">Drone Pilot</p>
-                            </div>
-                        ))}
-                    </div>
-                </div>
-                )}
-
-                {/* Backbone - Photographer */}
-                {teamData.backbone?.photographer?.length > 0 && (
-                <div>
-                    <p className="text-xs font-semibold uppercase tracking-widest text-gray-400 text-center mb-8 border-b border-gray-100 pb-3">Photographer</p>
-                    <div className="flex flex-wrap justify-center gap-6">
-                        {teamData.backbone.photographer.map((member, idx) => (
-                            <div key={idx} className="group flex flex-col items-center w-36 md:w-44">
-                                <div className="w-32 h-32 md:w-36 md:h-36 rounded-full overflow-hidden shadow-xl border-4 border-gray-100 group-hover:border-[#9333ea] transition-all duration-300 mb-4 bg-gray-100">
-                                    <img src={member.image} alt={member.name} loading="lazy" decoding="async" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
-                                </div>
-                                <h4 className="text-base font-bold text-center group-hover:text-[#9333ea] transition-colors leading-tight">{member.name}</h4>
-                                <p className="text-xs text-gray-400 font-medium mt-1 text-center">Photographer</p>
-                            </div>
-                        ))}
-                    </div>
-                </div>
-                )}
-            </div>
-
-            {/* Crew */}
-            <div className="mb-20">
-                <h3 className="text-3xl font-black mb-2 text-center uppercase tracking-widest text-gray-800">Crew</h3>
-                <div className="w-16 h-0.5 bg-[#9333ea] mx-auto mb-10"></div>
-
-                {/* Crew - Cinematographer */}
-                {teamData.crew?.cinematographer?.length > 0 && (
-                <div className="mb-12">
-                    <p className="text-xs font-semibold uppercase tracking-widest text-gray-400 text-center mb-8 border-b border-gray-100 pb-3">Cinematographer</p>
-                    <div className="flex flex-wrap justify-center gap-6">
-                        {teamData.crew.cinematographer.map((member, idx) => (
-                            <div key={idx} className="group flex flex-col items-center w-36 md:w-44">
-                                <div className="w-32 h-32 md:w-36 md:h-36 rounded-full overflow-hidden shadow-xl border-4 border-gray-100 group-hover:border-[#9333ea] transition-all duration-300 mb-4 bg-gray-100">
-                                    <img src={member.image} alt={member.name} loading="lazy" decoding="async" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
-                                </div>
-                                <h4 className="text-base font-bold text-center group-hover:text-[#9333ea] transition-colors leading-tight">{member.name}</h4>
-                                <p className="text-xs text-gray-400 font-medium mt-1 text-center">Cinematographer</p>
-                            </div>
-                        ))}
-                    </div>
-                </div>
-                )}
-
-                {/* Crew - Photographer */}
-                {teamData.crew?.photographer?.length > 0 && (
-                <div>
-                    <p className="text-xs font-semibold uppercase tracking-widest text-gray-400 text-center mb-8 border-b border-gray-100 pb-3">Photographer</p>
-                    <div className="flex flex-wrap justify-center gap-6">
-                        {teamData.crew.photographer.map((member, idx) => (
-                            <div key={idx} className="group flex flex-col items-center w-36 md:w-44">
-                                <div className="w-32 h-32 md:w-36 md:h-36 rounded-full overflow-hidden shadow-xl border-4 border-gray-100 group-hover:border-[#9333ea] transition-all duration-300 mb-4 bg-gray-100">
-                                    <img src={member.image} alt={member.name} loading="lazy" decoding="async" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
-                                </div>
-                                <h4 className="text-base font-bold text-center group-hover:text-[#9333ea] transition-colors leading-tight">{member.name}</h4>
-                                <p className="text-xs text-gray-400 font-medium mt-1 text-center">Photographer</p>
-                            </div>
-                        ))}
-                    </div>
-                </div>
-                )}
-            </div>
-
-            {/* Core */}
-            <div>
-                <h3 className="text-3xl font-black mb-2 text-center uppercase tracking-widest text-gray-800">Core</h3>
-                <div className="w-16 h-0.5 bg-[#9333ea] mx-auto mb-10"></div>
-
-                {/* Core - Drone Pilot */}
-                {teamData.core?.dronePilot?.length > 0 && (
-                <div className="mb-12">
-                    <p className="text-xs font-semibold uppercase tracking-widest text-gray-400 text-center mb-8 border-b border-gray-100 pb-3">Drone Pilot</p>
-                    <div className="flex flex-wrap justify-center gap-6">
-                        {teamData.core.dronePilot.map((member, idx) => (
-                            <div key={idx} className="group flex flex-col items-center w-36 md:w-44">
-                                <div className="w-32 h-32 md:w-36 md:h-36 rounded-full overflow-hidden shadow-xl border-4 border-gray-100 group-hover:border-[#9333ea] transition-all duration-300 mb-4 bg-gray-100">
-                                    <img src={member.image} alt={member.name} loading="lazy" decoding="async" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
-                                </div>
-                                <h4 className="text-base font-bold text-center group-hover:text-[#9333ea] transition-colors leading-tight">{member.name}</h4>
-                                <p className="text-xs text-gray-400 font-medium mt-1 text-center">Drone Pilot</p>
-                            </div>
-                        ))}
-                    </div>
-                </div>
-                )}
-
-                {/* Core - Cinematographer */}
-                {teamData.core?.cinematographer?.length > 0 && (
-                <div className="mb-12">
-                    <p className="text-xs font-semibold uppercase tracking-widest text-gray-400 text-center mb-8 border-b border-gray-100 pb-3">Cinematographer</p>
-                    <div className="flex flex-wrap justify-center gap-6">
-                        {teamData.core.cinematographer.map((member, idx) => (
-                            <div key={idx} className="group flex flex-col items-center w-36 md:w-44">
-                                <div className="w-32 h-32 md:w-36 md:h-36 rounded-full overflow-hidden shadow-xl border-4 border-gray-100 group-hover:border-[#9333ea] transition-all duration-300 mb-4 bg-gray-100">
-                                    <img src={member.image} alt={member.name} loading="lazy" decoding="async" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
-                                </div>
-                                <h4 className="text-base font-bold text-center group-hover:text-[#9333ea] transition-colors leading-tight">{member.name}</h4>
-                                <p className="text-xs text-gray-400 font-medium mt-1 text-center">Cinematographer</p>
-                            </div>
-                        ))}
-                    </div>
-                </div>
-                )}
-
-                {/* Core - Photographer */}
-                {teamData.core?.photographer?.length > 0 && (
-                <div>
-                    <p className="text-xs font-semibold uppercase tracking-widest text-gray-400 text-center mb-8 border-b border-gray-100 pb-3">Photographer</p>
-                    <div className="flex flex-wrap justify-center gap-6">
-                        {teamData.core.photographer.map((member, idx) => (
-                            <div key={idx} className="group flex flex-col items-center w-36 md:w-44">
-                                <div className="w-32 h-32 md:w-36 md:h-36 rounded-full overflow-hidden shadow-xl border-4 border-gray-100 group-hover:border-[#9333ea] transition-all duration-300 mb-4 bg-gray-100">
-                                    <img src={member.image} alt={member.name} loading="lazy" decoding="async" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
-                                </div>
-                                <h4 className="text-base font-bold text-center group-hover:text-[#9333ea] transition-colors leading-tight">{member.name}</h4>
-                                <p className="text-xs text-gray-400 font-medium mt-1 text-center">Photographer</p>
-                            </div>
-                        ))}
-                    </div>
-                </div>
-                )}
-            </div>
         </div>
       </section>
 
