@@ -397,6 +397,7 @@ const AboutUs = () => {
                 </motion.div>
             </div>
 
+            {/* Tiers rendered in fixed order: Backbone → Crew → Core */}
             {['backbone', 'crew', 'core'].map((tier, tierIdx) => {
               const tierData = teamData[tier];
               if (!tierData || Object.keys(tierData).length === 0) return null;
