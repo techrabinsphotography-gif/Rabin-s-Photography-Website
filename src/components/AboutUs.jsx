@@ -97,7 +97,7 @@ const AboutUs = () => {
   useEffect(() => {
     fetchTeam()
       .then(data => {
-        if (data) setTeamData(data);
+        if (data && typeof data === 'object') setTeamData(data);
       })
       .catch(err => console.error("Failed to load team data", err));
   }, []);
