@@ -28,3 +28,52 @@
         pointer-events: auto;
     }
 }
+
+/* Blog post content — override global white text so HTML content is readable */
+.blog-content,
+.blog-content * {
+    color: #1a1a1a !important;
+}
+
+.blog-content h1,
+.blog-content h2,
+.blog-content h3,
+.blog-content h4,
+.blog-content h5,
+.blog-content h6 {
+    color: #111827 !important;
+    font-weight: 700;
+    margin-top: 1.5em;
+    margin-bottom: 0.5em;
+}
+
+.blog-content p {
+    color: #374151 !important;
+    line-height: 1.8;
+    margin-bottom: 1em;
+}
+
+.blog-content a {
+    color: #ff4f5a !important;
+}
+
+.blog-content ul,
+.blog-content ol {
+    color: #374151 !important;
+    padding-left: 1.5em;
+}
+
+.blog-content li {
+    margin-bottom: 0.4em;
+}
+
+.blog-content strong {
+    color: #111827 !important;
+}
+
+.blog-content blockquote {
+    border-left: 4px solid #ff4f5a;
+    padding-left: 1em;
+    color: #4b5563 !important;
+    font-style: italic;
+}

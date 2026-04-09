@@ -77,7 +77,7 @@ const BlogPost = () => {
                     </div>
 
                     <div 
-                        className="prose prose-lg prose-gray max-w-none prose-headings:font-bold prose-headings:text-gray-900 prose-p:text-gray-600 prose-p:leading-relaxed prose-img:rounded-xl"
+                        className="blog-content prose prose-lg max-w-none"
                         dangerouslySetInnerHTML={{ __html: post.content || `<p>${post.excerpt}</p>` }}
                     />
                 </motion.div>
