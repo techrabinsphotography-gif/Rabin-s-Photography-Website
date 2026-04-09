@@ -29,7 +29,18 @@
     }
 }
 
-/* Blog post content — override global white text so HTML content is readable */
+/* Force input/textarea/select text to always be dark */
+input,
+textarea,
+select {
+    color: #111827 !important;
+}
+
+input::placeholder,
+textarea::placeholder {
+    color: #9ca3af !important;
+}
+
 .blog-content,
 .blog-content * {
     color: #1a1a1a !important;
