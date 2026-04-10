@@ -1,4 +1,5 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
+import { useEffect } from 'react';
 import './index.css';
 import FrontPage from './components/FrontPage';
 import Demo from './components/Demo';
@@ -13,9 +14,18 @@ import CookieConsent from './components/CookieConsent';
 import Careers from './components/Careers';
 import CareerDetail from './components/CareerDetail';
 
+function ScrollToTop() {
+  const { pathname } = useLocation();
+  useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+  }, [pathname]);
+  return null;
+}
+
 function App() {
   return (
     <Router>
+      <ScrollToTop />
       <CookieConsent />
       <Routes>
         <Route path="/demo" element={<FrontPage />} />
