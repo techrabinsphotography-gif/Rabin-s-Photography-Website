@@ -738,7 +738,7 @@ const Demo = () => {
                     <div>
                         <h3 className="text-white font-semibold mb-4">Company</h3>
                         <ul className="space-y-2 text-sm">
-                            <li className="hover:text-white transition-colors cursor-pointer"><Link to="/about" onClick={() => window.scrollTo(0, 0)}>About Us</Link></li>
+                            <li className="hover:text-white transition-colors cursor-pointer"><Link to="/aboutUs" onClick={() => window.scrollTo(0, 0)}>About Us</Link></li>
                             <li className="hover:text-white transition-colors cursor-pointer"><Link to="/blog" onClick={() => window.scrollTo(0, 0)}>Blog</Link></li>
                             <li className="hover:text-white transition-colors cursor-pointer"><Link to="/privacy" onClick={() => window.scrollTo(0, 0)}>Privacy Policy</Link></li>
                             <li className="hover:text-white transition-colors cursor-pointer"><Link to="/terms" onClick={() => window.scrollTo(0, 0)}>Terms of Service</Link></li>
