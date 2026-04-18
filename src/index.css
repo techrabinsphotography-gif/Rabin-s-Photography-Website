@@ -41,6 +41,23 @@ textarea::placeholder {
     color: #9ca3af !important;
 }
 
+/* Contact form inputs on dark background need white text */
+.contact-form-input,
+.contact-form-textarea {
+    color: #ffffff !important;
+}
+
+.contact-form-input::placeholder,
+.contact-form-textarea::placeholder {
+    color: rgba(255, 255, 255, 0.6) !important;
+}
+
+.contact-form-input:-webkit-autofill,
+.contact-form-textarea:-webkit-autofill {
+    -webkit-text-fill-color: #ffffff !important;
+    box-shadow: 0 0 0px 1000px rgba(255, 255, 255, 0.1) inset !important;
+}
+
 .blog-content,
 .blog-content * {
     color: #1a1a1a !important;
