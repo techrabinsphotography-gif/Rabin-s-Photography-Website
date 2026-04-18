@@ -1173,7 +1173,7 @@ const ContactSection = () => {
                                 type="text"
                                 name="name"
                                 required
-                                className="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-4 text-white placeholder-gray-400 focus:outline-none focus:border-blue-500 focus:ring-4 focus:ring-blue-500/20 transition-all backdrop-blur-sm"
+                                className="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-4 text-white placeholder-white focus:outline-none focus:border-blue-500 focus:ring-4 focus:ring-blue-500/20 transition-all backdrop-blur-sm"
                                 placeholder="Your name"
                                 onChange={handleChange}
                                 value={formData.name}
@@ -1186,9 +1186,15 @@ const ContactSection = () => {
                                 type="tel"
                                 name="phone"
                                 required
-                                className="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-4 text-white placeholder-gray-400 focus:outline-none focus:border-blue-500 focus:ring-4 focus:ring-blue-500/20 transition-all backdrop-blur-sm"
-                                placeholder="+91 1234567890"
-                                onChange={handleChange}
+                                maxLength={10}
+                                pattern="[0-9]{10}"
+                                inputMode="numeric"
+                                className="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-4 text-white placeholder-white focus:outline-none focus:border-blue-500 focus:ring-4 focus:ring-blue-500/20 transition-all backdrop-blur-sm"
+                                placeholder="10-digit mobile number"
+                                onChange={(e) => {
+                                    const val = e.target.value.replace(/\D/g, '').slice(0, 10);
+                                    setFormData(prev => ({ ...prev, phone: val }));
+                                }}
                                 value={formData.phone}
                             />
                         </div>
@@ -1199,7 +1205,7 @@ const ContactSection = () => {
                                 type="email"
                                 name="email"
                                 required
-                                className="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-4 text-white placeholder-gray-400 focus:outline-none focus:border-blue-500 focus:ring-4 focus:ring-blue-500/20 transition-all backdrop-blur-sm"
+                                className="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-4 text-white placeholder-white focus:outline-none focus:border-blue-500 focus:ring-4 focus:ring-blue-500/20 transition-all backdrop-blur-sm"
                                 placeholder="you@example.com"
                                 onChange={handleChange}
                                 value={formData.email}
@@ -1212,7 +1218,7 @@ const ContactSection = () => {
                                 name="message"
                                 required
                                 rows="5"
-                                className="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-4 text-white placeholder-gray-400 focus:outline-none focus:border-blue-500 focus:ring-4 focus:ring-blue-500/20 transition-all resize-none backdrop-blur-sm"
+                                className="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-4 text-white placeholder-white focus:outline-none focus:border-blue-500 focus:ring-4 focus:ring-blue-500/20 transition-all resize-none backdrop-blur-sm"
                                 placeholder="Tell us about your project..."
                                 onChange={handleChange}
                                 value={formData.message}
