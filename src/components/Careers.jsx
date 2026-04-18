@@ -12,12 +12,53 @@ function ApplyModal({ job, onClose }) {
   const [resumeFile, setResumeFile] = useState(null);
   const [form, setForm] = useState({ name: '', email: '', phone: '' });
   const [error, setError] = useState('');
+  const [fieldErrors, setFieldErrors] = useState({});
 
-  const handleChange = (e) => setForm(p => ({ ...p, [e.target.name]: e.target.value }));
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    if (name === 'phone') {
+      const digits = value.replace(/\D/g, '').slice(0, 10);
+      setForm(p => ({ ...p, phone: digits }));
+    } else {
+      setForm(p => ({ ...p, [name]: value }));
+    }
+    setFieldErrors(p => ({ ...p, [name]: '' }));
+  };
+
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+    const allowed = ['application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', 'image/jpeg'];
+    const allowedExt = ['.doc', '.docx', '.jpg', '.jpeg'];
+    const ext = '.' + file.name.split('.').pop().toLowerCase();
+    if (!allowed.includes(file.type) && !allowedExt.includes(ext)) {
+      setFieldErrors(p => ({ ...p, resume: 'Only .doc, .docx, .jpg, .jpeg files are allowed.' }));
+      setResumeFile(null);
+      return;
+    }
+    if (file.size > 2 * 1024 * 1024) {
+      setFieldErrors(p => ({ ...p, resume: 'File size must be under 2MB.' }));
+      setResumeFile(null);
+      return;
+    }
+    setFieldErrors(p => ({ ...p, resume: '' }));
+    setResumeFile(file);
+  };
+
+  const validate = () => {
+    const errs = {};
+    if (!form.name.trim()) errs.name = 'Full name is required.';
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(form.email)) errs.email = 'Please enter a valid email address.';
+    if (!/^\d{10}$/.test(form.phone)) errs.phone = 'Contact number must be exactly 10 digits.';
+    if (!resumeFile) errs.resume = 'Please upload your document.';
+    return errs;
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!resumeFile) { setError('Please upload your resume'); return; }
+    const errs = validate();
+    if (Object.keys(errs).length > 0) { setFieldErrors(errs); return; }
     setError('');
     setLoading(true);
     try {
@@ -53,40 +94,57 @@ function ApplyModal({ job, onClose }) {
             </div>
 
             {/* Form */}
-            <form onSubmit={handleSubmit} className="p-6 space-y-4">
+            <form onSubmit={handleSubmit} className="p-6 space-y-4" noValidate>
+
+              {/* Full Name */}
               <div>
                 <label className="block text-xs font-bold uppercase tracking-wider text-gray-500 mb-1.5">Full Name</label>
                 <input
                   name="name" value={form.name} onChange={handleChange} required
                   placeholder="Your full name"
-                  className="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-[#ff4f5a]/30 focus:border-[#ff4f5a] transition-all"
+                  className={`w-full border rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-[#ff4f5a]/30 focus:border-[#ff4f5a] transition-all ${fieldErrors.name ? 'border-red-400 bg-red-50' : 'border-gray-200'}`}
                 />
+                {fieldErrors.name && <p className="text-red-500 text-xs mt-1 flex items-center gap-1">⚠ {fieldErrors.name}</p>}
               </div>
+
+              {/* Email */}
               <div>
                 <label className="block text-xs font-bold uppercase tracking-wider text-gray-500 mb-1.5">Email Address</label>
                 <input
                   name="email" type="email" value={form.email} onChange={handleChange} required
                   placeholder="you@example.com"
-                  className="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-[#ff4f5a]/30 focus:border-[#ff4f5a] transition-all"
+                  className={`w-full border rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-[#ff4f5a]/30 focus:border-[#ff4f5a] transition-all ${fieldErrors.email ? 'border-red-400 bg-red-50' : 'border-gray-200'}`}
                 />
+                {fieldErrors.email && <p className="text-red-500 text-xs mt-1 flex items-center gap-1">⚠ {fieldErrors.email}</p>}
               </div>
+
+              {/* Phone */}
               <div>
                 <label className="block text-xs font-bold uppercase tracking-wider text-gray-500 mb-1.5">Contact Number</label>
                 <input
                   name="phone" type="tel" value={form.phone} onChange={handleChange} required
-                  placeholder="+91 98765 43210"
-                  className="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-[#ff4f5a]/30 focus:border-[#ff4f5a] transition-all"
+                  maxLength={10} inputMode="numeric"
+                  placeholder="10-digit mobile number"
+                  className={`w-full border rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-[#ff4f5a]/30 focus:border-[#ff4f5a] transition-all ${fieldErrors.phone ? 'border-red-400 bg-red-50' : 'border-gray-200'}`}
                 />
+                <p className="text-gray-400 text-xs mt-1">{form.phone.length}/10 digits</p>
+                {fieldErrors.phone && <p className="text-red-500 text-xs mt-1 flex items-center gap-1">⚠ {fieldErrors.phone}</p>}
               </div>
+
+              {/* File Upload */}
               <div>
                 <label className="block text-xs font-bold uppercase tracking-wider text-gray-500 mb-1.5">Resume / CV</label>
-                <label className={`flex items-center gap-3 border-2 border-dashed rounded-xl px-4 py-4 cursor-pointer transition-all ${resumeFile ? 'border-[#ff4f5a] bg-[#ff4f5a]/5' : 'border-gray-200 hover:border-[#ff4f5a]/50'}`}>
+                <label className={`flex items-center gap-3 border-2 border-dashed rounded-xl px-4 py-4 cursor-pointer transition-all ${resumeFile ? 'border-[#ff4f5a] bg-[#ff4f5a]/5' : fieldErrors.resume ? 'border-red-400 bg-red-50' : 'border-gray-200 hover:border-[#ff4f5a]/50'}`}>
                   <Upload className={`w-5 h-5 flex-shrink-0 ${resumeFile ? 'text-[#ff4f5a]' : 'text-gray-400'}`} />
-                  <span className={`text-sm ${resumeFile ? 'text-[#ff4f5a] font-semibold' : 'text-gray-400'}`}>
-                    {resumeFile ? resumeFile.name : 'Upload PDF, DOC or DOCX (max 5MB)'}
-                  </span>
-                  <input type="file" accept=".pdf,.doc,.docx" className="hidden" onChange={e => setResumeFile(e.target.files[0])} />
+                  <div className="flex flex-col min-w-0">
+                    <span className={`text-sm truncate ${resumeFile ? 'text-[#ff4f5a] font-semibold' : 'text-gray-400'}`}>
+                      {resumeFile ? resumeFile.name : 'Upload DOC, DOCX, JPG or JPEG'}
+                    </span>
+                    <span className="text-xs text-gray-400 mt-0.5">Max file size: 2MB</span>
+                  </div>
+                  <input type="file" accept=".doc,.docx,.jpg,.jpeg" className="hidden" onChange={handleFileChange} />
                 </label>
+                {fieldErrors.resume && <p className="text-red-500 text-xs mt-1 flex items-center gap-1">⚠ {fieldErrors.resume}</p>}
               </div>
 
               {error && <p className="text-red-500 text-sm bg-red-50 px-4 py-2 rounded-xl">{error}</p>}
