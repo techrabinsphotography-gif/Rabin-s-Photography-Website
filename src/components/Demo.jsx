@@ -154,6 +154,9 @@ const Demo = () => {
                                 Photography
                             </span>
                         </h1>
+                        <p className="text-white/70 text-sm sm:text-base md:text-lg font-medium tracking-wide mt-2">
+                            Best Photographer in Kolkata | Wedding, Pre-Wedding &amp; Event Photography
+                        </p>
                     </motion.div>
 
                     {/* Subheading */}
