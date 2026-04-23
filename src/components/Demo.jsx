@@ -1065,6 +1065,10 @@ const ContactSection = () => {
                     message: data.message || 'Message sent successfully!' 
                 });
                 setFormData({ name: '', phone: '', email: '', message: '' });
+                // Google Ads conversion tracking
+                if (typeof gtag === 'function') {
+                    gtag('event', 'conversion', { 'send_to': 'AW-846168871/irOjCJjhx6AcEKeGvpMD' });
+                }
             } else {
                 setSubmitStatus({ 
                     type: 'error', 
