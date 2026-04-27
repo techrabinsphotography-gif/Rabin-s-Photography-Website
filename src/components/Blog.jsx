@@ -1,9 +1,129 @@
-import React, { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
+import React, { useState, useEffect, useRef } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import finalLogo from '../assets/recent/final logo.png';
 
 import { fetchBlogPosts } from '../api';
+
+const SLIDER_IMAGES = [
+    {
+        src: '/484042900_1180013106811887_2538291571904064716_n.jpg',
+        caption: 'Capturing Timeless Moments',
+    },
+    {
+        src: '/571744774_1361610111985518_3207307785903951187_n.jpg',
+        caption: 'Stories Behind Every Frame',
+    },
+    {
+        src: '/long.jpeg',
+        caption: 'Light, Lens & Emotion',
+    },
+];
+
+const PhotoSlider = () => {
+    const [current, setCurrent] = useState(0);
+    const [direction, setDirection] = useState(1);
+    const timerRef = useRef(null);
+
+    const goTo = (index, dir) => {
+        setDirection(dir);
+        setCurrent(index);
+    };
+
+    const next = () => {
+        const nextIndex = (current + 1) % SLIDER_IMAGES.length;
+        goTo(nextIndex, 1);
+    };
+
+    const prev = () => {
+        const prevIndex = (current - 1 + SLIDER_IMAGES.length) % SLIDER_IMAGES.length;
+        goTo(prevIndex, -1);
+    };
+
+    useEffect(() => {
+        timerRef.current = setInterval(() => {
+            setCurrent(c => {
+                setDirection(1);
+                return (c + 1) % SLIDER_IMAGES.length;
+            });
+        }, 4500);
+        return () => clearInterval(timerRef.current);
+    }, []);
+
+    const variants = {
+        enter: (dir) => ({ x: dir > 0 ? '100%' : '-100%', opacity: 0 }),
+        center: { x: 0, opacity: 1 },
+        exit: (dir) => ({ x: dir > 0 ? '-100%' : '100%', opacity: 0 }),
+    };
+
+    return (
+        <div className="relative w-full overflow-hidden rounded-2xl shadow-xl" style={{ height: '420px' }}>
+            <AnimatePresence initial={false} custom={direction}>
+                <motion.div
+                    key={current}
+                    custom={direction}
+                    variants={variants}
+                    initial="enter"
+                    animate="center"
+                    exit="exit"
+                    transition={{ duration: 0.7, ease: [0.4, 0, 0.2, 1] }}
+                    className="absolute inset-0"
+                >
+                    <img
+                        src={SLIDER_IMAGES[current].src}
+                        alt={SLIDER_IMAGES[current].caption}
+                        className="w-full h-full object-cover"
+                    />
+                    {/* Gradient overlay */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent" />
+                    {/* Caption */}
+                    <motion.p
+                        initial={{ opacity: 0, y: 16 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 0.3, duration: 0.5 }}
+                        className="absolute bottom-10 left-1/2 -translate-x-1/2 text-white text-lg md:text-2xl font-semibold tracking-wide text-center px-4 drop-shadow-lg"
+                    >
+                        {SLIDER_IMAGES[current].caption}
+                    </motion.p>
+                </motion.div>
+            </AnimatePresence>
+
+            {/* Prev / Next arrows */}
+            <button
+                onClick={prev}
+                aria-label="Previous photo"
+                className="absolute left-4 top-1/2 -translate-y-1/2 z-10 w-10 h-10 rounded-full bg-white/20 hover:bg-white/40 backdrop-blur-sm flex items-center justify-center text-white transition-all duration-200"
+            >
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-5 h-5">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5" />
+                </svg>
+            </button>
+            <button
+                onClick={next}
+                aria-label="Next photo"
+                className="absolute right-4 top-1/2 -translate-y-1/2 z-10 w-10 h-10 rounded-full bg-white/20 hover:bg-white/40 backdrop-blur-sm flex items-center justify-center text-white transition-all duration-200"
+            >
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-5 h-5">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
+                </svg>
+            </button>
+
+            {/* Dot indicators */}
+            <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2 z-10">
+                {SLIDER_IMAGES.map((_, i) => (
+                    <button
+                        key={i}
+                        onClick={() => goTo(i, i > current ? 1 : -1)}
+                        aria-label={`Go to slide ${i + 1}`}
+                        className={`h-2 rounded-full transition-all duration-300 ${
+                            i === current ? 'w-6 bg-white' : 'w-2 bg-white/50'
+                        }`}
+                    />
+                ))}
+            </div>
+        </div>
+    );
+};
 
 const Blog = () => {
     const [selectedCategory, setSelectedCategory] = useState('All');
@@ -55,24 +175,37 @@ const Blog = () => {
             {/* Hero Section */}
             <section className="border-b border-gray-200 bg-gradient-to-b from-gray-50 to-white py-16">
                 <div className="max-w-7xl mx-auto px-6">
-                    <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.6 }}
-                        className="max-w-3xl"
-                    >
-                        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-[#ff4f5a]/10 to-orange-100/10 border border-[#ff4f5a]/20 mb-6">
-                            <span className="w-2 h-2 rounded-full bg-[#ff4f5a]"></span>
-                            <span className="text-[#ff4f5a] font-bold tracking-widest text-xs uppercase">Photography Blog</span>
-                        </div>
-                        <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-gray-900 mb-6 leading-tight">
-                            Stories, tips, and insights about photography
-                        </h1>
-                        <p className="text-xl text-gray-600 leading-relaxed">
-                            Explore our collection of articles covering wedding photography, portrait techniques, 
-                            and behind-the-scenes stories from Rabin's Photography.
-                        </p>
-                    </motion.div>
+                    <div className="flex flex-col lg:flex-row items-center gap-12">
+                        {/* Left: Text */}
+                        <motion.div
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.6 }}
+                            className="flex-1 min-w-0"
+                        >
+                            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-[#ff4f5a]/10 to-orange-100/10 border border-[#ff4f5a]/20 mb-6">
+                                <span className="w-2 h-2 rounded-full bg-[#ff4f5a]"></span>
+                                <span className="text-[#ff4f5a] font-bold tracking-widest text-xs uppercase">Photography Blog</span>
+                            </div>
+                            <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-gray-900 mb-6 leading-tight">
+                                Stories, tips, and insights about photography
+                            </h1>
+                            <p className="text-xl text-gray-600 leading-relaxed">
+                                Explore our collection of articles covering wedding photography, portrait techniques, 
+                                and behind-the-scenes stories from Rabin's Photography.
+                            </p>
+                        </motion.div>
+
+                        {/* Right: Photo Slider */}
+                        <motion.div
+                            initial={{ opacity: 0, x: 40 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            transition={{ duration: 0.7, delay: 0.2 }}
+                            className="w-full lg:w-[480px] flex-shrink-0"
+                        >
+                            <PhotoSlider />
+                        </motion.div>
+                    </div>
                 </div>
             </section>
 
