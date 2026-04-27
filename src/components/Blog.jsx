@@ -46,7 +46,7 @@ const Blog = () => {
                         <nav className="hidden md:flex items-center gap-8">
                             <Link to="/" className="text-gray-600 hover:text-gray-900 transition-colors">Home</Link>
                             <Link to="/blog" className="text-gray-900 font-semibold">Blog</Link>
-                            <Link to="/aboutUs" className="text-gray-600 hover:text-gray-900 transition-colors">About Us</Link>
+                            <Link to="/Aboutus" className="text-gray-600 hover:text-gray-900 transition-colors">About Us</Link>
                         </nav>
                     </div>
                 </div>
@@ -324,7 +324,7 @@ const Blog = () => {
                     <div>
                         <h3 className="text-white font-semibold mb-4">Company</h3>
                         <ul className="space-y-2 text-sm">
-                            <li className="hover:text-white transition-colors cursor-pointer"><Link to="/aboutUs">About Us</Link></li>
+                            <li className="hover:text-white transition-colors cursor-pointer"><Link to="/Aboutus">About Us</Link></li>
                             <li className="hover:text-white transition-colors cursor-pointer"><Link to="/blog">Blog</Link></li>
                             <li className="hover:text-white transition-colors cursor-pointer"><Link to="/privacy">Privacy Policy</Link></li>
                             <li className="hover:text-white transition-colors cursor-pointer"><Link to="/terms">Terms of Service</Link></li>

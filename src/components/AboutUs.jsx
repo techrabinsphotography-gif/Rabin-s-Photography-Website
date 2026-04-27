@@ -129,7 +129,7 @@ const AboutUs = () => {
               >
                 Blog
               </Link>
-              <Link to="/aboutUs" className="text-white font-semibold">
+              <Link to="/Aboutus" className="text-white font-semibold">
                 About Us
               </Link>
             </nav>
@@ -523,7 +523,7 @@ const AboutUs = () => {
             <h3 className="text-white font-semibold mb-4">Company</h3>
             <ul className="space-y-2 text-sm">
               <li className="hover:text-white transition-colors cursor-pointer">
-                <Link to="/aboutUs">About Us</Link>
+                <Link to="/Aboutus">About Us</Link>
               </li>
               <li className="hover:text-white transition-colors cursor-pointer">
                 <Link to="/blog">Blog</Link>

@@ -35,7 +35,7 @@ function App() {
         <Route path="/help" element={<HelpSupport />} />
         <Route path="/blog" element={<Blog />} />
         <Route path="/blog/:id" element={<BlogPost />} />
-        <Route path="/aboutUs" element={<AboutUs />} />
+        <Route path="/Aboutus" element={<AboutUs />} />
         <Route path="/cookie-policy" element={<CookiePolicy />} />
         <Route path="/careers" element={<Careers />} />
         <Route path="/careers/:id" element={<CareerDetail />} />
