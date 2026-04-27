@@ -138,11 +138,18 @@ const AboutUs = () => {
       </header>
 
       {/* Hero Section */}
-      <section className="pt-40 pb-20 px-6 relative overflow-hidden">
-        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-blue-500/20 rounded-full blur-[120px] -z-10" />
-        <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-[#ff4f5a]/20 rounded-full blur-[120px] -z-10" />
+      <section className="pt-40 pb-20 px-6 relative overflow-hidden min-h-[600px] flex items-center">
+        {/* Background Image */}
+        <div className="absolute inset-0 -z-10">
+          <img
+            src={img4}
+            alt="Hero Background"
+            className="w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-black/65" />
+        </div>
 
-        <div className="max-w-7xl mx-auto text-center">
+        <div className="max-w-7xl mx-auto text-center w-full">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
@@ -160,32 +167,9 @@ const AboutUs = () => {
                 Creating Art
               </span>
             </h1>
-            <p className="text-xl text-gray-400 max-w-3xl mx-auto leading-relaxed">
+            <p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
               At Rabin's Photography, we believe that every moment has a story — and every story deserves to be captured beautifully. Based in Kolkata, we are a team of passionate photographers and visual storytellers dedicated to transforming real emotions into timeless memories. With over a decade of experience in the industry, we specialize in creating cinematic, elegant, and emotionally rich visuals that you can cherish forever.
             </p>
-          </motion.div>
-
-          {/* Hero Image */}
-          <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.9, delay: 0.3 }}
-            className="mt-16 relative max-w-5xl mx-auto"
-          >
-            <div className="rounded-3xl overflow-hidden shadow-2xl border border-white/10">
-              <img
-                src={img4}
-                alt="Rabin's Photography — Capturing Moments"
-                className="w-full h-[420px] md:h-[560px] object-cover"
-              />
-              {/* Gradient overlay at bottom */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent rounded-3xl" />
-            </div>
-            {/* Floating badge */}
-            <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex items-center gap-3 bg-black/60 backdrop-blur-md border border-white/20 rounded-full px-6 py-3">
-              <span className="w-2 h-2 rounded-full bg-[#ff4f5a] animate-pulse"></span>
-              <span className="text-white text-sm font-semibold tracking-wide whitespace-nowrap">Since 2013 · Kolkata, India</span>
-            </div>
           </motion.div>
         </div>
       </section>
