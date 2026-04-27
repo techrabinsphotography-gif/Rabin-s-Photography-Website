@@ -164,6 +164,29 @@ const AboutUs = () => {
               At Rabin's Photography, we believe that every moment has a story — and every story deserves to be captured beautifully. Based in Kolkata, we are a team of passionate photographers and visual storytellers dedicated to transforming real emotions into timeless memories. With over a decade of experience in the industry, we specialize in creating cinematic, elegant, and emotionally rich visuals that you can cherish forever.
             </p>
           </motion.div>
+
+          {/* Hero Image */}
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.9, delay: 0.3 }}
+            className="mt-16 relative max-w-5xl mx-auto"
+          >
+            <div className="rounded-3xl overflow-hidden shadow-2xl border border-white/10">
+              <img
+                src={img4}
+                alt="Rabin's Photography — Capturing Moments"
+                className="w-full h-[420px] md:h-[560px] object-cover"
+              />
+              {/* Gradient overlay at bottom */}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent rounded-3xl" />
+            </div>
+            {/* Floating badge */}
+            <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex items-center gap-3 bg-black/60 backdrop-blur-md border border-white/20 rounded-full px-6 py-3">
+              <span className="w-2 h-2 rounded-full bg-[#ff4f5a] animate-pulse"></span>
+              <span className="text-white text-sm font-semibold tracking-wide whitespace-nowrap">Since 2013 · Kolkata, India</span>
+            </div>
+          </motion.div>
         </div>
       </section>
 
