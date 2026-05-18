@@ -6,7 +6,7 @@ import img1 from '../assets/recent/cameraa.png'
 import img2 from '/571744774_1361610111985518_3207307785903951187_n.jpg'
 
 import img4 from '/484042900_1180013106811887_2538291571904064716_n.jpg'
-const HERO_VIDEO_URL = "https://res.cloudinary.com/dvjm8xxgj/video/upload/v1771931255/Rabin_s_Photography_Web_Video_javamy.mp4"
+const HERO_VIDEO_URL = "https://res.cloudinary.com/dfcf6ug0s/video/upload/v1779124517/Rabin_s_Photography_Web_Video_xnz9uq.mp4"
 import finalLogo from '../assets/recent/final logo.png'
 import rabinsQR from "../assets/recent/Rabin's Photography.png"
 
