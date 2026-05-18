@@ -5,7 +5,6 @@ import img1 from '../assets/recent/cameraa.png'
 import img2 from '../assets/recent/cenamatic camera.png'
 import img3 from '../assets/recent/drone.jpeg'
 import img4 from '../assets/recent/studioimgg.png'
-import video from "../assets/recent/video.mp4"
 
 
 
@@ -18,7 +17,7 @@ const FrontPage = () => {
                 {/* Background Video */}
                 <video
                     className="absolute top-0 left-0 w-full h-full object-cover opacity-70"
-                    src={video}
+                    src="https://res.cloudinary.com/dfcf6ug0s/video/upload/v1779124517/Rabin_s_Photography_Web_Video_xnz9uq.mp4"
                     autoPlay
                     loop
                     muted
