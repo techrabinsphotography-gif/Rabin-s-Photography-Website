@@ -119,7 +119,6 @@ const TeamCard = ({ name, imgSrc, initial, position, bio }) => {
         {/* Bottom overlay */}
         <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent p-3">
           <p className="text-white font-bold text-sm leading-tight">{name}</p>
-          <p className="text-[#9333ea] text-xs font-semibold capitalize mt-0.5">{position}</p>
         </div>
       </div>
 
