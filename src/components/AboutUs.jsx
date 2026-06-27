@@ -159,6 +159,7 @@ const AboutUs = () => {
   const [showPopup, setShowPopup] = useState(false);
   const [showAppStorePopup, setShowAppStorePopup] = useState(false);
   const [teamData, setTeamData] = useState({ backbone: {}, crew: {}, core: {} });
+  const [teamLoading, setTeamLoading] = useState(true);
   const [siteImages, setSiteImages] = useState({ heroBg: '', portrait: '', founder: '', heroVideo: '' });
 
   useEffect(() => {
@@ -166,7 +167,8 @@ const AboutUs = () => {
       .then(data => {
         if (data && typeof data === 'object') setTeamData(data);
       })
-      .catch(err => console.error("Failed to load team data", err));
+      .catch(err => console.error("Failed to load team data", err))
+      .finally(() => setTeamLoading(false));
 
     fetchSiteSettings()
       .then(d => {
@@ -493,7 +495,22 @@ const AboutUs = () => {
             </div>
 
             {/* Tiers rendered in fixed order: Core → Backbone → Crew */}
-            {['core', 'backbone', 'crew'].map((tier, tierIdx) => {
+            {teamLoading ? (
+              // Skeleton loader
+              <div className="space-y-16">
+                {[1,2,3].map(t => (
+                  <div key={t}>
+                    <div className="h-6 w-24 bg-white/10 rounded mx-auto mb-4 animate-pulse" />
+                    <div className="flex flex-wrap justify-center gap-6">
+                      {Array.from({length: 6}).map((_, i) => (
+                        <div key={i} className="w-44 h-52 rounded-2xl bg-white/5 animate-pulse" />
+                      ))}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            ) : (
+            ['core', 'backbone', 'crew'].map((tier, tierIdx) => {
               const tierData = teamData[tier];
               if (!tierData || Object.keys(tierData).length === 0) return null;
               const positions = Object.keys(tierData);
@@ -521,7 +538,8 @@ const AboutUs = () => {
                   })}
                 </div>
               );
-            })}
+            }))
+            }
 
         </div>
       </section>
