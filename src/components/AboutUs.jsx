@@ -281,7 +281,7 @@ const AboutUs = () => {
       </header>
 
       {/* Hero Section */}
-      <section className="pt-40 pb-20 px-6 relative min-h-[600px] flex items-center">
+      <section className="relative min-h-screen flex items-center" style={{ minHeight: '100vh' }}>
         {/* Background — video only, black if not set */}
         <div className="absolute inset-0 overflow-hidden">
           {siteImages.heroVideo ? (
@@ -291,15 +291,16 @@ const AboutUs = () => {
               loop
               muted
               playsInline
-              className="w-full h-full object-cover"
+              className="absolute inset-0 w-full h-full object-cover"
+              style={{ minHeight: '100%', minWidth: '100%' }}
             />
           ) : (
             <div className="w-full h-full bg-gradient-to-br from-black via-gray-950 to-black" />
           )}
-          <div className="absolute inset-0 bg-black/65" />
+          <div className="absolute inset-0 bg-black/60" />
         </div>
 
-        <div className="relative z-10 max-w-7xl mx-auto text-center w-full">
+        <div className="relative z-10 max-w-7xl mx-auto text-center w-full px-6 py-32">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
