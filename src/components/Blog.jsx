@@ -3,24 +3,16 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import finalLogo from '../assets/recent/final logo.png';
 
-import { fetchBlogPosts } from '../api';
+import { fetchBlogPosts, fetchSiteSettings } from '../api';
 
-const SLIDER_IMAGES = [
-    {
-        src: '/484042900_1180013106811887_2538291571904064716_n.jpg',
-        caption: 'Capturing Timeless Moments',
-    },
-    {
-        src: '/571744774_1361610111985518_3207307785903951187_n.jpg',
-        caption: 'Stories Behind Every Frame',
-    },
-    {
-        src: '/long.jpeg',
-        caption: 'Light, Lens & Emotion',
-    },
+const FALLBACK_SLIDER = [
+    { src: '/484042900_1180013106811887_2538291571904064716_n.jpg', caption: 'Capturing Timeless Moments' },
+    { src: '/571744774_1361610111985518_3207307785903951187_n.jpg', caption: 'Stories Behind Every Frame' },
+    { src: '/long.jpeg', caption: 'Light, Lens & Emotion' },
 ];
 
-const PhotoSlider = () => {
+const PhotoSlider = ({ images }) => {
+    const SLIDER_IMAGES = images || FALLBACK_SLIDER;
     const [current, setCurrent] = useState(0);
     const [direction, setDirection] = useState(1);
     const timerRef = useRef(null);
@@ -129,10 +121,23 @@ const Blog = () => {
     const [selectedCategory, setSelectedCategory] = useState('All');
     const [showPopup, setShowPopup] = useState(false);
     const [showAppStorePopup, setShowAppStorePopup] = useState(false);
-
     const [blogPosts, setBlogPosts] = useState([]);
     const [featuredPost, setFeaturedPost] = useState(null);
     const [loading, setLoading] = useState(true);
+    const [sliderImages, setSliderImages] = useState(null);
+
+    useEffect(() => {
+        fetchSiteSettings().then(d => {
+            const s = d?.blogSliderImages;
+            if (s?.image1) {
+                setSliderImages([
+                    { src: s.image1, caption: 'Capturing Timeless Moments' },
+                    { src: s.image2 || FALLBACK_SLIDER[1].src, caption: 'Stories Behind Every Frame' },
+                    { src: s.image3 || FALLBACK_SLIDER[2].src, caption: 'Light, Lens & Emotion' },
+                ]);
+            }
+        }).catch(() => {});
+    }, []);
 
     const categories = ['All', 'Wedding', 'Portrait', 'Events', 'Tips & Tricks', 'Behind the Scenes'];
 
@@ -203,7 +208,7 @@ const Blog = () => {
                             transition={{ duration: 0.7, delay: 0.2 }}
                             className="w-full lg:w-[480px] flex-shrink-0"
                         >
-                            <PhotoSlider />
+                            <PhotoSlider images={sliderImages} />
                         </motion.div>
                     </div>
                 </div>

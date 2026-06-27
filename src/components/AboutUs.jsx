@@ -2,11 +2,11 @@ import React, { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import finalLogo from "../assets/recent/final logo.png";
-import img2 from "/samall.jpeg"; // Assuming this is a good image to use
-import img4 from "/long.jpeg"; // Another image
-import teamImg from "/Rabin_Ghosh.jpeg"; // Avatar
+import img2Fallback from "/samall.jpeg";
+import img4Fallback from "/long.jpeg";
+import teamImgFallback from "/Rabin_Ghosh.jpeg";
 
-import { fetchTeam } from '../api';
+import { fetchTeam, fetchSiteSettings } from '../api';
 
 const useCountUp = (end, duration = 2000, start = 0) => {
   const [count, setCount] = useState(start);
@@ -93,6 +93,7 @@ const AboutUs = () => {
   const [showPopup, setShowPopup] = useState(false);
   const [showAppStorePopup, setShowAppStorePopup] = useState(false);
   const [teamData, setTeamData] = useState({ backbone: {}, crew: {}, core: {} });
+  const [siteImages, setSiteImages] = useState({ heroBg: '', portrait: '', founder: '' });
 
   useEffect(() => {
     fetchTeam()
@@ -100,7 +101,17 @@ const AboutUs = () => {
         if (data && typeof data === 'object') setTeamData(data);
       })
       .catch(err => console.error("Failed to load team data", err));
+
+    fetchSiteSettings()
+      .then(d => {
+        if (d?.aboutImages) setSiteImages(d.aboutImages);
+      })
+      .catch(() => {});
   }, []);
+
+  const heroBg   = siteImages.heroBg   || img4Fallback;
+  const portrait = siteImages.portrait || img2Fallback;
+  const founder  = siteImages.founder  || teamImgFallback;
 
   return (
     <div className="min-h-screen bg-black text-white selection:bg-[#ff4f5a] selection:text-white">
@@ -142,7 +153,7 @@ const AboutUs = () => {
         {/* Background Image */}
         <div className="absolute inset-0 -z-10">
           <img
-            src={img4}
+            src={heroBg}
             alt="Hero Background"
             className="w-full h-full object-cover"
           />
@@ -185,14 +196,14 @@ const AboutUs = () => {
           >
             <div className="aspect-[4/5] rounded-2xl overflow-hidden shadow-2xl skew-y-3 border border-white/10">
               <img
-                src={img4}
+                src={heroBg}
                 alt="Photography Session"
                 className="w-full h-full object-cover"
               />
             </div>
             <div className="absolute -bottom-10 -right-10 w-64 h-64 bg-black rounded-2xl border border-white/10 p-4 shadow-xl -skew-y-3 hidden md:block">
               <img
-                src={img2}
+                src={portrait}
                 alt="Rabin Ghosh"
                 className="w-full h-full object-cover rounded-xl grayscale hover:grayscale-0 transition-all duration-500"
               />
@@ -366,7 +377,7 @@ const AboutUs = () => {
               <div className="w-full md:w-1/2">
                   <div className="w-full aspect-square rounded-2xl overflow-hidden border-2 border-white/10 shadow-[0_0_30px_rgba(255,79,90,0.15)] relative">
                     <img
-                      src={teamImg}
+                      src={founder}
                       alt="Rabin Ghosh"
                       className="w-full h-full object-cover"
                     />
