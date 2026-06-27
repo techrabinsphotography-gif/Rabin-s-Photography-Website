@@ -66,8 +66,8 @@ function ApplyModal({ job, onClose }) {
     setError('');
     setLoading(true);
     try {
-      const { url: resumeUrl, publicId: resumePublicId } = await uploadResume(resumeFile);
-      await submitApplication({ careerId: job._id, ...form, resumeUrl, resumePublicId });
+      const resume = await uploadResume(resumeFile);
+      await submitApplication({ careerId: job._id, ...form, resumeUrl: resume.url, resumePublicId: resume.publicId });
       setStep('success');
     } catch (err) {
       setError(err.message || 'Something went wrong. Please try again.');
