@@ -89,19 +89,18 @@ const CounterStat = ({ end, suffix = "", color, label }) => {
   );
 };
 
-// ── Team member card with React-controlled image error fallback ───────────────
+// ── Team member card ──────────────────────────────────────────────────────────
 const TeamCard = ({ name, imgSrc, initial, bio }) => {
   const [imgError, setImgError] = useState(false);
-  const [hovered, setHovered] = useState(false);
 
   return (
-    <div
-      className="group relative w-44 md:w-48 cursor-pointer"
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
+    <div className="group relative flex rounded-2xl overflow-hidden bg-[#111] shadow-lg border border-white/5
+      w-44 md:w-48 h-52 md:h-56
+      hover:w-80 md:hover:w-96 hover:border-[#9333ea]/40
+      transition-all duration-300 ease-in-out cursor-pointer flex-shrink-0"
     >
-      {/* Normal state — square card */}
-      <div className={`relative w-full aspect-square rounded-2xl overflow-hidden bg-[#111] shadow-lg transition-all duration-300 ${hovered ? 'opacity-0 scale-95' : 'opacity-100 scale-100'}`}>
+      {/* Image — always visible, shrinks on hover */}
+      <div className="flex-shrink-0 w-full group-hover:w-[45%] transition-all duration-300 relative">
         {imgSrc && !imgError ? (
           <img
             src={imgSrc}
@@ -116,30 +115,22 @@ const TeamCard = ({ name, imgSrc, initial, bio }) => {
             {initial}
           </div>
         )}
-        {/* Bottom overlay — name only */}
-        <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent p-3">
-          <p className="text-white font-bold text-sm leading-tight">{name}</p>
+        {/* Name overlay — visible when not hovered */}
+        <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent p-3
+          opacity-100 group-hover:opacity-0 transition-opacity duration-200">
+          <p className="text-white font-bold text-sm leading-tight truncate">{name}</p>
         </div>
       </div>
 
-      {/* Hover state — split card */}
-      <div className={`absolute inset-0 flex rounded-2xl overflow-hidden bg-[#0d0d0d] shadow-2xl border border-white/10 transition-all duration-300 ${hovered ? 'opacity-100 scale-100' : 'opacity-0 scale-95 pointer-events-none'}`}
-        style={{ width: '320px', left: '-40px', zIndex: 50 }}>
-        {/* Left: image */}
-        <div className="w-[45%] flex-shrink-0">
-          {imgSrc && !imgError ? (
-            <img src={imgSrc} alt={name} className="w-full h-full object-cover object-top" />
-          ) : (
-            <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-[#1a1a2e] to-[#16213e] text-purple-400 text-4xl font-bold">
-              {initial}
-            </div>
-          )}
-        </div>
-        {/* Right: info */}
-        <div className="flex-1 p-4 flex flex-col justify-center gap-2 bg-[#111]">
-          <p className="text-white font-bold text-base leading-tight">{name}</p>
-          {bio && <p className="text-gray-400 text-xs leading-relaxed mt-1">{bio}</p>}
-        </div>
+      {/* Info panel — hidden until hover */}
+      <div className="flex flex-col justify-center px-4 py-4 bg-[#0d0d0d]
+        w-0 overflow-hidden group-hover:w-[55%]
+        transition-all duration-300 ease-in-out">
+        <p className="text-white font-bold text-sm leading-tight mb-1 whitespace-nowrap">{name}</p>
+        {bio
+          ? <p className="text-gray-400 text-xs leading-relaxed line-clamp-4">{bio}</p>
+          : <p className="text-gray-600 text-xs italic">No bio yet</p>
+        }
       </div>
     </div>
   );
@@ -513,7 +504,7 @@ const AboutUs = () => {
                     if (!members || members.length === 0) return null;
                     return (
                       <div key={pos} className={posIdx < positions.length - 1 ? 'mb-12' : ''}>
-                        <div className="flex flex-wrap justify-center gap-6" style={{ overflow: 'visible' }}>
+                        <div className="flex flex-wrap justify-center gap-4 overflow-visible py-2">
                           {members.map((member, idx) => {
                             const imgSrc = member.image || member.imageUrl;
                             const initial = member.name ? member.name.charAt(0).toUpperCase() : '?';
