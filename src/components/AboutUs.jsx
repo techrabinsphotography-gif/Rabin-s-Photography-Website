@@ -186,7 +186,7 @@ const AboutUs = () => {
             <h1 className="text-5xl md:text-7xl font-bold mb-6 tracking-tight">
               Capturing Moments, <br className="hidden md:block"/>
               <span className="bg-gradient-to-r from-[#ff4f5a] via-orange-500 to-yellow-500 bg-clip-text text-transparent">
-                Creating Art
+                Creating Art's
               </span>
             </h1>
             <p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
