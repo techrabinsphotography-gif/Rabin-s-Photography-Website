@@ -122,10 +122,10 @@ const CommercialSlider = ({ videos }) => {
           className="text-center mb-12">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#a855f7]/10 border border-[#a855f7]/30 mb-4">
             <span className="w-1.5 h-1.5 rounded-full bg-[#a855f7] animate-pulse" />
-            <span className="text-[#a855f7] text-xs font-bold tracking-widest uppercase">Our Work</span>
+            {/* <span className="text-[#a855f7] text-xs font-bold tracking-widest uppercase">Our Work</span> */}
           </div>
           <h2 className="text-4xl md:text-5xl font-bold text-white mb-3">Our Commercials</h2>
-          <p className="text-gray-400 text-lg max-w-xl mx-auto">A glimpse into the cinematic world we create for our clients.</p>
+          <p className="text-gray-400 text-lg max-w-xl mx-auto">Crafting cinematic commercials that inspire, engage, and leave a lasting impression.</p>
         </motion.div>
 
         {/* Slider */}
@@ -296,7 +296,7 @@ const AboutUs = () => {
 
       {/* Hero Section */}
       <section className="pt-40 pb-20 px-6 relative min-h-[600px] flex items-center">
-        {/* Background — video if set, otherwise image */}
+        {/* Background — video only, black if not set */}
         <div className="absolute inset-0 overflow-hidden">
           {siteImages.heroVideo ? (
             <video
@@ -308,11 +308,7 @@ const AboutUs = () => {
               className="w-full h-full object-cover"
             />
           ) : (
-            <img
-              src={heroBg}
-              alt="Hero Background"
-              className="w-full h-full object-cover"
-            />
+            <div className="w-full h-full bg-gradient-to-br from-black via-gray-950 to-black" />
           )}
           <div className="absolute inset-0 bg-black/65" />
         </div>

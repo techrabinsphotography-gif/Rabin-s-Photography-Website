@@ -5,14 +5,14 @@ import finalLogo from '../assets/recent/final logo.png';
 
 import { fetchBlogPosts, fetchSiteSettings } from '../api';
 
-const FALLBACK_SLIDER = [
-    { src: '/484042900_1180013106811887_2538291571904064716_n.jpg', caption: 'Capturing Timeless Moments' },
-    { src: '/571744774_1361610111985518_3207307785903951187_n.jpg', caption: 'Stories Behind Every Frame' },
-    { src: '/long.jpeg', caption: 'Light, Lens & Emotion' },
-];
-
 const PhotoSlider = ({ images }) => {
-    const SLIDER_IMAGES = images || FALLBACK_SLIDER;
+    const SLIDER_IMAGES = images && images.length > 0 ? images : null;
+    const [current, setCurrent] = useState(0);
+    const [direction, setDirection] = useState(1);
+    const timerRef = useRef(null);
+
+    // Don't render slider if no images configured
+    if (!SLIDER_IMAGES) return null;
     const [current, setCurrent] = useState(0);
     const [direction, setDirection] = useState(1);
     const timerRef = useRef(null);
@@ -132,9 +132,9 @@ const Blog = () => {
             if (s?.image1) {
                 setSliderImages([
                     { src: s.image1, caption: 'Capturing Timeless Moments' },
-                    { src: s.image2 || FALLBACK_SLIDER[1].src, caption: 'Stories Behind Every Frame' },
-                    { src: s.image3 || FALLBACK_SLIDER[2].src, caption: 'Light, Lens & Emotion' },
-                ]);
+                    { src: s.image2 || '', caption: 'Stories Behind Every Frame' },
+                    { src: s.image3 || '', caption: 'Light, Lens & Emotion' },
+                ].filter(img => img.src));
             }
         }).catch(() => {});
     }, []);
