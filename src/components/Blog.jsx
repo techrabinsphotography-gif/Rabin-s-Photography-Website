@@ -371,11 +371,12 @@ const Blog = () => {
                             button.textContent = 'Subscribing...';
                             
                             try {
-                                // Vercel Serverless Function - Uses Brevo!
-                                const response = await fetch('/api/newsletter', {
+                                const API = import.meta.env.VITE_API_BASE_URL || 'https://app-server-maaw.onrender.com/api/v1';
+                                // Save to our server (stores in DB for admin view)
+                                const response = await fetch(`${API}/newsletter/subscribe`, {
                                     method: 'POST',
                                     headers: { 'Content-Type': 'application/json' },
-                                    body: JSON.stringify({ email }),
+                                    body: JSON.stringify({ email, source: 'blog' }),
                                 });
                                 
                                 const data = await response.json();
