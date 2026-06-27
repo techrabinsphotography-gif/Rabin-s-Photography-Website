@@ -128,7 +128,7 @@ const Demo = () => {
                 {/* Background Video with animated overlay */}
                 <video
                     className="absolute top-0 left-0 w-full h-full object-cover opacity-40"
-                    src={HERO_VIDEO_URL}
+                    src={heroVideoUrl}
                     autoPlay
                     loop
                     muted
@@ -273,7 +273,7 @@ const Demo = () => {
 
             {/* About Section */}
             <div id="about-section">
-                <AboutSection />
+                <AboutSection bookingImages={{ image1: bookingImg1, image2: bookingImg2, image3: bookingImg3 }} />
             </div>
 
             {/* ==================================================== */}
@@ -1389,8 +1389,11 @@ const DownloadAppSection = () => {
 
 
 
-const AboutSection = () => {
+const AboutSection = ({ bookingImages = {} }) => {
     const [showBookingDownloadPopup, setShowBookingDownloadPopup] = useState(false);
+    const bImg1 = bookingImages.image1 || img4;
+    const bImg2 = bookingImages.image2 || img2;
+    const bImg3 = bookingImages.image3 || img1;
     return (
         <section className="w-full py-24 md:py-32 bg-gradient-to-b from-white via-gray-50 to-white relative overflow-hidden">
             {/* Decorative Elements */}
@@ -1531,7 +1534,7 @@ const AboutSection = () => {
                             className="absolute top-0 right-0 w-[85%] h-[90%] rounded-3xl overflow-hidden shadow-2xl border border-white/20 backdrop-blur-sm"
                         >
                             <div className="absolute inset-0 bg-gradient-to-br from-[#ff4f5a]/20 via-transparent to-transparent z-10" />
-                            <img src={img4} alt="Photography Work" className="w-full h-full object-cover object-top" />
+                            <img src={bImg1} alt="Photography Work" className="w-full h-full object-cover object-top" />
                         </motion.div>
 
                         {/* Floating Card 2 */}
@@ -1542,7 +1545,7 @@ const AboutSection = () => {
                             className="absolute bottom-10 left-2 w-[55%] h-[55%] rounded-2xl overflow-hidden shadow-xl border-2 border-white bg-white p-1"
                         >
                             <div className="w-full h-full rounded-xl overflow-hidden">
-                                <img src={img2} alt="Cinematic Shot" className="w-full h-full object-cover object-top" />
+                                <img src={bImg2} alt="Cinematic Shot" className="w-full h-full object-cover object-top" />
                             </div>
                         </motion.div>
 
@@ -1554,7 +1557,7 @@ const AboutSection = () => {
                             className="absolute -top-20 left-0 w-48 h-48 rounded-2xl overflow-hidden shadow-lg border-3 border-white bg-white p-1"
                         >
                             <div className="w-full h-full rounded-lg overflow-hidden bg-gradient-to-br from-[#ff4f5a] to-orange-600 flex items-center justify-center relative">
-                                <img src={img1} alt="Detail Shot" className="w-full h-full object-cover object-center" />
+                                <img src={bImg3} alt="Detail Shot" className="w-full h-full object-cover object-center" />
                                 <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
                             </div>
                         </motion.div>
@@ -1572,14 +1575,14 @@ const AboutSection = () => {
                     >
                         <div className="relative rounded-2xl overflow-hidden shadow-xl h-[400px] border border-white/20">
                             <div className="absolute inset-0 bg-gradient-to-br from-[#ff4f5a]/20 via-transparent to-transparent z-10" />
-                            <img src={img4} alt="Photography Work" className="w-full h-full object-cover object-top" />
+                            <img src={bImg1} alt="Photography Work" className="w-full h-full object-cover object-top" />
                         </div>
                         <div className="flex gap-4">
                             <div className="relative rounded-2xl overflow-hidden shadow-lg h-56 w-1/2 border border-white/20">
-                                <img src={img2} alt="Professional Camera" className="w-full h-full object-cover object-top" />
+                                <img src={bImg2} alt="Professional Camera" className="w-full h-full object-cover object-top" />
                             </div>
                             <div className="relative rounded-2xl overflow-hidden shadow-lg h-56 w-1/2 border border-white/20">
-                                <img src={img1} alt="Detail Shot" className="w-full h-full object-cover object-center" />
+                                <img src={bImg3} alt="Detail Shot" className="w-full h-full object-cover object-center" />
                             </div>
                         </div>
                     </motion.div>
