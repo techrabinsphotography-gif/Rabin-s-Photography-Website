@@ -90,7 +90,7 @@ const CounterStat = ({ end, suffix = "", color, label }) => {
 };
 
 // ── Team member card with React-controlled image error fallback ───────────────
-const TeamCard = ({ name, imgSrc, initial, position, bio }) => {
+const TeamCard = ({ name, imgSrc, initial, bio }) => {
   const [imgError, setImgError] = useState(false);
   const [hovered, setHovered] = useState(false);
 
@@ -116,10 +116,9 @@ const TeamCard = ({ name, imgSrc, initial, position, bio }) => {
             {initial}
           </div>
         )}
-        {/* Bottom overlay */}
+        {/* Bottom overlay — name only */}
         <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent p-3">
           <p className="text-white font-bold text-sm leading-tight">{name}</p>
-          <p className="text-[#9333ea] text-xs font-semibold capitalize mt-0.5">{position}</p>
         </div>
       </div>
 
@@ -139,16 +138,7 @@ const TeamCard = ({ name, imgSrc, initial, position, bio }) => {
         {/* Right: info */}
         <div className="flex-1 p-4 flex flex-col justify-center gap-2 bg-[#111]">
           <p className="text-white font-bold text-base leading-tight">{name}</p>
-          <p className="text-[#9333ea] text-xs font-bold capitalize">{position}</p>
           {bio && <p className="text-gray-400 text-xs leading-relaxed mt-1">{bio}</p>}
-          <div className="flex gap-3 mt-2">
-            <svg className="w-5 h-5 text-gray-400 hover:text-white cursor-pointer transition-colors" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M7.8 2h8.4C19.4 2 22 4.6 22 7.8v8.4a5.8 5.8 0 0 1-5.8 5.8H7.8C4.6 22 2 19.4 2 16.2V7.8A5.8 5.8 0 0 1 7.8 2m-.2 2A3.6 3.6 0 0 0 4 7.6v8.8C4 18.39 5.61 20 7.6 20h8.8a3.6 3.6 0 0 0 3.6-3.6V7.6C20 5.61 18.39 4 16.4 4H7.6m9.65 1.5a1.25 1.25 0 0 1 1.25 1.25A1.25 1.25 0 0 1 17.25 8 1.25 1.25 0 0 1 16 6.75a1.25 1.25 0 0 1 1.25-1.25M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3z"/>
-            </svg>
-            <svg className="w-5 h-5 text-gray-400 hover:text-white cursor-pointer transition-colors" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"/>
-            </svg>
-          </div>
         </div>
       </div>
     </div>
@@ -523,13 +513,12 @@ const AboutUs = () => {
                     if (!members || members.length === 0) return null;
                     return (
                       <div key={pos} className={posIdx < positions.length - 1 ? 'mb-12' : ''}>
-                        <p className="text-xs font-semibold uppercase tracking-widest text-gray-500 text-center mb-8 border-b border-white/10 pb-3">{pos}</p>
                         <div className="flex flex-wrap justify-center gap-6" style={{ overflow: 'visible' }}>
                           {members.map((member, idx) => {
                             const imgSrc = member.image || member.imageUrl;
                             const initial = member.name ? member.name.charAt(0).toUpperCase() : '?';
                             return (
-                              <TeamCard key={idx} name={member.name} imgSrc={imgSrc} initial={initial} position={pos} bio={member.bio} />
+                              <TeamCard key={idx} name={member.name} imgSrc={imgSrc} initial={initial} bio={member.bio} />
                             );
                           })}
                         </div>
