@@ -101,6 +101,10 @@ const CommercialSlider = ({ videos }) => {
   const [canLeft, setCanLeft] = useState(false);
   const [canRight, setCanRight] = useState(true);
 
+  // Filter to only valid YouTube videos
+  const validVideos = (videos || []).filter(v => getYouTubeId(v.url));
+  if (validVideos.length === 0) return null;
+
   const scroll = (dir) => {
     const el = scrollRef.current;
     if (!el) return;
@@ -122,32 +126,25 @@ const CommercialSlider = ({ videos }) => {
           className="text-center mb-12">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#a855f7]/10 border border-[#a855f7]/30 mb-4">
             <span className="w-1.5 h-1.5 rounded-full bg-[#a855f7] animate-pulse" />
-            {/* <span className="text-[#a855f7] text-xs font-bold tracking-widest uppercase">Our Work</span> */}
+            <span className="text-[#a855f7] text-xs font-bold tracking-widest uppercase">Our Work</span>
           </div>
           <h2 className="text-4xl md:text-5xl font-bold text-white mb-3">Our Commercials</h2>
-          <p className="text-gray-400 text-lg max-w-xl mx-auto">Crafting cinematic commercials that inspire, engage, and leave a lasting impression.</p>
+          <p className="text-gray-400 text-lg max-w-xl mx-auto">A glimpse into the cinematic world we create for our clients.</p>
         </motion.div>
 
         {/* Slider */}
         <div className="relative">
-          {/* Left arrow */}
           {canLeft && (
             <button onClick={() => scroll(-1)}
               className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 z-10 w-10 h-10 rounded-full bg-[#a855f7] text-white flex items-center justify-center shadow-lg hover:bg-[#9333ea] transition-colors">
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" /></svg>
             </button>
           )}
-
-          {/* Scrollable row */}
-          <div
-            ref={scrollRef}
-            onScroll={checkScroll}
+          <div ref={scrollRef} onScroll={checkScroll}
             className="flex gap-5 overflow-x-auto pb-4 scroll-smooth"
-            style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
-          >
-            {videos.map((v, i) => {
+            style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
+            {validVideos.map((v, i) => {
               const ytId = getYouTubeId(v.url);
-              if (!ytId) return null;
               return (
                 <div key={i} className="flex-shrink-0 w-[380px] md:w-[420px] rounded-2xl overflow-hidden border border-white/10 bg-[#0d0d0d] shadow-xl hover:border-[#a855f7]/40 transition-all duration-300">
                   <div className="relative w-full aspect-video">
@@ -156,22 +153,15 @@ const CommercialSlider = ({ videos }) => {
                       title={v.title || `Video ${i + 1}`}
                       className="w-full h-full"
                       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                      allowFullScreen
-                      loading="lazy"
+                      allowFullScreen loading="lazy"
                     />
                   </div>
-                  {v.title && (
-                    <div className="px-4 py-3">
-                      <p className="text-white text-sm font-semibold truncate">{v.title}</p>
-                    </div>
-                  )}
+                  {v.title && <div className="px-4 py-3"><p className="text-white text-sm font-semibold truncate">{v.title}</p></div>}
                 </div>
               );
             })}
           </div>
-
-          {/* Right arrow */}
-          {canRight && (
+          {canRight && validVideos.length > 1 && (
             <button onClick={() => scroll(1)}
               className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 z-10 w-10 h-10 rounded-full bg-[#a855f7] text-white flex items-center justify-center shadow-lg hover:bg-[#9333ea] transition-colors">
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
