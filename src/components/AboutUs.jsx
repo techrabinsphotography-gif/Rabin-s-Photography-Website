@@ -150,13 +150,24 @@ const AboutUs = () => {
 
       {/* Hero Section */}
       <section className="pt-40 pb-20 px-6 relative overflow-hidden min-h-[600px] flex items-center">
-        {/* Background Image */}
+        {/* Background — video if set, otherwise image */}
         <div className="absolute inset-0 -z-10">
-          <img
-            src={heroBg}
-            alt="Hero Background"
-            className="w-full h-full object-cover"
-          />
+          {siteImages.heroVideo ? (
+            <video
+              src={siteImages.heroVideo}
+              autoPlay
+              loop
+              muted
+              playsInline
+              className="w-full h-full object-cover"
+            />
+          ) : (
+            <img
+              src={heroBg}
+              alt="Hero Background"
+              className="w-full h-full object-cover"
+            />
+          )}
           <div className="absolute inset-0 bg-black/65" />
         </div>
 
