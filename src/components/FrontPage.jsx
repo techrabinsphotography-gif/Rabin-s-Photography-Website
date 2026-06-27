@@ -378,7 +378,7 @@ const FrontPage = () => {
                         Privacy Policy and Content Policies.
                     </p>
                     <p className="mt-2">
-                        © 2013-2026 Robin Photo Studio. All rights reserved.
+                        © 2013-{new Date().getFullYear()} Robin Photo Studio. All rights reserved.
                     </p>
                 </div>
 

@@ -252,7 +252,7 @@ const BlogPost = () => {
                         By continuing past this page, you agree to our <Link to="/terms" className="hover:text-white transition-colors">Terms of Service</Link>, <Link to="/privacy" className="hover:text-white transition-colors">Privacy Policy</Link> and Cookie Policy.
                     </p>
                     <p>
-                        © 2013-2026 Rabin's Photography. All rights reserved.
+                        © 2013-{new Date().getFullYear()} Rabin's Photography. All rights reserved.
                     </p>
                 </div>
 

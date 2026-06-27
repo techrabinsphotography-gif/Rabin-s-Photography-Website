@@ -707,7 +707,7 @@ const AboutUs = () => {
             </Link>{" "}
             and Cookie Policy.
           </p>
-          <p>© 2013-2026 Rabin's Photography. All rights reserved.</p>
+          <p>© 2013-{new Date().getFullYear()} Rabin's Photography. All rights reserved.</p>
         </div>
       </footer>
     </div>
