@@ -124,10 +124,6 @@ const CommercialSlider = ({ videos }) => {
         {/* Heading */}
         <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}
           className="text-center mb-12">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#a855f7]/10 border border-[#a855f7]/30 mb-4">
-            <span className="w-1.5 h-1.5 rounded-full bg-[#a855f7] animate-pulse" />
-            <span className="text-[#a855f7] text-xs font-bold tracking-widest uppercase">Our Work</span>
-          </div>
           <h2 className="text-4xl md:text-5xl font-bold text-white mb-3">Our Commercials</h2>
           <p className="text-gray-400 text-lg max-w-xl mx-auto">A glimpse into the cinematic world we create for our clients.</p>
         </motion.div>
