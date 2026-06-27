@@ -89,6 +89,35 @@ const CounterStat = ({ end, suffix = "", color, label }) => {
   );
 };
 
+// ── Team member card with React-controlled image error fallback ───────────────
+const TeamCard = ({ name, imgSrc, initial, position }) => {
+  const [imgError, setImgError] = useState(false);
+  return (
+    <div className="group flex flex-col items-center w-36 md:w-44">
+      <div className="w-32 h-32 md:w-36 md:h-36 rounded-full overflow-hidden shadow-xl border-4 border-gray-100 group-hover:border-[#9333ea] transition-all duration-300 mb-4 bg-gray-100">
+        {imgSrc && !imgError ? (
+          <img
+            src={imgSrc}
+            alt={name}
+            loading="lazy"
+            decoding="async"
+            width="144"
+            height="144"
+            className="w-full h-full object-cover object-top group-hover:scale-110 transition-transform duration-500"
+            onError={() => setImgError(true)}
+          />
+        ) : (
+          <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-purple-100 to-purple-200 text-purple-500 text-2xl font-bold">
+            {initial}
+          </div>
+        )}
+      </div>
+      <h4 className="text-base font-bold text-center group-hover:text-[#9333ea] transition-colors leading-tight">{name}</h4>
+      <p className="text-xs text-gray-400 font-medium mt-1 text-center capitalize">{position}</p>
+    </div>
+  );
+};
+
 const AboutUs = () => {
   const [showPopup, setShowPopup] = useState(false);
   const [showAppStorePopup, setShowAppStorePopup] = useState(false);
@@ -442,27 +471,13 @@ const AboutUs = () => {
                       <div key={pos} className={posIdx < positions.length - 1 ? 'mb-12' : ''}>
                         <p className="text-xs font-semibold uppercase tracking-widest text-gray-400 text-center mb-8 border-b border-gray-100 pb-3">{pos}</p>
                         <div className="flex flex-wrap justify-center gap-6">
-                          {members.map((member, idx) => (
-                            <div key={idx} className="group flex flex-col items-center w-36 md:w-44">
-                              <div className="w-32 h-32 md:w-36 md:h-36 rounded-full overflow-hidden shadow-xl border-4 border-gray-100 group-hover:border-[#9333ea] transition-all duration-300 mb-4 bg-gray-200">
-                                <img
-                                  src={member.image || member.imageUrl}
-                                  alt={member.name}
-                                  loading="lazy"
-                                  decoding="async"
-                                  width="144"
-                                  height="144"
-                                  className="w-full h-full object-cover object-top group-hover:scale-110 transition-transform duration-500"
-                                  onError={(e) => {
-                                    e.target.style.display = 'none';
-                                    e.target.parentElement.innerHTML = `<div class="w-full h-full flex items-center justify-center bg-gradient-to-br from-purple-100 to-purple-200 text-purple-500 text-2xl font-bold">${member.name.charAt(0)}</div>`;
-                                  }}
-                                />
-                              </div>
-                              <h4 className="text-base font-bold text-center group-hover:text-[#9333ea] transition-colors leading-tight">{member.name}</h4>
-                              <p className="text-xs text-gray-400 font-medium mt-1 text-center capitalize">{pos}</p>
-                            </div>
-                          ))}
+                          {members.map((member, idx) => {
+                            const imgSrc = member.image || member.imageUrl;
+                            const initial = member.name ? member.name.charAt(0).toUpperCase() : '?';
+                            return (
+                              <TeamCard key={idx} name={member.name} imgSrc={imgSrc} initial={initial} position={pos} />
+                            );
+                          })}
                         </div>
                       </div>
                     );
