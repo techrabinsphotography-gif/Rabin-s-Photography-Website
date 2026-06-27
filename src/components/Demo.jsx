@@ -96,6 +96,7 @@ const Demo = () => {
     const [showPortfolioPopup, setShowPortfolioPopup] = useState(false);
     const [showGoldPopup, setShowGoldPopup] = useState(false);
     const [showAppStorePopup, setShowAppStorePopup] = useState(false);
+    const [showBookingDownloadPopup, setShowBookingDownloadPopup] = useState(false);
     useEffect(() => {
         const scrollTo = sessionStorage.getItem('scrollTo');
         if (scrollTo === 'footer') {
@@ -1476,13 +1477,29 @@ const AboutSection = () => {
                         </motion.div>
 
                         {/* CTA Button - Modern Style */}
-                        <motion.button
-                            whileHover={{ scale: 1.05 }}
-                            whileTap={{ scale: 0.95 }}
-                            className="mt-8 px-10 py-4 rounded-full bg-gradient-to-r from-[#ff4f5a] to-orange-600 text-white font-bold text-lg hover:shadow-2xl hover:shadow-[#ff4f5a]/40 transition-all duration-300 backdrop-blur-sm"
-                        >
-                            Download App Now
-                        </motion.button>
+                        <div className="relative inline-block">
+                            <motion.button
+                                whileHover={{ scale: 1.05 }}
+                                whileTap={{ scale: 0.95 }}
+                                onMouseEnter={() => setShowBookingDownloadPopup(true)}
+                                onMouseLeave={() => setShowBookingDownloadPopup(false)}
+                                className="mt-8 px-10 py-4 rounded-full bg-gradient-to-r from-[#ff4f5a] to-orange-600 text-white font-bold text-lg hover:shadow-2xl hover:shadow-[#ff4f5a]/40 transition-all duration-300 backdrop-blur-sm"
+                            >
+                                Download App Now
+                            </motion.button>
+                            {showBookingDownloadPopup && (
+                                <motion.div
+                                    initial={{ opacity: 0, y: 10, scale: 0.9 }}
+                                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                                    exit={{ opacity: 0, y: 10, scale: 0.9 }}
+                                    className="absolute bottom-full mb-3 left-1/2 -translate-x-1/2 w-48 bg-white text-black p-4 rounded-xl shadow-2xl text-center z-50 pointer-events-none"
+                                >
+                                    <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-4 h-4 bg-white rotate-45"></div>
+                                    <p className="font-bold text-lg mb-1">Coming Soon!</p>
+                                    <p className="text-xs text-gray-500">We're launching soon. Stay tuned!</p>
+                                </motion.div>
+                            )}
+                        </div>
                     </motion.div>
 
                     {/* Right: Modern Image Section */}
