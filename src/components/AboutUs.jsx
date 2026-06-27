@@ -90,30 +90,67 @@ const CounterStat = ({ end, suffix = "", color, label }) => {
 };
 
 // ── Team member card with React-controlled image error fallback ───────────────
-const TeamCard = ({ name, imgSrc, initial, position }) => {
+const TeamCard = ({ name, imgSrc, initial, position, bio }) => {
   const [imgError, setImgError] = useState(false);
+  const [hovered, setHovered] = useState(false);
+
   return (
-    <div className="group flex flex-col items-center w-36 md:w-44">
-      <div className="w-32 h-32 md:w-36 md:h-36 rounded-full overflow-hidden shadow-xl border-4 border-gray-100 group-hover:border-[#9333ea] transition-all duration-300 mb-4 bg-gray-100">
+    <div
+      className="group relative w-44 md:w-48 cursor-pointer"
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+    >
+      {/* Normal state — square card */}
+      <div className={`relative w-full aspect-square rounded-2xl overflow-hidden bg-[#111] shadow-lg transition-all duration-300 ${hovered ? 'opacity-0 scale-95' : 'opacity-100 scale-100'}`}>
         {imgSrc && !imgError ? (
           <img
             src={imgSrc}
             alt={name}
             loading="lazy"
             decoding="async"
-            width="144"
-            height="144"
-            className="w-full h-full object-cover object-top group-hover:scale-110 transition-transform duration-500"
+            className="w-full h-full object-cover object-top"
             onError={() => setImgError(true)}
           />
         ) : (
-          <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-purple-100 to-purple-200 text-purple-500 text-2xl font-bold">
+          <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-[#1a1a2e] to-[#16213e] text-purple-400 text-4xl font-bold">
             {initial}
           </div>
         )}
+        {/* Bottom overlay */}
+        <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent p-3">
+          <p className="text-white font-bold text-sm leading-tight">{name}</p>
+          <p className="text-[#9333ea] text-xs font-semibold capitalize mt-0.5">{position}</p>
+        </div>
       </div>
-      <h4 className="text-base font-bold text-center group-hover:text-[#9333ea] transition-colors leading-tight">{name}</h4>
-      <p className="text-xs text-gray-400 font-medium mt-1 text-center capitalize">{position}</p>
+
+      {/* Hover state — split card */}
+      <div className={`absolute inset-0 flex rounded-2xl overflow-hidden bg-[#0d0d0d] shadow-2xl border border-white/10 transition-all duration-300 ${hovered ? 'opacity-100 scale-100' : 'opacity-0 scale-95 pointer-events-none'}`}
+        style={{ width: '320px', left: '-40px', zIndex: 50 }}>
+        {/* Left: image */}
+        <div className="w-[45%] flex-shrink-0">
+          {imgSrc && !imgError ? (
+            <img src={imgSrc} alt={name} className="w-full h-full object-cover object-top" />
+          ) : (
+            <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-[#1a1a2e] to-[#16213e] text-purple-400 text-4xl font-bold">
+              {initial}
+            </div>
+          )}
+        </div>
+        {/* Right: info */}
+        <div className="flex-1 p-4 flex flex-col justify-center gap-2 bg-[#111]">
+          <p className="text-white font-bold text-base leading-tight">{name}</p>
+          <p className="text-[#9333ea] text-xs font-bold capitalize">{position}</p>
+          {bio && <p className="text-gray-400 text-xs leading-relaxed mt-1">{bio}</p>}
+          <div className="flex gap-3 mt-2">
+            <svg className="w-5 h-5 text-gray-400 hover:text-white cursor-pointer transition-colors" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M7.8 2h8.4C19.4 2 22 4.6 22 7.8v8.4a5.8 5.8 0 0 1-5.8 5.8H7.8C4.6 22 2 19.4 2 16.2V7.8A5.8 5.8 0 0 1 7.8 2m-.2 2A3.6 3.6 0 0 0 4 7.6v8.8C4 18.39 5.61 20 7.6 20h8.8a3.6 3.6 0 0 0 3.6-3.6V7.6C20 5.61 18.39 4 16.4 4H7.6m9.65 1.5a1.25 1.25 0 0 1 1.25 1.25A1.25 1.25 0 0 1 17.25 8 1.25 1.25 0 0 1 16 6.75a1.25 1.25 0 0 1 1.25-1.25M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3z"/>
+            </svg>
+            <svg className="w-5 h-5 text-gray-400 hover:text-white cursor-pointer transition-colors" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"/>
+            </svg>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };
@@ -442,13 +479,13 @@ const AboutUs = () => {
         </div>
       </section>
 
-      {/* Team Hierarchy Section - White UI */}
-      <section className="py-24 px-6 bg-white text-black border-t border-gray-200">
+      {/* Team Hierarchy Section - Dark UI */}
+      <section className="py-24 px-6 bg-[#0a0a0a] text-white border-t border-white/10">
         <div className="max-w-7xl mx-auto">
             <div className="text-center mb-16">
                 <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
-                    <h2 className="text-4xl md:text-5xl font-bold mb-4">Meet The Team</h2>
-                    <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+                    <h2 className="text-4xl md:text-5xl font-bold mb-4 text-white">Meet The Team</h2>
+                    <p className="text-xl text-gray-400 max-w-2xl mx-auto">
                         The creative minds and skilled professionals behind the magic.
                     </p>
                     <div className="w-24 h-1 bg-[#9333ea] mx-auto mt-6"></div>
@@ -462,20 +499,20 @@ const AboutUs = () => {
               const positions = Object.keys(tierData);
               return (
                 <div key={tier} className={tierIdx < 2 ? 'mb-20' : ''}>
-                  <h3 className="text-3xl font-black mb-2 text-center uppercase tracking-widest text-gray-800">{tier}</h3>
+                  <h3 className="text-3xl font-black mb-2 text-center uppercase tracking-widest text-white">{tier}</h3>
                   <div className="w-16 h-0.5 bg-[#9333ea] mx-auto mb-10"></div>
                   {positions.map((pos, posIdx) => {
                     const members = tierData[pos];
                     if (!members || members.length === 0) return null;
                     return (
                       <div key={pos} className={posIdx < positions.length - 1 ? 'mb-12' : ''}>
-                        <p className="text-xs font-semibold uppercase tracking-widest text-gray-400 text-center mb-8 border-b border-gray-100 pb-3">{pos}</p>
-                        <div className="flex flex-wrap justify-center gap-6">
+                        <p className="text-xs font-semibold uppercase tracking-widest text-gray-500 text-center mb-8 border-b border-white/10 pb-3">{pos}</p>
+                        <div className="flex flex-wrap justify-center gap-6" style={{ overflow: 'visible' }}>
                           {members.map((member, idx) => {
                             const imgSrc = member.image || member.imageUrl;
                             const initial = member.name ? member.name.charAt(0).toUpperCase() : '?';
                             return (
-                              <TeamCard key={idx} name={member.name} imgSrc={imgSrc} initial={initial} position={pos} />
+                              <TeamCard key={idx} name={member.name} imgSrc={imgSrc} initial={initial} position={pos} bio={member.bio} />
                             );
                           })}
                         </div>
