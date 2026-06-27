@@ -149,9 +149,9 @@ const AboutUs = () => {
       </header>
 
       {/* Hero Section */}
-      <section className="pt-40 pb-20 px-6 relative overflow-hidden min-h-[600px] flex items-center">
+      <section className="pt-40 pb-20 px-6 relative min-h-[600px] flex items-center">
         {/* Background — video if set, otherwise image */}
-        <div className="absolute inset-0 -z-10">
+        <div className="absolute inset-0 overflow-hidden">
           {siteImages.heroVideo ? (
             <video
               src={siteImages.heroVideo}
@@ -171,7 +171,7 @@ const AboutUs = () => {
           <div className="absolute inset-0 bg-black/65" />
         </div>
 
-        <div className="max-w-7xl mx-auto text-center w-full">
+        <div className="relative z-10 max-w-7xl mx-auto text-center w-full">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
