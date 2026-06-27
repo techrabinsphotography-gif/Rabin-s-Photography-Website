@@ -28,16 +28,20 @@ function ApplyModal({ job, onClose }) {
   const handleFileChange = (e) => {
     const file = e.target.files[0];
     if (!file) return;
-    const allowed = ['application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', 'image/jpeg'];
-    const allowedExt = ['.doc', '.docx', '.jpg', '.jpeg'];
+    const allowed = [
+      'application/pdf',
+      'application/msword',
+      'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+    ];
+    const allowedExt = ['.pdf', '.doc', '.docx'];
     const ext = '.' + file.name.split('.').pop().toLowerCase();
     if (!allowed.includes(file.type) && !allowedExt.includes(ext)) {
-      setFieldErrors(p => ({ ...p, resume: 'Only .doc, .docx, .jpg, .jpeg files are allowed.' }));
+      setFieldErrors(p => ({ ...p, resume: 'Only PDF, DOC or DOCX files are allowed.' }));
       setResumeFile(null);
       return;
     }
-    if (file.size > 2 * 1024 * 1024) {
-      setFieldErrors(p => ({ ...p, resume: 'File size must be under 2MB.' }));
+    if (file.size > 5 * 1024 * 1024) {
+      setFieldErrors(p => ({ ...p, resume: 'File size must be under 5MB.' }));
       setResumeFile(null);
       return;
     }
@@ -62,8 +66,8 @@ function ApplyModal({ job, onClose }) {
     setError('');
     setLoading(true);
     try {
-      const resumeUrl = await uploadResume(resumeFile);
-      await submitApplication({ careerId: job._id, ...form, resumeUrl });
+      const { url: resumeUrl, publicId: resumePublicId } = await uploadResume(resumeFile);
+      await submitApplication({ careerId: job._id, ...form, resumeUrl, resumePublicId });
       setStep('success');
     } catch (err) {
       setError(err.message || 'Something went wrong. Please try again.');
@@ -138,11 +142,11 @@ function ApplyModal({ job, onClose }) {
                   <Upload className={`w-5 h-5 flex-shrink-0 ${resumeFile ? 'text-[#ff4f5a]' : 'text-gray-400'}`} />
                   <div className="flex flex-col min-w-0">
                     <span className={`text-sm truncate ${resumeFile ? 'text-[#ff4f5a] font-semibold' : 'text-gray-400'}`}>
-                      {resumeFile ? resumeFile.name : 'Upload DOC, DOCX, JPG or JPEG'}
+                      {resumeFile ? resumeFile.name : 'Upload PDF, DOC or DOCX'}
                     </span>
-                    <span className="text-xs text-gray-400 mt-0.5">Max file size: 2MB</span>
+                    <span className="text-xs text-gray-400 mt-0.5">Max file size: 5MB</span>
                   </div>
-                  <input type="file" accept=".doc,.docx,.jpg,.jpeg" className="hidden" onChange={handleFileChange} />
+                  <input type="file" accept=".pdf,.doc,.docx" className="hidden" onChange={handleFileChange} />
                 </label>
                 {fieldErrors.resume && <p className="text-red-500 text-xs mt-1 flex items-center gap-1">⚠ {fieldErrors.resume}</p>}
               </div>

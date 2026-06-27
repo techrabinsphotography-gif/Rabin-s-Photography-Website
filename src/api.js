@@ -35,7 +35,8 @@ export const uploadResume = async (file) => {
     const res = await fetch(`${baseURL}/upload/resume`, { method: 'POST', body: fd });
     const data = await res.json();
     if (!data.success) throw new Error(data.message || 'Upload failed');
-    return data.url;
+    // Return both url and publicId so submitApplication can store the S3 key
+    return { url: data.url, publicId: data.publicId };
 };
 
 export const fetchBlogPosts = async () => {
