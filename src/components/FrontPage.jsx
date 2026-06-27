@@ -17,7 +17,7 @@ const FrontPage = () => {
                 {/* Background Video */}
                 <video
                     className="absolute top-0 left-0 w-full h-full object-cover opacity-70"
-                    src="https://res.cloudinary.com/dfcf6ug0s/video/upload/v1779124517/Rabin_s_Photography_Web_Video_xnz9uq.mp4"
+                    src="https://rabins-photography-510340537293-ap-south-1-an.s3.ap-south-1.amazonaws.com/Rabin_s_Photography_Web_Video_xnz9uq.mp4"
                     autoPlay
                     loop
                     muted
