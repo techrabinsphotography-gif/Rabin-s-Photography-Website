@@ -6,9 +6,11 @@ import img1 from '../assets/recent/cameraa.png'
 import img2 from '/571744774_1361610111985518_3207307785903951187_n.jpg'
 
 import img4 from '/484042900_1180013106811887_2538291571904064716_n.jpg'
-const HERO_VIDEO_URL = "https://rabins-photography-510340537293-ap-south-1-an.s3.ap-south-1.amazonaws.com/Rabin_s_Photography_Web_Video_xnz9uq.mp4"
 import finalLogo from '../assets/recent/final logo.png'
 import rabinsQR from "../assets/recent/Rabin's Photography.png"
+import { fetchSiteSettings } from '../api'
+
+const FALLBACK_VIDEO_URL = "https://rabins-photography-510340537293-ap-south-1-an.s3.ap-south-1.amazonaws.com/Rabin_s_Photography_Web_Video_xnz9uq.mp4"
 
 
 
@@ -96,6 +98,12 @@ const Demo = () => {
     const [showPortfolioPopup, setShowPortfolioPopup] = useState(false);
     const [showGoldPopup, setShowGoldPopup] = useState(false);
     const [showAppStorePopup, setShowAppStorePopup] = useState(false);
+    const [siteSettings, setSiteSettings] = useState(null);
+
+    useEffect(() => {
+        fetchSiteSettings().then(setSiteSettings).catch(() => {});
+    }, []);
+
     useEffect(() => {
         const scrollTo = sessionStorage.getItem('scrollTo');
         if (scrollTo === 'footer') {
@@ -105,6 +113,12 @@ const Demo = () => {
             }, 300);
         }
     }, []);
+
+    const heroVideoUrl = siteSettings?.heroVideoUrl || FALLBACK_VIDEO_URL;
+    const bookingImages = siteSettings?.bookingSectionImages || {};
+    const bookingImg1 = bookingImages.image1 || img4;
+    const bookingImg2 = bookingImages.image2 || img2;
+    const bookingImg3 = bookingImages.image3 || img1;
 
     return (
         <>

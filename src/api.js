@@ -55,3 +55,9 @@ export const fetchCookiePolicy = async () => {
     const data = await res.json();
     return data.data;
 };
+
+export const fetchSiteSettings = async () => {
+    const res = await fetch(`${baseURL}/admin/settings`, { cache: 'no-store' });
+    const data = await res.json();
+    return data.data;
+};
