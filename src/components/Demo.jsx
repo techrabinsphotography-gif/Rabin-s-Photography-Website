@@ -96,7 +96,6 @@ const Demo = () => {
     const [showPortfolioPopup, setShowPortfolioPopup] = useState(false);
     const [showGoldPopup, setShowGoldPopup] = useState(false);
     const [showAppStorePopup, setShowAppStorePopup] = useState(false);
-    const [showBookingDownloadPopup, setShowBookingDownloadPopup] = useState(false);
     useEffect(() => {
         const scrollTo = sessionStorage.getItem('scrollTo');
         if (scrollTo === 'footer') {
@@ -1377,6 +1376,7 @@ const DownloadAppSection = () => {
 
 
 const AboutSection = () => {
+    const [showBookingDownloadPopup, setShowBookingDownloadPopup] = useState(false);
     return (
         <section className="w-full py-24 md:py-32 bg-gradient-to-b from-white via-gray-50 to-white relative overflow-hidden">
             {/* Decorative Elements */}
