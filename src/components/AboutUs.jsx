@@ -90,16 +90,16 @@ const CounterStat = ({ end, suffix = "", color, label }) => {
 };
 
 // ── Team member card ──────────────────────────────────────────────────────────
-const TeamCard = ({ name, imgSrc, initial, bio }) => {
+const TeamCard = ({ name, imgSrc, initial, bio, position }) => {
   const [imgError, setImgError] = useState(false);
 
   return (
-    <div className="group relative flex rounded-2xl overflow-hidden bg-[#111] shadow-lg border border-white/5
-      w-44 md:w-48 h-52 md:h-56
-      hover:w-80 md:hover:w-96 hover:border-[#9333ea]/40
+    <div className="group relative flex rounded-2xl overflow-hidden bg-[#111] shadow-lg border border-[#a855f7]/20
+      w-44 md:w-48 h-56 md:h-60
+      hover:w-80 md:hover:w-96 hover:border-[#a855f7]/60 hover:shadow-[0_0_20px_rgba(168,85,247,0.25)]
       transition-all duration-300 ease-in-out cursor-pointer flex-shrink-0"
     >
-      {/* Image — always visible, shrinks on hover */}
+      {/* Image — full width normally, shrinks on hover */}
       <div className="flex-shrink-0 w-full group-hover:w-[45%] transition-all duration-300 relative">
         {imgSrc && !imgError ? (
           <img
@@ -111,25 +111,27 @@ const TeamCard = ({ name, imgSrc, initial, bio }) => {
             onError={() => setImgError(true)}
           />
         ) : (
-          <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-[#1a1a2e] to-[#16213e] text-purple-400 text-4xl font-bold">
+          <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-[#1a1a2e] to-[#16213e] text-[#a855f7] text-4xl font-bold">
             {initial}
           </div>
         )}
-        {/* Name overlay — visible when not hovered */}
-        <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent p-3
+        {/* Name + role overlay — fades out on hover */}
+        <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/95 via-black/60 to-transparent p-3
           opacity-100 group-hover:opacity-0 transition-opacity duration-200">
           <p className="text-white font-bold text-sm leading-tight truncate">{name}</p>
+          {position && <p className="text-[#a855f7] text-xs font-semibold capitalize mt-0.5">{position}</p>}
         </div>
       </div>
 
-      {/* Info panel — hidden until hover */}
+      {/* Info panel — slides in on hover */}
       <div className="flex flex-col justify-center px-4 py-4 bg-[#0d0d0d]
         w-0 overflow-hidden group-hover:w-[55%]
         transition-all duration-300 ease-in-out">
         <p className="text-white font-bold text-sm leading-tight mb-1 whitespace-nowrap">{name}</p>
+        {position && <p className="text-[#a855f7] text-xs font-semibold capitalize mb-2">{position}</p>}
         {bio
           ? <p className="text-gray-400 text-xs leading-relaxed line-clamp-4">{bio}</p>
-          : <p className="text-gray-600 text-xs italic">No bio yet</p>
+          : <p className="text-gray-600 text-xs italic">Rabin's Photography Team</p>
         }
       </div>
     </div>
@@ -141,6 +143,7 @@ const AboutUs = () => {
   const [showAppStorePopup, setShowAppStorePopup] = useState(false);
   const [teamData, setTeamData] = useState({ backbone: {}, crew: {}, core: {} });
   const [teamLoading, setTeamLoading] = useState(true);
+  const [activeTier, setActiveTier] = useState('core');
   const [siteImages, setSiteImages] = useState({ heroBg: '', portrait: '', founder: '', heroVideo: '' });
 
   useEffect(() => {
@@ -475,51 +478,56 @@ const AboutUs = () => {
                 </motion.div>
             </div>
 
-            {/* Tiers rendered in fixed order: Core → Backbone → Crew */}
+            {/* Tier Tab Buttons */}
+            <div className="flex justify-center mb-12">
+              <div className="flex bg-[#111] border border-[#a855f7]/30 p-1 rounded-2xl gap-1">
+                {['core', 'backbone', 'crew'].map((tier) => (
+                  <button
+                    key={tier}
+                    onClick={() => setActiveTier(tier)}
+                    className={`px-6 py-2.5 rounded-xl text-sm font-bold uppercase tracking-widest transition-all duration-300 ${
+                      activeTier === tier
+                        ? 'bg-[#a855f7] text-white shadow-[0_0_20px_rgba(168,85,247,0.5)]'
+                        : 'text-gray-400 hover:text-white hover:bg-white/5'
+                    }`}
+                  >
+                    {tier}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {/* Tier Members */}
             {teamLoading ? (
-              // Skeleton loader
-              <div className="space-y-16">
-                {[1,2,3].map(t => (
-                  <div key={t}>
-                    <div className="h-6 w-24 bg-white/10 rounded mx-auto mb-4 animate-pulse" />
-                    <div className="flex flex-wrap justify-center gap-6">
-                      {Array.from({length: 6}).map((_, i) => (
-                        <div key={i} className="w-44 h-52 rounded-2xl bg-white/5 animate-pulse" />
-                      ))}
-                    </div>
-                  </div>
+              <div className="flex flex-wrap justify-center gap-4 py-2">
+                {Array.from({length: 8}).map((_, i) => (
+                  <div key={i} className="w-44 h-52 rounded-2xl bg-white/5 animate-pulse" />
                 ))}
               </div>
             ) : (
-            ['core', 'backbone', 'crew'].map((tier, tierIdx) => {
-              const tierData = teamData[tier];
-              if (!tierData || Object.keys(tierData).length === 0) return null;
-              const positions = Object.keys(tierData);
-              return (
-                <div key={tier} className={tierIdx < 2 ? 'mb-20' : ''}>
-                  <h3 className="text-3xl font-black mb-2 text-center uppercase tracking-widest text-white">{tier}</h3>
-                  <div className="w-16 h-0.5 bg-[#9333ea] mx-auto mb-10"></div>
-                  {positions.map((pos, posIdx) => {
-                    const members = tierData[pos];
-                    if (!members || members.length === 0) return null;
+              <motion.div
+                key={activeTier}
+                initial={{ opacity: 0, y: 16 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.4 }}
+                className="flex flex-wrap justify-center gap-4 py-2"
+              >
+                {(() => {
+                  const tierData = teamData[activeTier] || {};
+                  const allMembers = Object.values(tierData).flat();
+                  if (allMembers.length === 0) return (
+                    <p className="text-gray-500 py-12">No members in this tier yet.</p>
+                  );
+                  return allMembers.map((member, idx) => {
+                    const imgSrc = member.image || member.imageUrl;
+                    const initial = member.name ? member.name.charAt(0).toUpperCase() : '?';
                     return (
-                      <div key={pos} className={posIdx < positions.length - 1 ? 'mb-12' : ''}>
-                        <div className="flex flex-wrap justify-center gap-4 overflow-visible py-2">
-                          {members.map((member, idx) => {
-                            const imgSrc = member.image || member.imageUrl;
-                            const initial = member.name ? member.name.charAt(0).toUpperCase() : '?';
-                            return (
-                              <TeamCard key={idx} name={member.name} imgSrc={imgSrc} initial={initial} bio={member.bio} />
-                            );
-                          })}
-                        </div>
-                      </div>
+                      <TeamCard key={idx} name={member.name} imgSrc={imgSrc} initial={initial} bio={member.bio} position={member.position} />
                     );
-                  })}
-                </div>
-              );
-            }))
-            }
+                  });
+                })()}
+              </motion.div>
+            )}
 
         </div>
       </section>
