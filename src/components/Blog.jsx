@@ -11,28 +11,25 @@ const PhotoSlider = ({ images }) => {
     const [direction, setDirection] = useState(1);
     const timerRef = useRef(null);
 
-    // Don't render slider if no images configured
-    if (!SLIDER_IMAGES) return null;
-    const [current, setCurrent] = useState(0);
-    const [direction, setDirection] = useState(1);
-    const timerRef = useRef(null);
-
     const goTo = (index, dir) => {
         setDirection(dir);
         setCurrent(index);
     };
 
     const next = () => {
+        if (!SLIDER_IMAGES) return;
         const nextIndex = (current + 1) % SLIDER_IMAGES.length;
         goTo(nextIndex, 1);
     };
 
     const prev = () => {
+        if (!SLIDER_IMAGES) return;
         const prevIndex = (current - 1 + SLIDER_IMAGES.length) % SLIDER_IMAGES.length;
         goTo(prevIndex, -1);
     };
 
     useEffect(() => {
+        if (!SLIDER_IMAGES) return;
         timerRef.current = setInterval(() => {
             setCurrent(c => {
                 setDirection(1);
@@ -40,7 +37,9 @@ const PhotoSlider = ({ images }) => {
             });
         }, 4500);
         return () => clearInterval(timerRef.current);
-    }, []);
+    }, [SLIDER_IMAGES]);
+
+    if (!SLIDER_IMAGES) return null;
 
     const variants = {
         enter: (dir) => ({ x: dir > 0 ? '100%' : '-100%', opacity: 0 }),
