@@ -1,8 +1,6 @@
-'use strict';
-const https = require('https');
+import https from 'https';
 
-module.exports = async function handler(req, res) {
-  // Only allow POST
+export default async function handler(req, res) {
   if (req.method !== 'POST') {
     return res.status(405).json({ success: false, message: 'Method not allowed' });
   }
@@ -15,7 +13,7 @@ module.exports = async function handler(req, res) {
 
   const BREVO_API_KEY = process.env.BREVO_API_KEY;
   if (!BREVO_API_KEY) {
-    console.error('BREVO_API_KEY is not set');
+    console.error('BREVO_API_KEY env variable is missing');
     return res.status(500).json({ success: false, message: 'Server configuration error' });
   }
 
@@ -23,8 +21,8 @@ module.exports = async function handler(req, res) {
     <!DOCTYPE html><html><head><meta charset="UTF-8"/></head><body>
     <div style="font-family:Arial,sans-serif;max-width:600px;margin:0 auto;padding:20px;background:#f9fafb;border-radius:10px;">
       <div style="background:linear-gradient(135deg,#ff4f5a,#ff8c42);padding:30px;border-radius:10px 10px 0 0;text-align:center;">
-        <h1 style="color:#fff;margin:0;font-size:24px;">New Contact Form Submission</h1>
-        <p style="color:rgba(255,255,255,.85);margin:8px 0 0;font-size:14px;">From Rabin's Photography Website</p>
+        <h1 style="color:#fff;margin:0;font-size:24px;">New Contact Form Message</h1>
+        <p style="color:rgba(255,255,255,.85);margin:8px 0 0;font-size:14px;">rabinsphotography.com</p>
       </div>
       <div style="background:#fff;padding:30px;border-radius:0 0 10px 10px;">
         <table style="width:100%;border-collapse:collapse;">
@@ -62,44 +60,39 @@ module.exports = async function handler(req, res) {
     sender: { name: "Rabin's Photography Website", email: 'noreply@rabinsphotography.com' },
     to: [{ email: 'rabinsphotography@gmail.com', name: "Rabin's Photography" }],
     replyTo: { email, name },
-    subject: `New Contact Form Message from ${name}`,
+    subject: `New Contact Message from ${name}`,
     htmlContent,
   });
 
-  try {
-    await new Promise((resolve, reject) => {
-      const req2 = https.request(
-        {
-          hostname: 'api.brevo.com',
-          path: '/v3/smtp/email',
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'api-key': BREVO_API_KEY,
-            'Content-Length': Buffer.byteLength(payload),
-          },
+  await new Promise((resolve, reject) => {
+    const apiReq = https.request(
+      {
+        hostname: 'api.brevo.com',
+        path: '/v3/smtp/email',
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'api-key': BREVO_API_KEY,
+          'Content-Length': Buffer.byteLength(payload),
         },
-        (apiRes) => {
-          let data = '';
-          apiRes.on('data', (chunk) => (data += chunk));
-          apiRes.on('end', () => {
-            if (apiRes.statusCode >= 200 && apiRes.statusCode < 300) {
-              resolve(data);
-            } else {
-              reject(new Error(`Brevo error ${apiRes.statusCode}: ${data}`));
-            }
-          });
-        }
-      );
-      req2.on('error', reject);
-      req2.setTimeout(15000, () => req2.destroy(new Error('Brevo API timeout')));
-      req2.write(payload);
-      req2.end();
-    });
+      },
+      (apiRes) => {
+        let data = '';
+        apiRes.on('data', (chunk) => (data += chunk));
+        apiRes.on('end', () => {
+          if (apiRes.statusCode >= 200 && apiRes.statusCode < 300) {
+            resolve(data);
+          } else {
+            reject(new Error(`Brevo error ${apiRes.statusCode}: ${data}`));
+          }
+        });
+      }
+    );
+    apiReq.on('error', reject);
+    apiReq.setTimeout(15000, () => apiReq.destroy(new Error('Brevo API timeout')));
+    apiReq.write(payload);
+    apiReq.end();
+  });
 
-    return res.status(200).json({ success: true, message: 'Message sent successfully!' });
-  } catch (error) {
-    console.error('Brevo send error:', error.message);
-    return res.status(500).json({ success: false, message: 'Failed to send message. Please try again later.' });
-  }
-};
+  return res.status(200).json({ success: true, message: 'Message sent successfully!' });
+}
