@@ -444,14 +444,19 @@ const AboutUs = () => {
                         <div className="flex flex-wrap justify-center gap-6">
                           {members.map((member, idx) => (
                             <div key={idx} className="group flex flex-col items-center w-36 md:w-44">
-                              <div className="w-32 h-32 md:w-36 md:h-36 rounded-full overflow-hidden shadow-xl border-4 border-gray-100 group-hover:border-[#9333ea] transition-all duration-300 mb-4 bg-gray-100">
+                              <div className="w-32 h-32 md:w-36 md:h-36 rounded-full overflow-hidden shadow-xl border-4 border-gray-100 group-hover:border-[#9333ea] transition-all duration-300 mb-4 bg-gray-200">
                                 <img
                                   src={member.image || member.imageUrl}
                                   alt={member.name}
                                   loading="lazy"
                                   decoding="async"
-                                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                                  onError={(e) => { e.target.style.display = 'none'; }}
+                                  width="144"
+                                  height="144"
+                                  className="w-full h-full object-cover object-top group-hover:scale-110 transition-transform duration-500"
+                                  onError={(e) => {
+                                    e.target.style.display = 'none';
+                                    e.target.parentElement.innerHTML = `<div class="w-full h-full flex items-center justify-center bg-gradient-to-br from-purple-100 to-purple-200 text-purple-500 text-2xl font-bold">${member.name.charAt(0)}</div>`;
+                                  }}
                                 />
                               </div>
                               <h4 className="text-base font-bold text-center group-hover:text-[#9333ea] transition-colors leading-tight">{member.name}</h4>

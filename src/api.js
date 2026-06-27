@@ -1,7 +1,9 @@
 const baseURL = import.meta.env.VITE_API_BASE_URL || 'https://app-server-maaw.onrender.com/api/v1';
 
 export const fetchTeam = async () => {
-    const res = await fetch(`${baseURL}/web/team?t=${Date.now()}`, { cache: 'no-store' });
+    const res = await fetch(`${baseURL}/web/team`, {
+        headers: { 'Cache-Control': 'max-age=300' } // cache 5 min
+    });
     const data = await res.json();
     return data.data;
 };
