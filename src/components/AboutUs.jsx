@@ -93,7 +93,7 @@ const AboutUs = () => {
   const [showPopup, setShowPopup] = useState(false);
   const [showAppStorePopup, setShowAppStorePopup] = useState(false);
   const [teamData, setTeamData] = useState({ backbone: {}, crew: {}, core: {} });
-  const [siteImages, setSiteImages] = useState({ heroBg: '', portrait: '', founder: '' });
+  const [siteImages, setSiteImages] = useState({ heroBg: '', portrait: '', founder: '', heroVideo: '' });
 
   useEffect(() => {
     fetchTeam()
