@@ -89,6 +89,100 @@ const CounterStat = ({ end, suffix = "", color, label }) => {
   );
 };
 
+// ── YouTube embed helper ──────────────────────────────────────────────────────
+const getYouTubeId = (url) => {
+  const match = url?.match(/(?:v=|youtu\.be\/|embed\/)([^&\s?/]+)/);
+  return match ? match[1] : null;
+};
+
+// ── Commercial Video Slider ───────────────────────────────────────────────────
+const CommercialSlider = ({ videos }) => {
+  const scrollRef = useRef(null);
+  const [canLeft, setCanLeft] = useState(false);
+  const [canRight, setCanRight] = useState(true);
+
+  const scroll = (dir) => {
+    const el = scrollRef.current;
+    if (!el) return;
+    el.scrollBy({ left: dir * 420, behavior: 'smooth' });
+  };
+
+  const checkScroll = () => {
+    const el = scrollRef.current;
+    if (!el) return;
+    setCanLeft(el.scrollLeft > 10);
+    setCanRight(el.scrollLeft + el.clientWidth < el.scrollWidth - 10);
+  };
+
+  return (
+    <section className="py-20 px-6 bg-[#050505] border-t border-white/5">
+      <div className="max-w-7xl mx-auto">
+        {/* Heading */}
+        <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}
+          className="text-center mb-12">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#a855f7]/10 border border-[#a855f7]/30 mb-4">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#a855f7] animate-pulse" />
+            <span className="text-[#a855f7] text-xs font-bold tracking-widest uppercase">Our Work</span>
+          </div>
+          <h2 className="text-4xl md:text-5xl font-bold text-white mb-3">Our Commercials</h2>
+          <p className="text-gray-400 text-lg max-w-xl mx-auto">A glimpse into the cinematic world we create for our clients.</p>
+        </motion.div>
+
+        {/* Slider */}
+        <div className="relative">
+          {/* Left arrow */}
+          {canLeft && (
+            <button onClick={() => scroll(-1)}
+              className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 z-10 w-10 h-10 rounded-full bg-[#a855f7] text-white flex items-center justify-center shadow-lg hover:bg-[#9333ea] transition-colors">
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" /></svg>
+            </button>
+          )}
+
+          {/* Scrollable row */}
+          <div
+            ref={scrollRef}
+            onScroll={checkScroll}
+            className="flex gap-5 overflow-x-auto pb-4 scroll-smooth"
+            style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+          >
+            {videos.map((v, i) => {
+              const ytId = getYouTubeId(v.url);
+              if (!ytId) return null;
+              return (
+                <div key={i} className="flex-shrink-0 w-[380px] md:w-[420px] rounded-2xl overflow-hidden border border-white/10 bg-[#0d0d0d] shadow-xl hover:border-[#a855f7]/40 transition-all duration-300">
+                  <div className="relative w-full aspect-video">
+                    <iframe
+                      src={`https://www.youtube.com/embed/${ytId}?rel=0&modestbranding=1`}
+                      title={v.title || `Video ${i + 1}`}
+                      className="w-full h-full"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowFullScreen
+                      loading="lazy"
+                    />
+                  </div>
+                  {v.title && (
+                    <div className="px-4 py-3">
+                      <p className="text-white text-sm font-semibold truncate">{v.title}</p>
+                    </div>
+                  )}
+                </div>
+              );
+            })}
+          </div>
+
+          {/* Right arrow */}
+          {canRight && (
+            <button onClick={() => scroll(1)}
+              className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 z-10 w-10 h-10 rounded-full bg-[#a855f7] text-white flex items-center justify-center shadow-lg hover:bg-[#9333ea] transition-colors">
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
+            </button>
+          )}
+        </div>
+      </div>
+    </section>
+  );
+};
+
 // ── Team member card ──────────────────────────────────────────────────────────
 const TeamCard = ({ name, imgSrc, initial, bio, position }) => {
   const [imgError, setImgError] = useState(false);
@@ -156,7 +250,7 @@ const AboutUs = () => {
 
     fetchSiteSettings()
       .then(d => {
-        if (d?.aboutImages) setSiteImages(d.aboutImages);
+        if (d?.aboutImages) setSiteImages({ ...d.aboutImages, commercialVideos: d.commercialVideos || [] });
       })
       .catch(() => {});
   }, []);
@@ -531,6 +625,11 @@ const AboutUs = () => {
 
         </div>
       </section>
+
+      {/* Commercial Videos Slider */}
+      {siteImages.commercialVideos && siteImages.commercialVideos.length > 0 && (
+        <CommercialSlider videos={siteImages.commercialVideos} />
+      )}
 
       {/* CTA Section */}
       <section className="py-20 px-6 bg-gradient-to-b from-black to-zinc-900 border-t border-white/10 text-center relative">
