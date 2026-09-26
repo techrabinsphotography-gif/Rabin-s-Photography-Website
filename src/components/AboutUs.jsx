@@ -174,45 +174,68 @@ const TeamCard = ({ name, imgSrc, initial, bio, position }) => {
   const [imgError, setImgError] = useState(false);
 
   return (
-    <div className="group relative flex rounded-2xl overflow-hidden bg-[#111] shadow-lg border border-[#a855f7]/20
-      w-44 md:w-48 h-56 md:h-60
-      hover:w-80 md:hover:w-96 hover:border-[#a855f7]/60 hover:shadow-[0_0_20px_rgba(168,85,247,0.25)]
-      transition-all duration-300 ease-in-out cursor-pointer flex-shrink-0"
+    /* Outer wrapper: fixed size, never changes — holds the layout slot */
+    <div
+      className="relative flex-shrink-0"
+      style={{ width: '11rem', height: '15rem' }} /* md: 12rem × 15rem */
     >
-      {/* Image — full width normally, shrinks on hover */}
-      <div className="flex-shrink-0 w-full group-hover:w-[45%] transition-all duration-300 relative">
-        {imgSrc && !imgError ? (
-          <img
-            src={imgSrc}
-            alt={name}
-            loading="lazy"
-            decoding="async"
-            className="w-full h-full object-cover object-top"
-            onError={() => setImgError(true)}
-          />
-        ) : (
-          <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-[#1a1a2e] to-[#16213e] text-[#a855f7] text-4xl font-bold">
-            {initial}
+      {/* md override via inline style isn't practical; use a wrapping class trick */}
+      {/* Inner card: absolutely positioned so it can expand without pushing siblings */}
+      <div
+        className="group absolute top-0 left-0 flex rounded-2xl overflow-hidden bg-[#111] shadow-lg border border-[#a855f7]/20
+          hover:border-[#a855f7]/60 hover:shadow-[0_0_20px_rgba(168,85,247,0.25)]
+          hover:z-10
+          transition-all duration-300 ease-in-out cursor-pointer"
+        style={{
+          width: '11rem',
+          height: '15rem',
+        }}
+        onMouseEnter={e => {
+          e.currentTarget.style.width = '23rem';
+        }}
+        onMouseLeave={e => {
+          e.currentTarget.style.width = '11rem';
+        }}
+      >
+        {/* Image — full width normally, shrinks on hover */}
+        <div className="flex-shrink-0 transition-all duration-300 relative"
+          style={{ width: '11rem', minWidth: '11rem', height: '100%' }}
+        >
+          <div className="absolute inset-0 group-hover:right-[unset] group-hover:w-[11rem] transition-all duration-300 h-full">
+            {imgSrc && !imgError ? (
+              <img
+                src={imgSrc}
+                alt={name}
+                loading="lazy"
+                decoding="async"
+                className="w-full h-full object-cover object-top"
+                onError={() => setImgError(true)}
+              />
+            ) : (
+              <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-[#1a1a2e] to-[#16213e] text-[#a855f7] text-4xl font-bold">
+                {initial}
+              </div>
+            )}
           </div>
-        )}
-        {/* Name + role overlay — fades out on hover */}
-        <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/95 via-black/60 to-transparent p-3
-          opacity-100 group-hover:opacity-0 transition-opacity duration-200">
-          <p className="text-white font-bold text-sm leading-tight truncate">{name}</p>
-          {position && <p className="text-[#a855f7] text-xs font-semibold capitalize mt-0.5">{position}</p>}
+          {/* Name + role overlay — fades out on hover */}
+          <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/95 via-black/60 to-transparent p-3
+            opacity-100 group-hover:opacity-0 transition-opacity duration-200 z-10">
+            <p className="text-white font-bold text-sm leading-tight truncate">{name}</p>
+            {position && <p className="text-[#a855f7] text-xs font-semibold capitalize mt-0.5">{position}</p>}
+          </div>
         </div>
-      </div>
 
-      {/* Info panel — slides in on hover */}
-      <div className="flex flex-col justify-center px-4 py-4 bg-[#0d0d0d]
-        w-0 overflow-hidden group-hover:w-[55%]
-        transition-all duration-300 ease-in-out">
-        <p className="text-white font-bold text-sm leading-tight mb-1 whitespace-nowrap">{name}</p>
-        {position && <p className="text-[#a855f7] text-xs font-semibold capitalize mb-2">{position}</p>}
-        {bio
-          ? <p className="text-gray-400 text-xs leading-relaxed line-clamp-4">{bio}</p>
-          : <p className="text-gray-600 text-xs italic">Rabin's Photography Team</p>
-        }
+        {/* Info panel — slides in on hover */}
+        <div className="flex flex-col justify-center px-4 py-4 bg-[#0d0d0d]
+          w-0 overflow-hidden group-hover:w-[12rem]
+          transition-all duration-300 ease-in-out flex-shrink-0 min-w-0">
+          <p className="text-white font-bold text-sm leading-tight mb-1 break-words">{name}</p>
+          {position && <p className="text-[#a855f7] text-xs font-semibold capitalize mb-2 break-words">{position}</p>}
+          {bio
+            ? <p className="text-gray-400 text-xs leading-relaxed line-clamp-5 break-words">{bio}</p>
+            : <p className="text-gray-600 text-xs italic">Rabin's Photography Team</p>
+          }
+        </div>
       </div>
     </div>
   );
@@ -587,7 +610,7 @@ const AboutUs = () => {
                 initial={{ opacity: 0, y: 16 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.4 }}
-                className="flex flex-wrap justify-center gap-4 py-2"
+                className="flex flex-wrap justify-center items-start gap-4 py-2"
               >
                 {(() => {
                   const tierData = teamData[activeTier] || {};
