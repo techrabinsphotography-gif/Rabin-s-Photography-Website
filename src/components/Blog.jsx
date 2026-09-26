@@ -124,6 +124,7 @@ const Blog = () => {
     const [featuredPost, setFeaturedPost] = useState(null);
     const [loading, setLoading] = useState(true);
     const [sliderImages, setSliderImages] = useState(null);
+    const [visibleCount, setVisibleCount] = useState(9);
 
     useEffect(() => {
         fetchSiteSettings().then(d => {
@@ -157,6 +158,12 @@ const Blog = () => {
     const filteredPosts = selectedCategory === 'All' 
         ? blogPosts 
         : blogPosts.filter(post => post.category === selectedCategory);
+
+    // Reset visible count whenever the category filter changes
+    useEffect(() => { setVisibleCount(9); }, [selectedCategory]);
+
+    const visiblePosts = filteredPosts.slice(0, visibleCount);
+    const hasMore = visibleCount < filteredPosts.length;
 
     return (
         <div className="min-h-screen bg-white">
@@ -219,14 +226,14 @@ const Blog = () => {
             {loading ? (
                 <div className="py-20 flex justify-center"><div className="w-10 h-10 border-4 border-[#ff4f5a] border-t-transparent flex items-center justify-center rounded-full animate-spin"></div></div>
             ) : featuredPost ? (
-            <section className="max-w-7xl mx-auto px-6 py-16">
+            <section className="max-w-7xl mx-auto px-6 py-8 lg:py-16">
                 <motion.article
                     initial={{ opacity: 0, y: 30 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8 }}
-                    className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-20"
+                    className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-12 items-center mb-10 lg:mb-20"
                 >
-                    <Link to={`/blog/${featuredPost._id}`} className="relative group overflow-hidden rounded-2xl aspect-[4/3] block">
+                    <Link to={`/blog/${featuredPost._id}`} className="relative group overflow-hidden rounded-2xl aspect-[16/9] lg:aspect-[4/3] block">
                         <img 
                             src={featuredPost.coverImage || featuredPost.image} 
                             alt={featuredPost.title}
@@ -234,7 +241,7 @@ const Blog = () => {
                         />
                         <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                     </Link>
-                    <div className="space-y-6">
+                    <div className="space-y-4 lg:space-y-6">
                         <div className="flex items-center gap-3">
                             <span className="px-3 py-1 rounded-full bg-[#ff4f5a] text-white text-xs font-bold uppercase tracking-wider">
                                 Featured
@@ -242,21 +249,21 @@ const Blog = () => {
                             <span className="text-sm text-gray-500">{featuredPost.category}</span>
                         </div>
                         <Link to={`/blog/${featuredPost._id}`}>
-                            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 leading-tight hover:text-[#ff4f5a] transition-colors cursor-pointer">
+                            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 leading-tight hover:text-[#ff4f5a] transition-colors cursor-pointer">
                                 {featuredPost.title}
                             </h2>
                         </Link>
-                        <p className="text-lg text-gray-600 leading-relaxed max-h-32 overflow-hidden overflow-ellipsis text-left">
+                        <p className="text-base lg:text-lg text-gray-600 leading-relaxed text-left line-clamp-4 lg:line-clamp-none lg:max-h-32 lg:overflow-hidden">
                             {featuredPost.excerpt}
                         </p>
-                        <div className="flex flex-wrap items-center gap-4 text-sm text-gray-500">
+                        <div className="flex flex-wrap items-center gap-2 lg:gap-4 text-sm text-gray-500">
                             <span className="font-semibold text-gray-900">{featuredPost.author}</span>
                             <span>·</span>
                             <span>{new Date(featuredPost.createdAt || featuredPost.date).toLocaleDateString()}</span>
                             <span>·</span>
                             <span>{featuredPost.readTime}</span>
                         </div>
-                        <Link to={`/blog/${featuredPost._id}`} className="inline-block px-8 py-3 rounded-full bg-gradient-to-r from-[#ff4f5a] to-orange-600 text-white font-semibold hover:shadow-lg hover:shadow-[#ff4f5a]/30 transition-all duration-300">
+                        <Link to={`/blog/${featuredPost._id}`} className="inline-block px-6 py-2.5 lg:px-8 lg:py-3 rounded-full bg-gradient-to-r from-[#ff4f5a] to-orange-600 text-white font-semibold text-sm lg:text-base hover:shadow-lg hover:shadow-[#ff4f5a]/30 transition-all duration-300">
                             Read Full Story
                         </Link>
                     </div>
@@ -292,7 +299,7 @@ const Blog = () => {
                 {!loading && (
                 <section className="max-w-7xl mx-auto px-6 pb-16">
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    {filteredPosts.map((post, index) => (
+                    {visiblePosts.map((post, index) => (
                         <motion.article
                             key={post._id}
                             initial={{ opacity: 0, y: 30 }}
@@ -340,11 +347,19 @@ const Blog = () => {
                 )}
 
                 {/* Load More */}
-                <div className="mt-16 text-center">
-                    <button className="px-8 py-3 rounded-full border-2 border-gray-900 text-gray-900 font-semibold hover:bg-gray-900 hover:text-white transition-all duration-300">
+                {!loading && hasMore && (
+                <div className="mt-12 text-center">
+                    <button
+                        onClick={() => setVisibleCount(c => c + 9)}
+                        className="px-8 py-3 rounded-full border-2 border-gray-900 text-gray-900 font-semibold hover:bg-gray-900 hover:text-white transition-all duration-300"
+                    >
                         Load More Articles
+                        <span className="ml-2 text-sm text-gray-500 font-normal">
+                            ({filteredPosts.length - visibleCount} remaining)
+                        </span>
                     </button>
                 </div>
+                )}
 
             {/* Newsletter Section */}
             <section className="border-t border-gray-200 bg-gradient-to-b from-white to-gray-50 py-20">
