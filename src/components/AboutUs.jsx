@@ -173,36 +173,79 @@ const CommercialSlider = ({ videos }) => {
 // ── Team member card ──────────────────────────────────────────────────────────
 const TeamCard = ({ name, imgSrc, initial, bio, position }) => {
   const [imgError, setImgError] = useState(false);
+  const [tapped, setTapped] = useState(false);  // mobile tap state
 
   return (
-    /* Outer wrapper: fixed size, never changes — holds the layout slot */
+    /* Outer wrapper — on mobile fills grid cell, on desktop fixed 11rem slot */
     <div
-      className="relative flex-shrink-0"
-      style={{ width: '11rem', height: '15rem' }} /* md: 12rem × 15rem */
+      className="relative flex-shrink-0 w-full md:w-[11rem]"
+      style={{ height: '15rem' }}
     >
-      {/* md override via inline style isn't practical; use a wrapping class trick */}
-      {/* Inner card: absolutely positioned so it can expand without pushing siblings */}
+      {/* ── MOBILE CARD (visible only on <md screens) ── */}
       <div
-        className="group absolute top-0 left-0 flex rounded-2xl overflow-hidden bg-[#111] shadow-lg border border-[#a855f7]/20
+        className="md:hidden w-full h-full rounded-2xl overflow-hidden bg-[#111] border border-[#a855f7]/20 cursor-pointer select-none relative"
+        onClick={() => setTapped(t => !t)}
+      >
+        {/* Image side */}
+        <div
+          className={`absolute inset-0 transition-opacity duration-300 ${tapped ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}
+        >
+          {imgSrc && !imgError ? (
+            <img
+              src={imgSrc}
+              alt={name}
+              loading="lazy"
+              decoding="async"
+              className="w-full h-full object-cover object-top"
+              onError={() => setImgError(true)}
+            />
+          ) : (
+            <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-[#1a1a2e] to-[#16213e] text-[#a855f7] text-4xl font-bold">
+              {initial}
+            </div>
+          )}
+          {/* Name overlay */}
+          <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/95 via-black/60 to-transparent p-3">
+            <p className="text-white font-bold text-sm leading-tight truncate">{name}</p>
+            {position && <p className="text-[#a855f7] text-xs font-semibold capitalize mt-0.5">{position}</p>}
+          </div>
+          {/* Tap hint */}
+          <div className="absolute top-2 right-2 w-6 h-6 rounded-full bg-[#a855f7]/80 flex items-center justify-center">
+            <svg className="w-3 h-3 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M13 16h-1v-4h-1m1-4h.01M12 2a10 10 0 110 20A10 10 0 0112 2z" />
+            </svg>
+          </div>
+        </div>
+
+        {/* Info side — shown after tap */}
+        <div
+          className={`absolute inset-0 bg-[#0d0d0d] p-4 flex flex-col justify-center transition-opacity duration-300 ${tapped ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
+        >
+          <p className="text-white font-bold text-sm leading-tight mb-1 break-words">{name}</p>
+          {position && <p className="text-[#a855f7] text-xs font-semibold capitalize mb-2 break-words">{position}</p>}
+          {bio
+            ? <p className="text-gray-400 text-xs leading-relaxed line-clamp-6 break-words">{bio}</p>
+            : <p className="text-gray-600 text-xs italic">Rabin's Photography Team</p>
+          }
+          <p className="text-gray-600 text-[10px] mt-3">Tap to go back</p>
+        </div>
+      </div>
+
+      {/* ── DESKTOP CARD (visible only on md+ screens, hover-expand) ── */}
+      <div
+        className="group hidden md:flex absolute top-0 left-0 rounded-2xl overflow-hidden bg-[#111] shadow-lg border border-[#a855f7]/20
           hover:border-[#a855f7]/60 hover:shadow-[0_0_20px_rgba(168,85,247,0.25)]
           hover:z-10
           transition-all duration-300 ease-in-out cursor-pointer"
-        style={{
-          width: '11rem',
-          height: '15rem',
-        }}
-        onMouseEnter={e => {
-          e.currentTarget.style.width = '23rem';
-        }}
-        onMouseLeave={e => {
-          e.currentTarget.style.width = '11rem';
-        }}
+        style={{ width: '11rem', height: '15rem' }}
+        onMouseEnter={e => { e.currentTarget.style.width = '23rem'; }}
+        onMouseLeave={e => { e.currentTarget.style.width = '11rem'; }}
       >
-        {/* Image — full width normally, shrinks on hover */}
+        {/* Image */}
         <div className="flex-shrink-0 transition-all duration-300 relative"
           style={{ width: '11rem', minWidth: '11rem', height: '100%' }}
         >
-          <div className="absolute inset-0 group-hover:right-[unset] group-hover:w-[11rem] transition-all duration-300 h-full">
+          <div className="absolute inset-0 transition-all duration-300 h-full">
             {imgSrc && !imgError ? (
               <img
                 src={imgSrc}
@@ -218,7 +261,7 @@ const TeamCard = ({ name, imgSrc, initial, bio, position }) => {
               </div>
             )}
           </div>
-          {/* Name + role overlay — fades out on hover */}
+          {/* Name overlay — fades on hover */}
           <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/95 via-black/60 to-transparent p-3
             opacity-100 group-hover:opacity-0 transition-opacity duration-200 z-10">
             <p className="text-white font-bold text-sm leading-tight truncate">{name}</p>
@@ -611,7 +654,7 @@ const AboutUs = () => {
                 initial={{ opacity: 0, y: 16 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.4 }}
-                className="flex flex-wrap justify-center items-start gap-4 py-2"
+                className="grid grid-cols-3 sm:grid-cols-4 md:flex md:flex-wrap md:justify-center md:items-start gap-3 md:gap-4 py-2"
               >
                 {(() => {
                   const tierData = teamData[activeTier] || {};
