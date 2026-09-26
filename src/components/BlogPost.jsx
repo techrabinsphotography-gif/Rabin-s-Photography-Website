@@ -4,6 +4,123 @@ import { motion } from 'framer-motion';
 import { fetchBlogPost } from '../api';
 import finalLogo from '../assets/recent/final logo.png';
 import { Camera } from 'lucide-react';
+import SiteFooter from './SiteFooter';
+
+// ── Share Bar ──────────────────────────────────────────────────────────────────
+const ShareBar = ({ title }) => {
+    const [copied, setCopied] = useState(false);
+    const url = typeof window !== 'undefined' ? window.location.href : '';
+    const encodedUrl = encodeURIComponent(url);
+    const encodedTitle = encodeURIComponent(title || '');
+
+    const copyLink = async () => {
+        try {
+            await navigator.clipboard.writeText(url);
+            setCopied(true);
+            setTimeout(() => setCopied(false), 2000);
+        } catch {
+            // fallback
+            const el = document.createElement('input');
+            el.value = url;
+            document.body.appendChild(el);
+            el.select();
+            document.execCommand('copy');
+            document.body.removeChild(el);
+            setCopied(true);
+            setTimeout(() => setCopied(false), 2000);
+        }
+    };
+
+    const nativeShare = async () => {
+        if (navigator.share) {
+            await navigator.share({ title, url });
+        }
+    };
+
+    return (
+        <div className="mt-12 pt-8 border-t border-gray-100">
+            <p className="text-sm font-semibold text-gray-500 uppercase tracking-widest mb-4">Share this article</p>
+            <div className="flex flex-wrap gap-3">
+
+                {/* WhatsApp */}
+                <a
+                    href={`https://api.whatsapp.com/send?text=${encodedTitle}%20${encodedUrl}`}
+                    target="_blank" rel="noopener noreferrer"
+                    className="flex items-center gap-2 px-4 py-2.5 rounded-full bg-[#25D366] text-white text-sm font-semibold hover:opacity-90 transition-all hover:scale-105"
+                >
+                    <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347"/>
+                        <path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.117 1.528 5.848L0 24l6.335-1.513A11.945 11.945 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.846 0-3.575-.5-5.065-1.37l-.362-.217-3.762.898.937-3.665-.236-.374A9.96 9.96 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/>
+                    </svg>
+                    WhatsApp
+                </a>
+
+                {/* Facebook */}
+                <a
+                    href={`https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}`}
+                    target="_blank" rel="noopener noreferrer"
+                    className="flex items-center gap-2 px-4 py-2.5 rounded-full bg-[#1877F2] text-white text-sm font-semibold hover:opacity-90 transition-all hover:scale-105"
+                >
+                    <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                    </svg>
+                    Facebook
+                </a>
+
+                {/* X (Twitter) */}
+                <a
+                    href={`https://twitter.com/intent/tweet?text=${encodedTitle}&url=${encodedUrl}`}
+                    target="_blank" rel="noopener noreferrer"
+                    className="flex items-center gap-2 px-4 py-2.5 rounded-full bg-black text-white text-sm font-semibold hover:opacity-90 transition-all hover:scale-105"
+                >
+                    <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z"/>
+                    </svg>
+                    X
+                </a>
+
+                {/* Copy Link */}
+                <button
+                    onClick={copyLink}
+                    className={`flex items-center gap-2 px-4 py-2.5 rounded-full text-sm font-semibold transition-all hover:scale-105 border ${
+                        copied
+                            ? 'bg-green-50 border-green-400 text-green-700'
+                            : 'bg-gray-100 border-gray-200 text-gray-700 hover:bg-gray-200'
+                    }`}
+                >
+                    {copied ? (
+                        <>
+                            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                                <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                            </svg>
+                            Copied!
+                        </>
+                    ) : (
+                        <>
+                            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                                <path strokeLinecap="round" strokeLinejoin="round" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                            </svg>
+                            Copy Link
+                        </>
+                    )}
+                </button>
+
+                {/* Native Share — only shown on mobile/supported browsers */}
+                {typeof navigator !== 'undefined' && navigator.share && (
+                    <button
+                        onClick={nativeShare}
+                        className="flex items-center gap-2 px-4 py-2.5 rounded-full bg-[#ff4f5a] text-white text-sm font-semibold hover:opacity-90 transition-all hover:scale-105"
+                    >
+                        <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z" />
+                        </svg>
+                        Share
+                    </button>
+                )}
+            </div>
+        </div>
+    );
+};
 
 const BlogPost = () => {
     const { id } = useParams();
@@ -80,6 +197,9 @@ const BlogPost = () => {
                         className="blog-content prose prose-lg max-w-none"
                         dangerouslySetInnerHTML={{ __html: post.content || `<p>${post.excerpt}</p>` }}
                     />
+
+                    {/* ── Share Bar ── */}
+                    <ShareBar title={post.title} />
                 </motion.div>
             </article>
 
@@ -108,152 +228,7 @@ const BlogPost = () => {
             </section>
 
             {/* Footer Section */}
-            <footer className="w-full bg-black text-gray-400 pt-20 pb-10 px-8 relative overflow-hidden">
-                {/* Subtle Gradient Background */}
-                <div className="absolute top-0 left-0 w-96 h-96 bg-blue-500/5 rounded-full blur-[120px]" />
-                <div className="absolute bottom-0 right-0 w-96 h-96 bg-[#ff4f5a]/5 rounded-full blur-[120px]" />
-
-                {/* Top Footer */}
-                <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-5 gap-12 relative z-10">
-
-                    {/* Brand */}
-                    <div>
-                        <img src={finalLogo} alt="Rabin's Photography" className="w-64 mb-4 object-contain" />
-                        <p className="text-white text-xs mt-4 leading-relaxed max-w-xs">Book. Track. Deliver. Professional photography management, all in one app.</p>
-                    </div>
-
-                    {/* Column 1 */}
-                    <div>
-                        <h3 className="text-white font-semibold mb-4">For Photographers</h3>
-                        <ul className="space-y-2 text-sm">
-                            <li className="hover:text-white transition-colors cursor-pointer"><a href="https://www.behance.net/rabinsphotographyind" target="_blank" rel="noopener noreferrer">Portfolio</a></li>
-
-                            <li className="hover:text-white transition-colors cursor-pointer text-gray-400 group relative">
-                                <Link to="/careers" className="relative group-hover:text-white transition-colors duration-300">
-                                    Careers
-                                    <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-[#ff4f5a] transition-all duration-300 group-hover:w-full"></span>
-                                </Link>
-                            </li>
-                        </ul>
-                    </div>
-
-                    {/* Column 2 */}
-                    <div>
-                        <h3 className="text-white font-semibold mb-4">For Clients</h3>
-                        <ul className="space-y-2 text-sm">
-                            <li className="hover:text-white transition-colors cursor-pointer">
-                                <a href="https://calendly.com/rabinsphotography" target="_blank" rel="noopener noreferrer">Book a Meeting</a>
-                            </li>
-                        </ul>
-                    </div>
-
-                    {/* Column 3 */}
-                    <div>
-                        <h3 className="text-white font-semibold mb-4">Company</h3>
-                        <ul className="space-y-2 text-sm">
-                            <li className="hover:text-white transition-colors cursor-pointer"><Link to="/Aboutus">About Us</Link></li>
-                            <li className="hover:text-white transition-colors cursor-pointer"><Link to="/blog">Blog</Link></li>
-                            <li className="hover:text-white transition-colors cursor-pointer"><Link to="/privacy">Privacy Policy</Link></li>
-                            <li className="hover:text-white transition-colors cursor-pointer"><Link to="/terms">Terms of Service</Link></li>
-                            <li className="hover:text-white transition-colors cursor-pointer"><Link to="/help">Help & Support</Link></li>
-                        </ul>
-                    </div>
-
-                    {/* Column 4 - Social Links */}
-                    <div>
-                        <h3 className="text-white font-semibold mb-4">Social Links</h3>
-
-                        {/* Social Icons */}
-                        <div className="flex gap-3 mb-8">
-                            <a href="https://www.instagram.com/rabinsphotography/" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-white text-black flex items-center justify-center hover:scale-110 transition-all">
-                                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M7.8,2H16.2C19.4,2 22,4.6 22,7.8V16.2A5.8,5.8 0 0,1 16.2,22H7.8C4.6,22 2,19.4 2,16.2V7.8A5.8,5.8 0 0,1 7.8,2M7.6,4A3.6,3.6 0 0,0 4,7.6V16.4C4,18.39 5.61,20 7.6,20H16.4A3.6,3.6 0 0,0 20,16.4V7.6C20,5.61 18.39,4 16.4,4H7.6M17.25,5.5A1.25,1.25 0 0,1 18.5,6.75A1.25,1.25 0 0,1 17.25,8A1.25,1.25 0 0,1 16,6.75A1.25,1.25 0 0,1 17.25,5.5M12,7A5,5 0 0,1 17,12A5,5 0 0,1 12,17A5,5 0 0,1 7,12A5,5 0 0,1 12,7M12,9A3,3 0 0,0 9,12A3,3 0 0,0 12,15A3,3 0 0,0 15,12A3,3 0 0,0 12,9Z" /></svg>
-                            </a>
-                            <a href="https://www.youtube.com/@RabinsPhotography" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-white text-black flex items-center justify-center hover:scale-110 transition-all">
-                                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"/></svg>
-                            </a>
-                            <a href="https://www.facebook.com/RabinsPhotography/" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-white text-black flex items-center justify-center hover:scale-110 transition-all">
-                                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"/></svg>
-                            </a>
-                            <a href="https://x.com/Rabinsclick" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-white text-black flex items-center justify-center hover:scale-110 transition-all">
-                                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z"/></svg>
-                            </a>
-                        </div>
-
-                        {/* App Buttons */}
-                        <div className="space-y-3">
-                            {/* App Store */}
-                            <div className="relative">
-                                <button 
-                                    onClick={() => setShowAppStorePopup(true)}
-                                    onMouseEnter={() => setShowAppStorePopup(true)}
-                                    onMouseLeave={() => setShowAppStorePopup(false)}
-                                    className="w-full px-4 py-3 rounded-xl bg-black border border-white/30 text-white hover:bg-white/10 transition-all flex items-center justify-center gap-3 group"
-                                >
-                                    <svg className="w-8 h-8" viewBox="0 0 24 24" fill="currentColor">
-                                        <path d="M17.05 20.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.35C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.74 1.18 0 2.48-1.67 5.17-1.44 1.14.08 3.52.41 4.3 2.5a3.65 3.65 0 0 1-2 2 c-1.52.89-1.85 3.51.05 5.37.5 1.57.25 2.15 0 2.5ZM13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.84 1.53-2.95 1.5-.83-4.17.65-3.19 1.05-3.19Z"/>
-                                    </svg>
-                                    <div className="text-left">
-                                        <div className="text-[10px] uppercase font-medium text-gray-400 leading-none">Download on the</div>
-                                        <div className="text-lg font-bold leading-tight">App Store</div>
-                                    </div>
-                                </button>
-                                {showAppStorePopup && (
-                                    <motion.div 
-                                        initial={{ opacity: 0, y: 10, scale: 0.9 }}
-                                        animate={{ opacity: 1, y: 0, scale: 1 }}
-                                        exit={{ opacity: 0, y: 10, scale: 0.9 }}
-                                        className="absolute bottom-full mb-3 left-1/2 -translate-x-1/2 w-48 bg-white text-black p-4 rounded-xl shadow-2xl text-center z-50 pointer-events-none"
-                                    >
-                                        <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-4 h-4 bg-white rotate-45"></div>
-                                        <p className="font-bold text-lg mb-1">Coming Soon!</p>
-                                        <p className="text-xs text-gray-500">iOS app launching soon!</p>
-                                    </motion.div>
-                                )}
-                            </div>
-
-                            {/* Google Play - With Popup */}
-                            <div className="relative">
-                                <button 
-                                    onClick={() => setShowPopup(true)}
-                                    className="w-full px-4 py-3 rounded-xl bg-black border border-white/30 text-white hover:bg-white/10 transition-all flex items-center justify-center gap-3"
-                                >
-                                    <svg className="w-7 h-7" viewBox="0 0 24 24" fill="currentColor">
-                                        <path d="M3,20.5V3.5C3,2.91 3.34,2.39 3.84,2.15L13.69,12L3.84,21.85C3.34,21.6 3,21.09 3,20.5M16.81,15.12L6.05,21.34L14.54,12.85L16.81,15.12M20.16,10.81C20.5,11.08 20.75,11.5 20.75,12C20.75,12.5 21,12.92 20.16,13.19L17.89,14.5L15.39,12L17.89,9.5L20.16,10.81M6.05,2.66L16.81,8.88L14.54,11.15L6.05,2.66Z" />
-                                    </svg>
-                                    <div className="text-left">
-                                        <div className="text-[10px] uppercase font-medium text-gray-400 leading-none">GET IT ON</div>
-                                        <div className="text-lg font-bold leading-tight">Google Play</div>
-                                    </div>
-                                </button>
-                                
-                                {showPopup && (
-                                    <motion.div 
-                                        initial={{ opacity: 0, y: 10, scale: 0.9 }}
-                                        animate={{ opacity: 1, y: 0, scale: 1 }}
-                                        exit={{ opacity: 0, y: 10, scale: 0.9 }}
-                                        className="absolute bottom-full mb-3 left-1/2 -translate-x-1/2 w-48 bg-white text-black p-4 rounded-xl shadow-2xl text-center z-50 pointer-events-none"
-                                    >
-                                        <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-4 h-4 bg-white rotate-45"></div>
-                                        <p className="font-bold text-lg mb-1">Coming Soon!</p>
-                                        <p className="text-xs text-gray-500">We are working on the Android version.</p>
-                                    </motion.div>
-                                )}
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-                {/* Divider */}
-                <div className="max-w-7xl mx-auto border-t border-gray-800 mt-16 pt-6 text-sm text-gray-600 relative z-10">
-                    <p className="mb-2">
-                        By continuing past this page, you agree to our <Link to="/terms" className="hover:text-white transition-colors">Terms of Service</Link>, <Link to="/privacy" className="hover:text-white transition-colors">Privacy Policy</Link> and Cookie Policy.
-                    </p>
-                    <p>
-                        © 2013-{new Date().getFullYear()} Rabin's Photography. All rights reserved.
-                    </p>
-                </div>
-
-            </footer>
+            <SiteFooter />
         </div>
     );
 };

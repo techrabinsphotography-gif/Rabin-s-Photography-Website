@@ -81,10 +81,10 @@ const CounterStat = ({ end, suffix = '', color, label }) => {
 
     return (
         <div ref={countRef} className="text-center">
-            <p className={`text-4xl md:text-5xl font-black bg-gradient-to-r ${color} bg-clip-text text-transparent`}>
+            <p className={`text-2xl sm:text-3xl md:text-5xl font-black bg-gradient-to-r ${color} bg-clip-text text-transparent`}>
                 {count}{suffix}
             </p>
-            <p className="text-xs md:text-sm text-gray-600 uppercase tracking-wider font-semibold mt-2">
+            <p className="text-[10px] sm:text-xs md:text-sm text-gray-600 uppercase tracking-wider font-semibold mt-1 md:mt-2">
                 {label}
             </p>
         </div>
@@ -722,16 +722,13 @@ const Demo = () => {
 
                     {/* Column 1 */}
                     <div>
-                        <h3 className="text-white font-semibold mb-4">For Photographers</h3>
+                        <h3 className="text-white font-semibold mb-4">Creative Hub</h3>
                         <ul className="space-y-2 text-sm">
                             <li className="hover:text-white transition-colors cursor-pointer"><a href="https://www.behance.net/rabinsphotographyind" target="_blank" rel="noopener noreferrer">Portfolio</a></li>
 
-                            <li className="hover:text-white transition-colors cursor-pointer text-gray-400 group relative">
-                                <Link to="/careers" onClick={() => window.scrollTo(0, 0)} className="relative group-hover:text-white transition-colors duration-300">
-                                    Careers
-                                    <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-[#ff4f5a] transition-all duration-300 group-hover:w-full"></span>
-                                </Link>
-                            </li>
+                            <li className="hover:text-white transition-colors cursor-pointer"><Link to="/blog" onClick={() => window.scrollTo(0, 0)}>Blog</Link></li>
+
+                            <li className="hover:text-white transition-colors cursor-pointer"><a href="https://www.google.com/maps/place/Rabin's+Photography%C2%AD/@22.5960327,88.3917177,18.33z/data=!4m8!3m7!1s0x3a0277b182fd5f73:0xc2d04a221fb9ff27!8m2!3d22.5941259!4d88.3943257!9m1!1b1!16s%2Fg%2F11kkmt3_np?entry=ttu&g_ep=EgoyMDI2MDkyMy4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener noreferrer">Testimonials</a></li>
                         </ul>
                     </div>
 
@@ -740,7 +737,10 @@ const Demo = () => {
                         <h3 className="text-white font-semibold mb-4">For Clients</h3>
                         <ul className="space-y-2 text-sm">
                             <li className="hover:text-white transition-colors cursor-pointer">
-                                <a href="https://calendly.com/rabinsphotography" target="_blank" rel="noopener noreferrer">Book a Meeting</a>
+                                <a href="https://calendly.com/rabinsphotography" target="_blank" rel="noopener noreferrer">Schedule a Meeting</a>
+                            </li>
+                            <li className="hover:text-white transition-colors cursor-pointer">
+                                <a href="https://g.page/r/CSf_uR8iStDCEBM/review" target="_blank" rel="noopener noreferrer">Give a Review</a>
                             </li>
                         </ul>
                     </div>
@@ -750,7 +750,7 @@ const Demo = () => {
                         <h3 className="text-white font-semibold mb-4">Company</h3>
                         <ul className="space-y-2 text-sm">
                             <li className="hover:text-white transition-colors cursor-pointer"><Link to="/Aboutus" onClick={() => window.scrollTo(0, 0)}>About Us</Link></li>
-                            <li className="hover:text-white transition-colors cursor-pointer"><Link to="/blog" onClick={() => window.scrollTo(0, 0)}>Blog</Link></li>
+                            <li className="hover:text-white transition-colors cursor-pointer"><Link to="/careers" onClick={() => window.scrollTo(0, 0)}>Careers</Link></li>
                             <li className="hover:text-white transition-colors cursor-pointer"><Link to="/privacy" onClick={() => window.scrollTo(0, 0)}>Privacy Policy</Link></li>
                             <li className="hover:text-white transition-colors cursor-pointer"><Link to="/terms" onClick={() => window.scrollTo(0, 0)}>Terms of Service</Link></li>
                             <li className="hover:text-white transition-colors cursor-pointer"><Link to="/help" onClick={() => window.scrollTo(0, 0)}>Help & Support</Link></li>
@@ -1166,7 +1166,7 @@ const ContactSection = () => {
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-5 h-5 text-white"><path strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" /><path strokeLinecap="round" strokeLinejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z" /></svg>
                             </div>
                             <div className="text-left">
-                                <p className="text-xs text-gray-500 font-medium">Visit Our Office</p>
+                                <p className="text-xs text-gray-500 font-medium">Our Head Office</p>
                                 <p className="text-white font-semibold">Kolkata, India</p>
                             </div>
                         </a>
@@ -1467,7 +1467,7 @@ const AboutSection = ({ bookingImages = {} }) => {
                             initial={{ opacity: 0, y: 20 }}
                             whileInView={{ opacity: 1, y: 0 }}
                             transition={{ delay: 0.4, duration: 0.8 }}
-                            className="grid grid-cols-3 gap-6 pt-8 border-t border-gray-200"
+                            className="grid grid-cols-3 gap-3 sm:gap-6 pt-8 border-t border-gray-200"
                         >
                             <CounterStat 
                                 end={2000} 

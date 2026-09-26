@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import img1 from '../assets/recent/cameraa.png'
 import img2 from '../assets/recent/cenamatic camera.png'
 import img3 from '../assets/recent/drone.jpeg'
+import SiteFooter from './SiteFooter';
 import img4 from '../assets/recent/studioimgg.png'
 
 
@@ -285,104 +286,7 @@ const FrontPage = () => {
             <DownloadAppSection />
 
             {/* Footer Section */}
-            <footer className="w-full bg-black text-gray-400 pt-20 pb-10 px-8">
-
-                {/* Top Footer */}
-                <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-5 gap-12">
-
-                    {/* Brand */}
-                    <div>
-                        <h1 className="text-white text-3xl font-bold mb-6">
-                            robin
-                        </h1>
-                    </div>
-
-                    {/* Column 1 */}
-                    <div>
-                        <h3 className="text-white font-semibold mb-4">Studio</h3>
-                        <ul className="space-y-2">
-                            <li>About Us</li>
-                            <li>Our Team</li>
-                            <li>Gallery</li>
-                            <li>Behind the Scenes</li>
-                            <li className="hover:text-black transition-colors cursor-pointer">
-                                <Link to="/careers">Careers</Link>
-                            </li>
-                            <li>Investor Relations</li>
-                        </ul>
-                    </div>
-
-                    {/* Column 2 */}
-                    <div>
-                        <h3 className="text-white font-semibold mb-4">For Clients</h3>
-                        <ul className="space-y-2">
-                            <li>Book a Shoot</li>
-
-                            <li>Portrait Sessions</li>
-                            <li>Commercial Shoots</li>
-                        </ul>
-                    </div>
-
-                    {/* Column 3 */}
-                    <div>
-                        <h3 className="text-white font-semibold mb-4">Learn More</h3>
-                        <ul className="space-y-2">
-                            <li>Privacy Policy</li>
-                            <li>Security</li>
-                            <li>Terms of Service</li>
-                            <li>Help & Support</li>
-                            <li>Report an Issue</li>
-                            <li>Blog</li>
-                        </ul>
-                    </div>
-
-                    {/* Column 4 */}
-                    <div>
-                        <h3 className="text-white font-semibold mb-4">Social Links</h3>
-
-                        {/* Social Icons */}
-                        <div className="flex gap-3 mb-6">
-                            <div className="w-8 h-8 rounded-full bg-white text-black flex items-center justify-center">in</div>
-                            <div className="w-8 h-8 rounded-full bg-white text-black flex items-center justify-center">ig</div>
-                            <div className="w-8 h-8 rounded-full bg-white text-black flex items-center justify-center">yt</div>
-                            <div className="w-8 h-8 rounded-full bg-white text-black flex items-center justify-center">fb</div>
-                            <div className="w-8 h-8 rounded-full bg-white text-black flex items-center justify-center">x</div>
-                        </div>
-
-                        {/* Store Buttons */}
-                    <div className="flex justify-center md:justify-start gap-4 mt-8">
-                        {/* Plain Apple Logo Button */}
-                        <button className="w-11 h-11 flex items-center justify-center bg-black rounded-xl shadow hover:opacity-80 transition-opacity cursor-default">
-                            <svg viewBox="0 0 170 170" fill="white" className="w-6 h-6">
-                                <path d="M150.37 130.25c-2.45 5.66-5.35 10.87-8.71 15.66-4.58 6.53-8.33 11.05-11.22 13.56-4.48 4.12-9.28 6.23-14.42 6.35-3.69 0-8.14-1.05-13.32-3.18-5.197-2.12-9.973-3.17-14.34-3.17-4.58 0-9.492 1.05-14.746 3.17-5.262 2.13-9.501 3.24-12.742 3.35-4.929.21-9.842-1.96-14.746-6.52-3.13-2.73-7.045-7.41-11.735-14.04-5.032-7.08-9.169-15.29-12.41-24.65-3.471-10.11-5.211-19.9-5.211-29.378 0-10.857 2.346-20.221 7.045-28.068 3.693-6.303 8.606-11.275 14.755-14.925s12.793-5.51 19.948-5.629c3.915 0 9.049 1.211 15.429 3.591 6.362 2.388 10.447 3.599 12.238 3.599 1.339 0 5.877-1.416 13.57-4.239 7.275-2.618 13.415-3.702 18.445-3.275 13.63 1.1 23.87 6.473 30.68 16.153-12.19 7.386-18.22 17.731-18.1 31.002.11 10.337 3.86 18.939 11.23 25.769 3.34 3.17 7.07 5.62 11.22 7.36-.9 2.61-1.85 5.11-2.86 7.51zM119.11 7.24c0 8.102-2.96 15.667-8.86 22.669-7.12 8.324-15.732 13.134-25.071 12.375a25.222 25.222 0 0 1-.188-3.07c0-7.778 3.386-16.102 9.399-22.908 3.002-3.446 6.82-6.311 11.45-8.597 4.62-2.252 8.99-3.497 13.1-3.71.12 1.017.17 2.035.17 3.24z"/>
-                            </svg>
-                        </button>
-                        <button className="px-5 py-2 rounded-lg bg-black text-white hover:opacity-80 transition-all flex items-center gap-2.5 cursor-default min-h-[44px]">
-                            <svg className="w-8 h-8 flex-shrink-0" viewBox="0 0 24 24" fill="white">
-                                <path d="M17.05 20.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.35C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.74 1.18 0 2.48-1.67 5.17-1.44 1.14.08 3.52.41 4.3 2.5a3.65 3.65 0 0 1-2 2 c-1.52.89-1.85 3.51.05 5.37.5 1.57.25 2.15 0 2.5ZM13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.84 1.53-2.95 1.5-.83-4.17.65-3.19 1.05-3.19Z"/>
-                            </svg>
-                            <div className="text-left flex-1">
-                                <div className="text-[8.5px] font-normal text-white leading-tight">Download on the</div>
-                                <div className="text-[18px] font-semibold leading-tight">App Store</div>
-                            </div>
-                        </button>
-                    </div>
-                    </div>
-
-                </div>
-
-                {/* Divider */}
-                <div className="max-w-7xl mx-auto border-t border-gray-800 mt-16 pt-6 text-sm text-gray-500">
-                    <p>
-                        By continuing past this page, you agree to our Terms of Service, Cookie Policy,
-                        Privacy Policy and Content Policies.
-                    </p>
-                    <p className="mt-2">
-                        © 2013-{new Date().getFullYear()} Robin Photo Studio. All rights reserved.
-                    </p>
-                </div>
-
-            </footer>
+            <SiteFooter />
 
 
 
