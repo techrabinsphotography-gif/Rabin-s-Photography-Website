@@ -62,3 +62,21 @@ export const fetchSiteSettings = async () => {
     const data = await res.json();
     return data.data;
 };
+
+export const fetchPrivacyPolicy = async () => {
+    const res = await fetch(`${baseURL}/web/privacy-policy`);
+    const data = await res.json();
+    return data.data;
+};
+
+export const fetchTermsOfService = async () => {
+    const res = await fetch(`${baseURL}/web/terms-of-service`);
+    const data = await res.json();
+    return data.data;
+};
+
+export const fetchHelpSupport = async () => {
+    const res = await fetch(`${baseURL}/web/help-support`);
+    const data = await res.json();
+    return data.data;
+};

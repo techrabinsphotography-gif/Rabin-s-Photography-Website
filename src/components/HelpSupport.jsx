@@ -1,95 +1,21 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
+import { fetchHelpSupport } from '../api';
 
 const HelpSupport = () => {
+    const [faqs, setFaqs] = useState([]);
+    const [loading, setLoading] = useState(true);
     const [openIndex, setOpenIndex] = useState(null);
 
-    const faqs = [
-        {
-            question: "How do I book a session?",
-            answer: "You can book a session by contacting us via WhatsApp or call, or by filling out the booking form on our website. Your booking will be confirmed only after paying the required advance."
-        },
-        {
-            question: "What is the advance payment policy?",
-            answer: "A 50% advance payment is required to confirm your booking. This advance is non-refundable and non-transferable, and dates are blocked only after payment is received."
-        },
-        {
-            question: "What is your cancellation or rescheduling policy?",
-            answer: "Same-day cancellations will result in full advance retention. Rescheduling is allowed only in exceptional cases with valid proof and management approval. Additional charges may apply for date changes."
-        },
-        {
-            question: "What services do you offer?",
-            answer: "We offer wedding and pre-wedding photography, cinematic wedding films, engagement, haldi and reception coverage, fashion and portfolio shoots, as well as corporate and private event coverage."
-        },
-        {
-            question: "Do you offer destination photography?",
-            answer: "Yes, we provide destination photography services across India. Travel, accommodation, and logistics must be arranged or covered by the client."
-        },
-        {
-            question: "When will I receive my photos and videos?",
-            answer: "Raw photos are delivered within 1–10 days after full payment. Edited photos take 45–60 days after selection. Cinematic videos are delivered within 60–90 days. Album design takes 20–30 days, and delivery takes 10–15 days after approval."
-        },
-        {
-            question: "How will I receive my photos?",
-            answer: "Photos are shared via Google Drive or an online gallery. Albums are delivered physically if included in your package."
-        },
-        {
-            question: "How many photos will we get?",
-            answer: "We provide unlimited clicks during the event. The final edited photos depend on event coverage and your selection."
-        },
-        {
-            question: "Can we select photos for editing and albums?",
-            answer: "Yes, clients must complete their selection within 30 days of receiving raw data. Delays beyond 3 months will incur a penalty of ₹200 per day."
-        },
-        {
-            question: "How many revisions are included?",
-            answer: "We offer 2 revisions for albums and 1 revision for videos. Additional revisions will be chargeable."
-        },
-        {
-            question: "Can we change songs in the video later?",
-            answer: "Once finalized, songs cannot be changed. Any changes will cost ₹2,000 per change."
-        },
-        {
-            question: "Do you provide raw photos/videos?",
-            answer: "Yes, raw photos are provided. Raw video footage is generally not provided unless discussed in advance."
-        },
-        {
-            question: "What are the extra charges?",
-            answer: "Extra hours are charged at ₹4,000 per hour. Travel and logistics are paid by the client. Additional edits or revisions are also chargeable."
-        },
-        {
-            question: "Do we need to arrange food for the team?",
-            answer: "Yes, food and refreshments must be provided for the entire crew during the shoot."
-        },
-        {
-            question: "How many team members will cover the event?",
-            answer: "The team size depends on your package, typically ranging from 2 to 6 professionals including photographers and videographers."
-        },
-        {
-            question: "What happens if payment is delayed?",
-            answer: "Deliverables will be delayed, and no data will be shared until full payment is completed."
-        },
-        {
-            question: "How long do you store our data?",
-            answer: "Raw data is stored for 30 days only. After delivery, clients are responsible for maintaining their own backup."
-        },
-        {
-            question: "Can you share our photos on social media?",
-            answer: "Yes, unless the client requests privacy in advance. Some private or family photos may not be shared without permission."
-        },
-        {
-            question: "What if there is an unavoidable delay or issue?",
-            answer: "We are not responsible for delays caused by natural conditions, technical failures, or other uncontrollable situations."
-        },
-        {
-            question: "How can I contact support?",
-            answer: "You can contact us via email at support@rabinsphotography.com, WhatsApp during working hours, or visit during office hours (Monday to Saturday, 10 AM – 7 PM)."
-        }
-    ];
+    useEffect(() => {
+        fetchHelpSupport()
+            .then(d => setFaqs(d?.faqs || []))
+            .catch(err => console.error('Failed to load Help & Support', err))
+            .finally(() => setLoading(false));
+    }, []);
 
     return (
         <div className="min-h-screen bg-black text-white relative overflow-hidden">
-            {/* Background Effects */}
             <div className="absolute inset-0 bg-gradient-to-br from-gray-900 to-black pointer-events-none" />
             <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-purple-600/10 rounded-full blur-[100px] animate-pulse" />
 
@@ -108,40 +34,48 @@ const HelpSupport = () => {
                 </motion.div>
 
                 {/* FAQ Grid */}
-                <div className="grid gap-6">
-                    {faqs.map((faq, index) => (
-                        <motion.div
-                            key={index}
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ delay: index * 0.1, duration: 0.5 }}
-                            className="bg-gray-900/50 border border-gray-800 rounded-2xl overflow-hidden"
-                        >
-                            <button
-                                onClick={() => setOpenIndex(openIndex === index ? null : index)}
-                                className="w-full px-6 py-4 flex items-center justify-between text-left focus:outline-none hover:bg-white/5 transition-colors"
-                            >
-                                <span className="text-lg font-medium text-white">{faq.question}</span>
-                                <span className={`transform transition-transform duration-300 ${openIndex === index ? 'rotate-180' : ''}`}>
-                                    <svg className="w-5 h-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                                    </svg>
-                                </span>
-                            </button>
-                            <div
-                                className={`px-6 overflow-hidden transition-all duration-300 ${openIndex === index ? 'max-h-48 py-4 opacity-100' : 'max-h-0 py-0 opacity-0'}`}
-                            >
-                                <p className="text-gray-400 leading-relaxed">{faq.answer}</p>
+                {loading ? (
+                    <div className="space-y-4">
+                        {[1,2,3,4,5].map(i => (
+                            <div key={i} className="animate-pulse bg-gray-900/50 border border-gray-800 rounded-2xl p-6">
+                                <div className="h-5 bg-white/5 rounded w-3/4" />
                             </div>
-                        </motion.div>
-                    ))}
-                </div>
+                        ))}
+                    </div>
+                ) : (
+                    <div className="grid gap-4">
+                        {faqs.map((faq, index) => (
+                            <motion.div
+                                key={index}
+                                initial={{ opacity: 0, y: 20 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ delay: Math.min(index * 0.05, 0.5), duration: 0.4 }}
+                                className="bg-gray-900/50 border border-gray-800 rounded-2xl overflow-hidden"
+                            >
+                                <button
+                                    onClick={() => setOpenIndex(openIndex === index ? null : index)}
+                                    className="w-full px-6 py-4 flex items-center justify-between text-left focus:outline-none hover:bg-white/5 transition-colors"
+                                >
+                                    <span className="text-lg font-medium text-white pr-4">{faq.question}</span>
+                                    <span className={`flex-shrink-0 transform transition-transform duration-300 ${openIndex === index ? 'rotate-180' : ''}`}>
+                                        <svg className="w-5 h-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                                        </svg>
+                                    </span>
+                                </button>
+                                <div className={`px-6 overflow-hidden transition-all duration-300 ${openIndex === index ? 'max-h-96 py-4 opacity-100' : 'max-h-0 py-0 opacity-0'}`}>
+                                    <p className="text-gray-400 leading-relaxed whitespace-pre-line">{faq.answer}</p>
+                                </div>
+                            </motion.div>
+                        ))}
+                    </div>
+                )}
 
                 {/* Contact Options */}
                 <motion.div
                     initial={{ opacity: 0, y: 30 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.6, duration: 0.8 }}
+                    transition={{ delay: 0.4, duration: 0.8 }}
                     className="mt-20 grid md:grid-cols-2 gap-8"
                 >
                     <div className="p-8 rounded-3xl bg-gradient-to-br from-blue-900/20 to-transparent border border-blue-500/20 text-center">
@@ -165,30 +99,27 @@ const HelpSupport = () => {
                         </div>
                         <h3 className="text-xl font-bold text-white mb-2">WhatsApp Support</h3>
                         <p className="text-gray-400 mb-6">Chat with us directly.</p>
-                        <a 
-                            href="https://wa.me/919038858523" 
-                            target="_blank" 
-                            rel="noopener noreferrer"
-                            className="inline-block px-6 py-2 rounded-full bg-green-600/20 text-green-400 border border-green-600/30 hover:bg-green-600/30 transition-colors"
-                        >
+                        <a href="https://wa.me/919038858523" target="_blank" rel="noopener noreferrer"
+                            className="inline-block px-6 py-2 rounded-full bg-green-600/20 text-green-400 border border-green-600/30 hover:bg-green-600/30 transition-colors">
                             Chat on WhatsApp
                         </a>
                     </div>
                 </motion.div>
 
-                 {/* Back Button */}
-                 <motion.div
+                {/* Back Button */}
+                <motion.div
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ delay: 0.8 }}
                     className="mt-16 text-center"
                 >
-                   <a href="/" onClick={() => sessionStorage.setItem('scrollTo', 'footer')} className="inline-flex items-center gap-2 text-gray-400 hover:text-white transition-colors">
+                    <a href="/" onClick={() => sessionStorage.setItem('scrollTo', 'footer')}
+                        className="inline-flex items-center gap-2 text-gray-400 hover:text-white transition-colors">
                         <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
                         </svg>
                         Back to Home
-                   </a>
+                    </a>
                 </motion.div>
             </div>
         </div>
