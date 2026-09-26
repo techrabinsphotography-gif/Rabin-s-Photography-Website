@@ -724,9 +724,7 @@ const Demo = () => {
                     <div>
                         <h3 className="text-white font-semibold mb-4">For Photographers</h3>
                         <ul className="space-y-2 text-sm">
-                            <li className="hover:text-white transition-colors cursor-pointer">Professional Services</li>
-                            <li className="hover:text-white transition-colors cursor-pointer">Booking System</li>
-                            <li className="hover:text-white transition-colors cursor-pointer">Portfolio</li>
+                            <li className="hover:text-white transition-colors cursor-pointer"><a href="https://www.behance.net/rabinsphotographyind" target="_blank" rel="noopener noreferrer">Portfolio</a></li>
 
                             <li className="hover:text-white transition-colors cursor-pointer text-gray-400 group relative">
                                 <Link to="/careers" onClick={() => window.scrollTo(0, 0)} className="relative group-hover:text-white transition-colors duration-300">
@@ -741,10 +739,9 @@ const Demo = () => {
                     <div>
                         <h3 className="text-white font-semibold mb-4">For Clients</h3>
                         <ul className="space-y-2 text-sm">
-                            <li className="hover:text-white transition-colors cursor-pointer">Book a Session</li>
-                            <li className="hover:text-white transition-colors cursor-pointer">Track Project</li>
-
-
+                            <li className="hover:text-white transition-colors cursor-pointer">
+                                <a href="https://calendly.com/rabinsphotography" target="_blank" rel="noopener noreferrer">Book a Meeting</a>
+                            </li>
                         </ul>
                     </div>
 
