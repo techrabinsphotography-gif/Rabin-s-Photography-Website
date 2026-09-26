@@ -173,115 +173,106 @@ const CommercialSlider = ({ videos }) => {
 // ── Team member card ──────────────────────────────────────────────────────────
 const TeamCard = ({ name, imgSrc, initial, bio, position }) => {
   const [imgError, setImgError] = useState(false);
-  const [tapped, setTapped] = useState(false);  // mobile tap state
+  const [tapped, setTapped] = useState(false);
 
   return (
-    /* Outer wrapper — on mobile fills grid cell, on desktop fixed 11rem slot */
-    <div
-      className="relative flex-shrink-0 w-full md:w-[11rem]"
-      style={{ height: '15rem' }}
-    >
-      {/* ── MOBILE CARD (visible only on <md screens) ── */}
+    <>
+      {/* ── MOBILE CARD (hidden on md+) ── */}
       <div
-        className="md:hidden w-full h-full rounded-2xl overflow-hidden bg-[#111] border border-[#a855f7]/20 cursor-pointer select-none relative"
+        className="md:hidden relative w-full cursor-pointer select-none rounded-xl overflow-hidden bg-[#111] border border-[#a855f7]/20"
+        style={{ paddingBottom: '100%' }}   /* makes it a square */
         onClick={() => setTapped(t => !t)}
       >
-        {/* Image side */}
-        <div
-          className={`absolute inset-0 transition-opacity duration-300 ${tapped ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}
-        >
+        {/* absolute fill */}
+        <div className="absolute inset-0">
+          {/* Image */}
           {imgSrc && !imgError ? (
             <img
               src={imgSrc}
               alt={name}
               loading="lazy"
               decoding="async"
+              style={{ pointerEvents: 'none' }}
               className="w-full h-full object-cover object-top"
               onError={() => setImgError(true)}
             />
           ) : (
-            <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-[#1a1a2e] to-[#16213e] text-[#a855f7] text-4xl font-bold">
+            <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-[#1a1a2e] to-[#16213e] text-[#a855f7] text-2xl font-bold">
               {initial}
             </div>
           )}
-          {/* Name overlay */}
-          <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/95 via-black/60 to-transparent p-3">
-            <p className="text-white font-bold text-sm leading-tight truncate">{name}</p>
-            {position && <p className="text-[#a855f7] text-xs font-semibold capitalize mt-0.5">{position}</p>}
-          </div>
-          {/* Tap hint */}
-          <div className="absolute top-2 right-2 w-6 h-6 rounded-full bg-[#a855f7]/80 flex items-center justify-center">
-            <svg className="w-3 h-3 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-              <path strokeLinecap="round" strokeLinejoin="round" d="M13 16h-1v-4h-1m1-4h.01M12 2a10 10 0 110 20A10 10 0 0112 2z" />
-            </svg>
-          </div>
-        </div>
 
-        {/* Info side — shown after tap */}
-        <div
-          className={`absolute inset-0 bg-[#0d0d0d] p-4 flex flex-col justify-center transition-opacity duration-300 ${tapped ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
-        >
-          <p className="text-white font-bold text-sm leading-tight mb-1 break-words">{name}</p>
-          {position && <p className="text-[#a855f7] text-xs font-semibold capitalize mb-2 break-words">{position}</p>}
-          {bio
-            ? <p className="text-gray-400 text-xs leading-relaxed line-clamp-6 break-words">{bio}</p>
-            : <p className="text-gray-600 text-xs italic">Rabin's Photography Team</p>
-          }
-          <p className="text-gray-600 text-[10px] mt-3">Tap to go back</p>
+          {/* Default overlay — name + role */}
+          <div
+            className="absolute inset-0 flex flex-col justify-end p-2 bg-gradient-to-t from-black/80 via-transparent to-transparent transition-opacity duration-200"
+            style={{ opacity: tapped ? 0 : 1 }}
+          >
+            <p className="text-white font-bold text-[11px] leading-tight truncate text-center">{name}</p>
+            {position && <p className="text-[#a855f7] text-[9px] font-semibold capitalize truncate text-center mt-0.5">{position}</p>}
+          </div>
+
+          {/* Tapped overlay — name + role + bio */}
+          <div
+            className="absolute inset-0 flex flex-col justify-center p-3 bg-black/90 transition-opacity duration-200"
+            style={{ opacity: tapped ? 1 : 0, pointerEvents: tapped ? 'auto' : 'none' }}
+          >
+            <p className="text-white font-bold text-xs leading-tight mb-0.5">{name}</p>
+            {position && <p className="text-[#a855f7] text-[10px] font-semibold capitalize mb-1.5">{position}</p>}
+            {bio
+              ? <p className="text-gray-300 text-[10px] leading-relaxed line-clamp-5">{bio}</p>
+              : <p className="text-gray-500 text-[10px] italic">Rabin's Photography Team</p>
+            }
+          </div>
         </div>
       </div>
 
-      {/* ── DESKTOP CARD (visible only on md+ screens, hover-expand) ── */}
+      {/* ── DESKTOP CARD (hidden on mobile, hover-expand) ── */}
+      {/* Fixed-size layout slot */}
       <div
-        className="group hidden md:flex absolute top-0 left-0 rounded-2xl overflow-hidden bg-[#111] shadow-lg border border-[#a855f7]/20
-          hover:border-[#a855f7]/60 hover:shadow-[0_0_20px_rgba(168,85,247,0.25)]
-          hover:z-10
-          transition-all duration-300 ease-in-out cursor-pointer"
+        className="hidden md:block relative flex-shrink-0"
         style={{ width: '11rem', height: '15rem' }}
-        onMouseEnter={e => { e.currentTarget.style.width = '23rem'; }}
-        onMouseLeave={e => { e.currentTarget.style.width = '11rem'; }}
+        onMouseEnter={e => { e.currentTarget.style.zIndex = '20'; }}
+        onMouseLeave={e => { e.currentTarget.style.zIndex = '0'; }}
       >
-        {/* Image */}
-        <div className="flex-shrink-0 transition-all duration-300 relative"
-          style={{ width: '11rem', minWidth: '11rem', height: '100%' }}
+        {/* Actual card — absolutely positioned, expands without pushing siblings */}
+        <div
+          className="group absolute top-0 left-0 flex rounded-2xl overflow-hidden bg-[#111] shadow-lg border border-[#a855f7]/20
+            hover:border-[#a855f7]/60 hover:shadow-[0_0_20px_rgba(168,85,247,0.25)]
+            transition-all duration-300 ease-in-out cursor-pointer"
+          style={{ width: '11rem', height: '15rem' }}
+          onMouseEnter={e => { e.currentTarget.style.width = '23rem'; }}
+          onMouseLeave={e => { e.currentTarget.style.width = '11rem'; }}
         >
-          <div className="absolute inset-0 transition-all duration-300 h-full">
-            {imgSrc && !imgError ? (
-              <img
-                src={imgSrc}
-                alt={name}
-                loading="lazy"
-                decoding="async"
-                className="w-full h-full object-cover object-top"
-                onError={() => setImgError(true)}
-              />
-            ) : (
-              <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-[#1a1a2e] to-[#16213e] text-[#a855f7] text-4xl font-bold">
-                {initial}
-              </div>
-            )}
+          {/* Image column — fixed width, never shrinks */}
+          <div className="flex-shrink-0 relative" style={{ width: '11rem', minWidth: '11rem', height: '100%' }}>
+            <div className="absolute inset-0">
+              {imgSrc && !imgError ? (
+                <img src={imgSrc} alt={name} loading="lazy" decoding="async"
+                  className="w-full h-full object-cover object-top"
+                  onError={() => setImgError(true)} />
+              ) : (
+                <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-[#1a1a2e] to-[#16213e] text-[#a855f7] text-4xl font-bold">{initial}</div>
+              )}
+            </div>
+            {/* Name + role overlay — fades out when card is hovered */}
+            <div className="group-hover:opacity-0 opacity-100 transition-opacity duration-200 absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/95 via-black/60 to-transparent p-3 z-[1]">
+              <p className="text-white font-bold text-sm leading-tight truncate">{name}</p>
+              {position && <p className="text-[#a855f7] text-xs font-semibold capitalize mt-0.5">{position}</p>}
+            </div>
           </div>
-          {/* Name overlay — fades on hover */}
-          <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/95 via-black/60 to-transparent p-3
-            opacity-100 group-hover:opacity-0 transition-opacity duration-200 z-10">
-            <p className="text-white font-bold text-sm leading-tight truncate">{name}</p>
-            {position && <p className="text-[#a855f7] text-xs font-semibold capitalize mt-0.5">{position}</p>}
-          </div>
-        </div>
 
-        {/* Info panel — slides in on hover */}
-        <div className="flex flex-col justify-center px-4 py-4 bg-[#0d0d0d]
-          w-0 overflow-hidden group-hover:w-[12rem]
-          transition-all duration-300 ease-in-out flex-shrink-0 min-w-0">
-          <p className="text-white font-bold text-sm leading-tight mb-1 break-words">{name}</p>
-          {position && <p className="text-[#a855f7] text-xs font-semibold capitalize mb-2 break-words">{position}</p>}
-          {bio
-            ? <p className="text-gray-400 text-xs leading-relaxed line-clamp-5 break-words">{bio}</p>
-            : <p className="text-gray-600 text-xs italic">Rabin's Photography Team</p>
-          }
+          {/* Info panel — slides in when card is hovered */}
+          <div className="flex flex-col justify-center px-4 py-4 bg-[#0d0d0d] w-0 overflow-hidden group-hover:w-[12rem] transition-all duration-300 ease-in-out flex-shrink-0 min-w-0">
+            <p className="text-white font-bold text-sm leading-tight mb-1 break-words">{name}</p>
+            {position && <p className="text-[#a855f7] text-xs font-semibold capitalize mb-2 break-words">{position}</p>}
+            {bio
+              ? <p className="text-gray-400 text-xs leading-relaxed line-clamp-5 break-words">{bio}</p>
+              : <p className="text-gray-600 text-xs italic">Rabin's Photography Team</p>
+            }
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 
