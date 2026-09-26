@@ -138,7 +138,7 @@ const Blog = () => {
         }).catch(() => {});
     }, []);
 
-    const categories = ['All', 'Wedding', 'Portrait', 'Events', 'Tips & Tricks', 'Behind the Scenes'];
+    const categories = ['All', 'Wedding', 'Pre-Wedding', 'Portrait', 'Events', 'Tips & Tricks', 'Behind the Scenes', 'Rice Ceremony', 'Fashion', 'Commercial', 'Corporate'];
 
     useEffect(() => {
         fetchBlogPosts()
