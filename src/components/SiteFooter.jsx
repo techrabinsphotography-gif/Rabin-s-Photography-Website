@@ -43,7 +43,7 @@ const SiteFooter = () => {
                     <h3 className="text-white font-semibold mb-4">For Clients</h3>
                     <ul className="space-y-2 text-sm">
                         <li className="hover:text-white transition-colors cursor-pointer">
-                            <a href="https://calendly.com/rabinsphotography" target="_blank" rel="noopener noreferrer">Book a Meeting</a>
+                            <a href="https://calendly.com/rabinsphotography" target="_blank" rel="noopener noreferrer">Schedule a Meeting</a>
                         </li>
                         <li className="hover:text-white transition-colors cursor-pointer">
                             <a href="https://g.page/r/CSf_uR8iStDCEBM/review" target="_blank" rel="noopener noreferrer">Give a Review</a>
