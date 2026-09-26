@@ -1062,8 +1062,7 @@ const ContactSection = () => {
         setSubmitStatus({ type: '', message: '' });
 
         try {
-            // Vercel Serverless Function - Uses Brevo, no backend server needed!
-            const response = await fetch('/api/contact', {
+            const response = await fetch(`${import.meta.env.VITE_API_BASE_URL || 'https://app-server-maaw.onrender.com/api/v1'}/contact`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
