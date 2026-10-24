@@ -7,7 +7,6 @@ import img2 from '/571744774_1361610111985518_3207307785903951187_n.jpg'
 
 import img4 from '/484042900_1180013106811887_2538291571904064716_n.jpg'
 import finalLogo from '../assets/recent/final logo.png'
-import rabinsQR from "../assets/recent/Rabin's Photography.png"
 import { fetchSiteSettings } from '../api'
 
 const FALLBACK_VIDEO_URL = "https://rabins-photography-510340537293-ap-south-1-an.s3.ap-south-1.amazonaws.com/Rabin_s_Photography_Web_Video_xnz9uq.mp4"
@@ -93,10 +92,6 @@ const CounterStat = ({ end, suffix = '', color, label }) => {
 
 const Demo = () => {
 
-    const [showPopup, setShowPopup] = useState(false);
-    const [showDownloadPopup, setShowDownloadPopup] = useState(false);
-    const [showPortfolioPopup, setShowPortfolioPopup] = useState(false);
-    const [showGoldPopup, setShowGoldPopup] = useState(false);
     const [showAppStorePopup, setShowAppStorePopup] = useState(false);
     const [siteSettings, setSiteSettings] = useState(null);
 
@@ -200,50 +195,22 @@ const Demo = () => {
                         transition={{ duration: 0.8, delay: 0.8 }}
                         className="mt-12 flex flex-col sm:flex-row items-center justify-center gap-4 w-full sm:w-auto"
                     >
-                        <div className="relative">
-                            <button 
-                                onClick={() => setShowDownloadPopup(true)}
-                                onMouseEnter={() => setShowDownloadPopup(true)}
-                                onMouseLeave={() => setShowDownloadPopup(false)}
-                                className="px-10 py-4 rounded-full bg-gradient-to-r from-[#ff4f5a] to-orange-600 text-white font-bold text-lg hover:shadow-2xl hover:shadow-[#ff4f5a]/40 hover:scale-105 transition-all duration-300 backdrop-blur-sm"
-                            >
-                                Download App Now
-                            </button>
-                            {showDownloadPopup && (
-                                <motion.div 
-                                    initial={{ opacity: 0, y: 10, scale: 0.9 }}
-                                    animate={{ opacity: 1, y: 0, scale: 1 }}
-                                    exit={{ opacity: 0, y: 10, scale: 0.9 }}
-                                    className="absolute bottom-full mb-3 left-1/2 -translate-x-1/2 w-48 bg-white text-black p-4 rounded-xl shadow-2xl text-center z-50 pointer-events-none"
-                                >
-                                    <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-4 h-4 bg-white rotate-45"></div>
-                                    <p className="font-bold text-lg mb-1">Coming Soon!</p>
-                                    <p className="text-xs text-gray-500">We're launching soon. Stay tuned!</p>
-                                </motion.div>
-                            )}
-                        </div>
-                        <div className="relative">
-                            <button 
-                                onClick={() => setShowPortfolioPopup(true)}
-                                onMouseEnter={() => setShowPortfolioPopup(true)}
-                                onMouseLeave={() => setShowPortfolioPopup(false)}
-                                className="px-10 py-4 rounded-full border-2 border-white/30 text-white font-bold text-lg hover:border-[#ff4f5a] hover:bg-white/5 transition-all duration-300 backdrop-blur-sm"
-                            >
-                                View Portfolio
-                            </button>
-                            {showPortfolioPopup && (
-                                <motion.div 
-                                    initial={{ opacity: 0, y: 10, scale: 0.9 }}
-                                    animate={{ opacity: 1, y: 0, scale: 1 }}
-                                    exit={{ opacity: 0, y: 10, scale: 0.9 }}
-                                    className="absolute bottom-full mb-3 left-1/2 -translate-x-1/2 w-48 bg-white text-black p-4 rounded-xl shadow-2xl text-center z-50 pointer-events-none"
-                                >
-                                    <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-4 h-4 bg-white rotate-45"></div>
-                                    <p className="font-bold text-lg mb-1">Coming Soon!</p>
-                                    <p className="text-xs text-gray-500">Portfolio section under development.</p>
-                                </motion.div>
-                            )}
-                        </div>
+                        <a
+                            href="https://play.google.com/store/apps/details?id=com.sudip004.client"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="px-10 py-4 rounded-full bg-gradient-to-r from-[#ff4f5a] to-orange-600 text-white font-bold text-lg hover:shadow-2xl hover:shadow-[#ff4f5a]/40 hover:scale-105 transition-all duration-300 backdrop-blur-sm"
+                        >
+                            Download App Now
+                        </a>
+                        <a
+                            href="https://www.behance.net/rabinsphotographyind"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="px-10 py-4 rounded-full border-2 border-white/30 text-white font-bold text-lg hover:border-[#ff4f5a] hover:bg-white/5 transition-all duration-300 backdrop-blur-sm"
+                        >
+                            View Portfolio
+                        </a>
                     </motion.div>
 
                     {/* Scroll Indicator */}
@@ -669,30 +636,16 @@ const Demo = () => {
                     </motion.div>
 
                     {/* CTA Button */}
-                    <div className="relative">
-                        <motion.button
-                            onClick={() => setShowGoldPopup(true)}
-                            onMouseEnter={() => setShowGoldPopup(true)}
-                            onMouseLeave={() => setShowGoldPopup(false)}
-                            whileHover={{ scale: 1.05, boxShadow: "0 0 40px rgba(34, 197, 94, 0.5)" }}
-                            whileTap={{ scale: 0.95 }}
-                            className="mt-10 px-10 py-4 rounded-full bg-gradient-to-r from-green-500 to-emerald-600 text-white font-bold text-lg shadow-2xl shadow-green-500/50 hover:shadow-green-500/70 transition-all duration-300"
-                        >
-                            Get Started Free
-                        </motion.button>
-                        {showGoldPopup && (
-                            <motion.div 
-                                initial={{ opacity: 0, y: 10, scale: 0.9 }}
-                                animate={{ opacity: 1, y: 0, scale: 1 }}
-                                exit={{ opacity: 0, y: 10, scale: 0.9 }}
-                                className="absolute bottom-full mb-3 left-1/2 -translate-x-1/2 w-56 bg-white text-black p-4 rounded-xl shadow-2xl text-center z-50 pointer-events-none"
-                            >
-                                <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-4 h-4 bg-white rotate-45"></div>
-                                <p className="font-bold text-lg mb-1">Coming Soon!</p>
-                                <p className="text-xs text-gray-500">Premium memberships launching soon!</p>
-                            </motion.div>
-                        )}
-                    </div>
+                    <motion.a
+                        href="https://play.google.com/store/apps/details?id=com.sudip004.client"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        whileHover={{ scale: 1.05, boxShadow: "0 0 40px rgba(34, 197, 94, 0.5)" }}
+                        whileTap={{ scale: 0.95 }}
+                        className="mt-10 px-10 py-4 rounded-full bg-gradient-to-r from-green-500 to-emerald-600 text-white font-bold text-lg shadow-2xl shadow-green-500/50 hover:shadow-green-500/70 transition-all duration-300 inline-block"
+                    >
+                        Get Started Free
+                    </motion.a>
                 </motion.div>
 
                 {/* Feature Cards Grid with Detailed Descriptions */}
@@ -784,7 +737,7 @@ const Demo = () => {
                         {/* App Buttons */}
                         <div className="space-y-3">
 
-                            {/* App Store - With Popup */}
+                            {/* App Store */}
                             <div className="relative">
                                 <button
                                     onMouseEnter={() => setShowAppStorePopup(true)}
@@ -813,35 +766,21 @@ const Demo = () => {
                                 )}
                             </div>
 
-                            {/* Google Play - With Popup */}
-                            <div className="relative">
-                                <button 
-                                    onMouseEnter={() => setShowPopup(true)}
-                                    onMouseLeave={() => setShowPopup(false)}
-                                    className="w-full px-4 py-3 rounded-xl bg-black border border-white/30 text-white hover:bg-white/10 transition-all flex items-center justify-center gap-3 cursor-default"
-                                >
-                                    <svg className="w-7 h-7" viewBox="0 0 24 24" fill="currentColor">
-                                        <path d="M3,20.5V3.5C3,2.91 3.34,2.39 3.84,2.15L13.69,12L3.84,21.85C3.34,21.6 3,21.09 3,20.5M16.81,15.12L6.05,21.34L14.54,12.85L16.81,15.12M20.16,10.81C20.5,11.08 20.75,11.5 20.75,12C20.75,12.5 21,12.92 20.16,13.19L17.89,14.5L15.39,12L17.89,9.5L20.16,10.81M6.05,2.66L16.81,8.88L14.54,11.15L6.05,2.66Z" />
-                                    </svg>
-                                    <div className="text-left">
-                                        <div className="text-[10px] uppercase font-medium text-gray-400 leading-none">GET IT ON</div>
-                                        <div className="text-lg font-bold leading-tight">Google Play</div>
-                                    </div>
-                                </button>
-                                
-                                {showPopup && (
-                                    <motion.div 
-                                        initial={{ opacity: 0, y: 10, scale: 0.9 }}
-                                        animate={{ opacity: 1, y: 0, scale: 1 }}
-                                        exit={{ opacity: 0, y: 10, scale: 0.9 }}
-                                        className="absolute bottom-full mb-3 left-1/2 -translate-x-1/2 w-48 bg-white text-black p-4 rounded-xl shadow-2xl text-center z-50 pointer-events-none"
-                                    >
-                                        <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-4 h-4 bg-white rotate-45"></div>
-                                        <p className="font-bold text-lg mb-1">Coming Soon!</p>
-                                        <p className="text-xs text-gray-500">We are working on the Android version.</p>
-                                    </motion.div>
-                                )}
-                            </div>
+                            {/* Google Play */}
+                            <a 
+                                href="https://play.google.com/store/apps/details?id=com.sudip004.client"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="w-full px-4 py-3 rounded-xl bg-black border border-white/30 text-white hover:bg-white/10 transition-all flex items-center justify-center gap-3"
+                            >
+                                <svg className="w-7 h-7" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M3,20.5V3.5C3,2.91 3.34,2.39 3.84,2.15L13.69,12L3.84,21.85C3.34,21.6 3,21.09 3,20.5M16.81,15.12L6.05,21.34L14.54,12.85L16.81,15.12M20.16,10.81C20.5,11.08 20.75,11.5 20.75,12C20.75,12.5 21,12.92 20.16,13.19L17.89,14.5L15.39,12L17.89,9.5L20.16,10.81M6.05,2.66L16.81,8.88L14.54,11.15L6.05,2.66Z" />
+                                </svg>
+                                <div className="text-left">
+                                    <div className="text-[10px] uppercase font-medium text-gray-400 leading-none">GET IT ON</div>
+                                    <div className="text-lg font-bold leading-tight">Google Play</div>
+                                </div>
+                            </a>
                         </div>
                     </div>
 
@@ -1276,8 +1215,7 @@ const ContactSection = () => {
 };
 
 const DownloadAppSection = () => {
-    const [showGooglePlayPopup, setShowGooglePlayPopup] = useState(false);
-    const [showAppStorePopup2, setShowAppStorePopup2] = useState(false);
+    const [showAppStorePopup, setShowAppStorePopup] = useState(false);
     
     return (
         <section id='download-app' className="w-full flex justify-center items-center py-24 bg-white">
@@ -1301,38 +1239,28 @@ const DownloadAppSection = () => {
 
                     {/* Store Buttons */}
                     <div className="flex justify-center md:justify-start gap-4 mt-8">
-                        <div className="relative">
+                        <a
+                            href="https://play.google.com/store/apps/details?id=com.sudip004.client"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
                             <img
-                                onMouseEnter={() => setShowGooglePlayPopup(true)}
-                                onMouseLeave={() => setShowGooglePlayPopup(false)}
                                 src="https://b.zmtcdn.com/data/o2_assets/aad864bd17860b27634fe621001c32db1739350431.png"
                                 alt="Google Play"
                                 className="h-10 md:h-12 cursor-pointer hover:opacity-80 transition-opacity"
                             />
-                            {showGooglePlayPopup && (
-                                <motion.div 
-                                    initial={{ opacity: 0, y: 10, scale: 0.9 }}
-                                    animate={{ opacity: 1, y: 0, scale: 1 }}
-                                    exit={{ opacity: 0, y: 10, scale: 0.9 }}
-                                    className="absolute bottom-full mb-3 left-1/2 -translate-x-1/2 w-48 bg-white text-black p-4 rounded-xl shadow-2xl text-center z-50 pointer-events-none"
-                                >
-                                    <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-4 h-4 bg-white rotate-45"></div>
-                                    <p className="font-bold text-lg mb-1">Coming Soon!</p>
-                                    <p className="text-xs text-gray-500">We are working on the Android version.</p>
-                                </motion.div>
-                            )}
-                        </div>
-                        
+                        </a>
+
                         <div className="relative">
                             <img
-                                onMouseEnter={() => setShowAppStorePopup2(true)}
-                                onMouseLeave={() => setShowAppStorePopup2(false)}
+                                onMouseEnter={() => setShowAppStorePopup(true)}
+                                onMouseLeave={() => setShowAppStorePopup(false)}
                                 src="https://b.zmtcdn.com/data/o2_assets/df6464de32f4a09262cee301f65aaa661739351256.png"
                                 alt="App Store"
                                 className="h-10 md:h-12 cursor-pointer hover:opacity-80 transition-opacity"
                             />
-                            {showAppStorePopup2 && (
-                                <motion.div 
+                            {showAppStorePopup && (
+                                <motion.div
                                     initial={{ opacity: 0, y: 10, scale: 0.9 }}
                                     animate={{ opacity: 1, y: 0, scale: 1 }}
                                     exit={{ opacity: 0, y: 10, scale: 0.9 }}
@@ -1347,31 +1275,13 @@ const DownloadAppSection = () => {
                     </div>
                 </div>
 
-                {/* RIGHT PHONE + QR */}
-                <div className="relative z-10 h-[460px] overflow-hidden flex justify-center w-full md:w-auto">
-                    <div className="w-full max-w-[580px] h-auto md:h-[640px] aspect-[9/16] md:aspect-auto rounded-[40px] bg-white border-4 border-gray-300 shadow-2xl flex items-start justify-center relative pt-12">
-                        {/* Screen */}
-                        <div className="w-[92%] h-[96%] bg-slate-50 rounded-[32px] flex flex-col items-center justify-start gap-6 px-6 overflow-hidden relative pt-8">
-                            {/* Decorative header */}
-                            <div className="absolute top-0 w-full h-20 bg-blue-50/50 z-0"></div>
-
-                            <div className="relative z-10 text-center">
-                                <p className="text-blue-600 font-bold mb-4 text-lg">
-                                    Get the App
-                                </p>
-                                <div className="bg-white p-3 rounded-2xl shadow-lg border border-blue-100 mx-auto w-fit">
-                                    <img
-                                        src={rabinsQR}
-                                        alt="Rabin's Photography QR Code"
-                                        className="w-64 h-64 opacity-90"
-                                    />
-                                </div>
-                                <p className="text-gray-400 text-sm mt-4 font-medium">
-                                    Scan to download
-                                </p>
-                            </div>
-                        </div>
-                    </div>
+                {/* RIGHT — Phone image */}
+                <div className="relative z-10 flex justify-center items-center w-full md:w-auto">
+                    <img
+                        src="/image-removebg-preview.png"
+                        alt="Rabin's Photography App"
+                        className="h-[420px] md:h-[520px] w-auto object-contain drop-shadow-2xl"
+                    />
                 </div>
 
                 {/* Background Decor */}
@@ -1386,7 +1296,6 @@ const DownloadAppSection = () => {
 
 
 const AboutSection = ({ bookingImages = {} }) => {
-    const [showBookingDownloadPopup, setShowBookingDownloadPopup] = useState(false);
     const bImg1 = bookingImages.image1 || img4;
     const bImg2 = bookingImages.image2 || img2;
     const bImg3 = bookingImages.image3 || img1;
@@ -1490,29 +1399,16 @@ const AboutSection = ({ bookingImages = {} }) => {
                         </motion.div>
 
                         {/* CTA Button - Modern Style */}
-                        <div className="relative inline-block">
-                            <motion.button
-                                whileHover={{ scale: 1.05 }}
-                                whileTap={{ scale: 0.95 }}
-                                onMouseEnter={() => setShowBookingDownloadPopup(true)}
-                                onMouseLeave={() => setShowBookingDownloadPopup(false)}
-                                className="mt-8 px-10 py-4 rounded-full bg-gradient-to-r from-[#ff4f5a] to-orange-600 text-white font-bold text-lg hover:shadow-2xl hover:shadow-[#ff4f5a]/40 transition-all duration-300 backdrop-blur-sm"
-                            >
-                                Download App Now
-                            </motion.button>
-                            {showBookingDownloadPopup && (
-                                <motion.div
-                                    initial={{ opacity: 0, y: 10, scale: 0.9 }}
-                                    animate={{ opacity: 1, y: 0, scale: 1 }}
-                                    exit={{ opacity: 0, y: 10, scale: 0.9 }}
-                                    className="absolute bottom-full mb-3 left-1/2 -translate-x-1/2 w-48 bg-white text-black p-4 rounded-xl shadow-2xl text-center z-50 pointer-events-none"
-                                >
-                                    <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-4 h-4 bg-white rotate-45"></div>
-                                    <p className="font-bold text-lg mb-1">Coming Soon!</p>
-                                    <p className="text-xs text-gray-500">We're launching soon. Stay tuned!</p>
-                                </motion.div>
-                            )}
-                        </div>
+                        <motion.a
+                            href="https://play.google.com/store/apps/details?id=com.sudip004.client"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            whileHover={{ scale: 1.05 }}
+                            whileTap={{ scale: 0.95 }}
+                            className="mt-8 px-10 py-4 rounded-full bg-gradient-to-r from-[#ff4f5a] to-orange-600 text-white font-bold text-lg hover:shadow-2xl hover:shadow-[#ff4f5a]/40 transition-all duration-300 backdrop-blur-sm inline-block"
+                        >
+                            Download App Now
+                        </motion.a>
                     </motion.div>
 
                     {/* Right: Modern Image Section */}
