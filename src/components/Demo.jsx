@@ -302,54 +302,16 @@ const Demo = () => {
                         className="relative z-10 flex flex-col items-center w-full lg:w-1/3"
                     >
                         {/* Glow Background Effect */}
-                        <div className="absolute -inset-6 bg-gradient-to-r from-blue-500/20 via-[#ff4f5a]/20 to-purple-500/20 rounded-[60px] blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-
-                        {/* Phone Device */}
-                        <div className="relative w-full max-w-[300px] h-auto aspect-[1/2] rounded-[45px] p-3 shadow-2xl border-[8px] border-gray-900 group">
-                            {/* Phone Shine Effect */}
-                            <div className="absolute inset-0 rounded-[45px] bg-gradient-to-br from-white/10 via-transparent to-transparent pointer-events-none"></div>
-
-                            {/* Bezel & Notch */}
-                            <div className="absolute top-0 left-1/2 -translate-x-1/2 h-[25px] w-[120px] bg-black rounded-b-3xl z-20"></div>
-
-                            {/* Screen */}
-                            <div className="w-full h-full bg-white rounded-[38px] overflow-hidden relative shadow-inner">
-                                {/* Modern Gradient Background */}
-                                <div className="absolute inset-0 bg-gradient-to-br from-slate-50 via-white to-blue-50"></div>
-
-                                {/* Fake UI App Header - Modern */}
-                                <div className="absolute top-0 w-full h-14 bg-gradient-to-r from-white via-white/95 to-white backdrop-blur-xl z-10 flex items-end justify-center pb-2 border-b border-gray-100/50">
-                                    <span className="font-bold text-sm bg-gradient-to-r from-gray-900 to-gray-600 bg-clip-text text-transparent">Rabin's Photography</span>
-                                </div>
-
-                                {/* Screen Content - Enhanced */}
-                                <div className="w-full h-full bg-gradient-to-b from-blue-50 to-slate-100 flex flex-col items-center justify-center relative pt-6">
-                                    {/* Floating Camera Icon with Glow */}
-                                    <motion.div
-                                        animate={{ y: [0, -8, 0] }}
-                                        transition={{ duration: 3, repeat: Infinity }}
-                                        className="relative"
-                                    >
-                                        <div className="absolute inset-0 bg-gradient-to-r from-blue-400 to-[#ff4f5a] rounded-full blur-2xl opacity-30 scale-150"></div>
-                                        <div className="w-32 h-32 rounded-full border-4 border-white shadow-2xl flex items-center justify-center bg-gradient-to-br from-blue-100 to-blue-50 relative z-10">
-                                            <Camera className="w-16 h-16 text-white animate-pulse" />
-                                        </div>
-                                    </motion.div>
-
-                                    {/* Recording Indicator */}
-                                    <motion.div
-                                        animate={{ scale: [1, 1.2, 1], opacity: [0.8, 1, 0.8] }}
-                                        transition={{ duration: 2, repeat: Infinity }}
-                                        className="absolute bottom-20 w-16 h-16 rounded-full border-4 border-[#ff4f5a] bg-gradient-to-br from-[#ff4f5a] to-red-600 shadow-lg shadow-[#ff4f5a]/50"
-                                    ></motion.div>
-
-                                    {/* Status Text */}
-                                    <div className="absolute bottom-6 flex items-center gap-2">
-                                        <div className="w-2 h-2 rounded-full bg-[#ff4f5a] animate-pulse"></div>
-                                        <span className="text-xs font-semibold text-gray-700">Ready to Capture</span>
-                                    </div>
-                                </div>
-                            </div>
+                        {/* Video - no phone frame */}
+                        <div className="relative w-full max-w-[300px] h-auto aspect-[1/2] rounded-[38px] overflow-hidden shadow-2xl">
+                            <video
+                                src="/Phone_video_screenplay_with_text_1080p_20261024160237.mp4"
+                                autoPlay
+                                loop
+                                muted
+                                playsInline
+                                className="w-full h-full object-cover"
+                            />
                         </div>
 
                         {/* Under Phone - Glow & Reflection Effect */}
